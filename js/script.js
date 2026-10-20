@@ -19,11 +19,15 @@
    10. Gallery lightbox (keyboard, swipe, focus trap)
    11. Copy-to-clipboard + toast
    12. Footer year
+   13. Time-of-day greeting
+   14. Calm mode (the manual "fewer effects" switch)
+   15. Small performance guards (pause work that is off-screen)
 
    LOOKING FOR SOMETHING TO CHANGE?
    --------------------------------
    • Typing phrases .............. ROLES in initTyping()
    • Theme storage name ......... THEME_KEY in initTheme()
+   • Calm storage name .......... CALM_KEY in initCalmMode()
    • Reveal speed/stagger ....... REVEAL_STAGGER below
    • Animation timings .......... css/style.css, section 20
    ========================================================================== */
@@ -47,6 +51,11 @@
   var motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   var prefersReducedMotion = function () {
     return motionQuery.matches;
+  };
+
+  /* Calm mode is a manual preference, so it counts alongside the OS setting */
+  var calmEnabled = function () {
+    return root.getAttribute("data-calm") === "true";
   };
 
   /* Run an init function safely: an error is logged, never thrown globally */
@@ -484,7 +493,7 @@
     function start() {
       if (timer) window.clearTimeout(timer);
       stopped = false;
-      if (prefersReducedMotion()) {
+      if (prefersReducedMotion() || calmEnabled()) {
         stopped = true;
         element.textContent = ROLES[0];
         return;
@@ -506,6 +515,27 @@
 
     if (typeof motionQuery.addEventListener === "function") {
       motionQuery.addEventListener("change", onMotionChange);
+    }
+
+    document.addEventListener("calmchange", start);
+
+    /* Stop the timer while the hero is off-screen. The effect is invisible
+       there, so there is no reason to keep updating text every 60ms. */
+    if ("IntersectionObserver" in window) {
+      var hero = $("#home");
+      if (hero) {
+        new IntersectionObserver(
+          function (entries) {
+            if (entries[0].isIntersecting) {
+              start();
+            } else if (timer) {
+              window.clearTimeout(timer);
+              stopped = true;
+            }
+          },
+          { threshold: 0.02 }
+        ).observe(hero);
+      }
     }
   }
 
@@ -963,13 +993,120 @@
   }
 
   /* ========================================================================
+     13. TIME-OF-DAY GREETING
+     ------------------------------------------------------------------------
+     A small human touch in the hero eyebrow. The static HTML says
+     "Welcome to my little corner of the internet", so this is an upgrade,
+     never a requirement.
+     ======================================================================== */
+  function initGreeting() {
+    var target = $("#greeting");
+    if (!target) return;
+
+    var hour = new Date().getHours();
+    var text = "Good evening — welcome in";
+
+    if (hour < 5) text = "Still awake? Welcome in";
+    else if (hour < 12) text = "Good morning — welcome in";
+    else if (hour < 18) text = "Good afternoon — welcome in";
+
+    target.textContent = text;
+  }
+
+  /* ========================================================================
+     14. CALM MODE
+     ------------------------------------------------------------------------
+     Sets data-calm="true" on <html>. The CSS in section 23 stops the
+     background motion, the grain and the glass blur. The choice is remembered
+     in localStorage, and the <head> applies it before first paint so the page
+     never flashes back into "full effects".
+     ======================================================================== */
+  var CALM_KEY = "jml-calm";
+
+  function initCalmMode(showToast) {
+    var button = $("#calm-toggle");
+    if (!button) return;
+
+    function apply(on, announce) {
+      if (on) {
+        root.setAttribute("data-calm", "true");
+      } else {
+        root.removeAttribute("data-calm");
+      }
+
+      button.classList.toggle("is-on", on);
+      button.setAttribute("aria-pressed", String(on));
+
+      if (typeof CustomEvent === "function") {
+        document.dispatchEvent(new CustomEvent("calmchange", { detail: { calm: on } }));
+      }
+
+      if (announce && typeof showToast === "function") {
+        showToast(on ? "Calm mode on — fewer effects" : "Calm mode off — full effects back");
+      }
+    }
+
+    var stored = null;
+    try {
+      stored = localStorage.getItem(CALM_KEY);
+    } catch (error) {
+      /* Blocked storage: fall back to whatever the <head> managed to apply */
+    }
+
+    apply(stored === "true" || calmEnabled(), false);
+
+    button.addEventListener("click", function () {
+      var next = !calmEnabled();
+
+      try {
+        localStorage.setItem(CALM_KEY, String(next));
+      } catch (error) {
+        /* The switch still works for this visit; it just won't be remembered */
+      }
+
+      apply(next, true);
+    });
+  }
+
+  /* ========================================================================
+     15. SMALL PERFORMANCE GUARDS
+     ------------------------------------------------------------------------
+     The ticker is one long transform animation. When it scrolls out of view
+     there is no point in keeping the compositor busy, so it is paused and
+     resumed. The same applies when the tab is in the background.
+     ======================================================================== */
+  function initTicker() {
+    var ticker = $(".ticker");
+    if (!ticker) return;
+
+    var track = $(".ticker__track", ticker);
+    if (!track) return;
+
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(
+        function (entries) {
+          track.classList.toggle("is-paused", !entries[0].isIntersecting);
+        },
+        { rootMargin: "120px 0px" }
+      ).observe(ticker);
+    }
+
+    document.addEventListener("visibilitychange", function () {
+      track.classList.toggle("is-asleep", document.hidden);
+    });
+  }
+
+  /* ========================================================================
      START EVERYTHING
      ======================================================================== */
   safe("theme", initTheme);
-  safe("copy", function () {
+  safe("copy + calm mode", function () {
     var toast = initToast();
     initCopyButtons(toast);
+    initCalmMode(toast);
   });
+  safe("greeting", initGreeting);
+  safe("ticker", initTicker);
   safe("preloader", initPreloader);
   safe("mobile menu", initMobileMenu);
   safe("smooth scroll", initSmoothScroll);

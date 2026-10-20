@@ -46,7 +46,7 @@ There is **no build step**. Edit a file, save it, refresh. That's the workflow.
 Personal-Website/            (rename the folder freely — all paths are relative)
 ├── index.html              all page structure and text
 ├── css/
-│   └── style.css           all styling (22 numbered sections)
+│   └── style.css           all styling (23 numbered sections)
 ├── js/
 │   └── script.js           all behaviour (vanilla, no dependencies)
 ├── assets/
@@ -62,7 +62,7 @@ Personal-Website/            (rename the folder freely — all paths are relativ
 | File | Purpose |
 | --- | --- |
 | `index.html` | The skeleton and every word on the page. Organised into labelled comment blocks — one per section — so you can jump straight to the part you want. |
-| `css/style.css` | All visual design: tokens, glass surfaces, layout, motion, responsive rules, reduced-motion and print styles. Split into 22 numbered sections with a contents list at the top. |
+| `css/style.css` | All visual design: tokens, glass surfaces, layout, motion, responsive rules, reduced-motion and print styles. Split into 23 numbered sections with a contents list at the top. |
 | `js/script.js` | Theme switching, preloader, mobile menu, smooth scrolling, active-nav tracking, typing effect, scroll reveals, gallery filters, lightbox, toast messages and the footer year. Each feature is its own commented function. |
 | `site.webmanifest` | Name, colours and icons used when the site is added to a home screen. |
 | `assets/images/` | Illustrations, the Open Graph cover, and the photos used by the gallery. |
@@ -106,6 +106,24 @@ tokens**. There are two blocks — `:root` (light) and `[data-theme="dark"]`
 > is 4.61:1. If you swap in your own colours, run them through a contrast checker
 > before committing.
 
+### Keeping it light
+
+The page looks heavier than it is. A few deliberate choices keep scrolling
+smooth on phones and older laptops:
+
+- The background orbs are **soft radial gradients, not blurred layers** — the
+  glow you see costs no `filter: blur()`.
+- Glass blur is 13–15px on desktop and **switched off entirely on phones,
+  touch-first devices and when the system asks for reduced transparency**,
+  where a slightly more opaque tint takes over.
+- The ticker pauses when it scrolls out of view or the tab is in the
+  background; the hero typing effect pauses when the hero leaves the screen.
+- Gallery images are lazy-loaded, decoded asynchronously and paint-contained.
+- Scroll reveals animate **opacity and transform only**. They used to animate a
+  blur on top of every frosted card, which is the classic cause of scroll jank.
+- The small pulsing dots ripple with `transform`, not `box-shadow`.
+- Nothing on the page animates anything except `transform` and `opacity`.
+
 ### Type
 
 - **Sora** — headings, buttons, numerals.
@@ -142,6 +160,15 @@ var ROLES = [
 
 Keep them lowercase and short — the line is designed for two to four words. Add
 or remove as many as you like; the animation loops automatically.
+
+### The ticker strip
+
+Between the hero and the About section there is a slow-moving line of small
+facts — find **`[EDIT: TICKER]`** in `index.html`. Each phrase is a
+`<span class="ticker__item">` with an icon. Keep the two `.ticker__group`
+blocks **identical**: the animation slides the track by exactly 50%, so
+duplicated content is what makes the loop seamless. Delete the whole
+`<div class="ticker">` if you would rather not have it.
 
 ### About Me
 
@@ -311,6 +338,22 @@ reveal animations**.
 `initTyping` entry in the start-up list at the bottom of `js/script.js`. The hero
 sentence reads fine without it.
 
+### Calm mode — the switch in the footer
+
+The **Calm mode** button in the footer is a visitor-facing version of the same
+idea. It sets `data-calm="true"` on `<html>`, which stops the orbs, the ticker,
+the float animations and the typing loop, removes the grain, turns the glass
+into solid panels and drops the hover lifts. The choice is stored under
+`jml-calm` and applied before first paint, so it persists without a flash.
+
+It is independent of `prefers-reduced-motion`: the OS setting is honoured
+automatically, and Calm mode lets anyone opt in on top of that.
+
+**To remove Calm mode**, delete the `#calm-toggle` button and the
+`initCalmMode` call at the bottom of `js/script.js`; the CSS block for
+`[data-calm="true"]` becomes unused and can be removed too. **To make it the
+default**, add `data-calm="true"` to the `<html>` tag in `index.html`.
+
 **To remove the preloader**, delete the `#preloader` element and the
 `initPreloader` entry. It already removes itself after a short timeout even if an
 image fails to load, and it is skipped entirely for reduced-motion visitors.
@@ -354,7 +397,8 @@ Things that were built in, not bolted on:
 - The theme toggle reports its state with `aria-pressed`.
 - Colour contrast meets WCAG AA in both themes. Type and spacing are set in
   relative units, so the layout still holds together at 200% zoom.
-- `prefers-reduced-motion` is respected throughout.
+- `prefers-reduced-motion` is respected throughout, and
+  `prefers-reduced-transparency` swaps the glass for solid panels.
 - With JavaScript disabled the page still reads, scrolls, and links to the full
   images; the nav becomes a static wrapped panel on small screens.
 
