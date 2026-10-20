@@ -14,6 +14,7 @@
   QUICK EDIT INDEX (search for these markers)
   -------------------------------------------
   [EDIT: NAME]        your name, initials and roles
+  [EDIT: TICKER]      the scrolling strip between the hero and About
   [EDIT: ABOUT]       the About Me story and personal details
   [EDIT: SKILLS]      skill cards, descriptions and levels
   [EDIT: HOBBIES]     hobby cards
@@ -66,7 +67,8 @@
   <noscript>
     <style>
       .theme-toggle,
-      .menu-toggle {
+      .menu-toggle,
+      .calm-toggle {
         display: none !important;
       }
 
@@ -125,6 +127,13 @@
 
       var meta = document.querySelector('meta[name="theme-color"]');
       if (meta) meta.setAttribute('content', theme === 'dark' ? '#050b17' : '#eef5ff');
+
+      /* Calm mode is a visual preference, so it is applied before first paint */
+      try {
+        if (localStorage.getItem('jml-calm') === 'true') {
+          document.documentElement.setAttribute('data-calm', 'true');
+        }
+      } catch (error) {}
     })();
   </script>
 </head>
@@ -233,7 +242,7 @@
         <div class="hero__content">
           <p class="eyebrow">
             <span class="eyebrow__dot" aria-hidden="true"></span>
-            Welcome to my little corner of the internet
+            <span id="greeting">Welcome to my little corner of the internet</span>
           </p>
 
           <h1 class="hero__title" id="hero-title">
@@ -280,6 +289,7 @@
 
         <!-- Portrait card. Replace assets/images/profile.jpg with your photo. -->
         <div class="hero__visual">
+          <span class="hero__watermark" aria-hidden="true">JM</span>
           <div class="portrait">
             <div class="portrait__glow" aria-hidden="true"></div>
             <div class="portrait__ring" aria-hidden="true"></div>
@@ -316,6 +326,37 @@
         Scroll to explore
       </a>
     </section>
+
+    <!-- ===================================================================
+         TICKER — a decorative strip of small facts. It scrolls slowly, pauses
+         on hover, and stops entirely for reduced-motion or calm-mode visitors.
+         [EDIT: TICKER] Change the phrases below; keep both groups identical so
+         the loop stays seamless.
+         =================================================================== -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__track">
+        <div class="ticker__group">
+          <span class="ticker__item"><svg><use href="#i-sparkle"></use></svg>curious by default</span>
+          <span class="ticker__item"><svg><use href="#i-braces"></use></svg>learning <em>Java</em></span>
+          <span class="ticker__item"><svg><use href="#i-rocket"></use></svg>building small things</span>
+          <span class="ticker__item"><svg><use href="#i-chip"></use></svg>ESP32 experiments</span>
+          <span class="ticker__item"><svg><use href="#i-pen"></use></svg>writing it down</span>
+          <span class="ticker__item"><svg><use href="#i-palette"></use></svg>fussing over details</span>
+          <span class="ticker__item"><svg><use href="#i-gear"></use></svg>robotics &amp; electronics</span>
+          <span class="ticker__item"><svg><use href="#i-heart"></use></svg>still figuring it out</span>
+        </div>
+        <div class="ticker__group">
+          <span class="ticker__item"><svg><use href="#i-sparkle"></use></svg>curious by default</span>
+          <span class="ticker__item"><svg><use href="#i-braces"></use></svg>learning <em>Java</em></span>
+          <span class="ticker__item"><svg><use href="#i-rocket"></use></svg>building small things</span>
+          <span class="ticker__item"><svg><use href="#i-chip"></use></svg>ESP32 experiments</span>
+          <span class="ticker__item"><svg><use href="#i-pen"></use></svg>writing it down</span>
+          <span class="ticker__item"><svg><use href="#i-palette"></use></svg>fussing over details</span>
+          <span class="ticker__item"><svg><use href="#i-gear"></use></svg>robotics &amp; electronics</span>
+          <span class="ticker__item"><svg><use href="#i-heart"></use></svg>still figuring it out</span>
+        </div>
+      </div>
+    </div>
 
     <!-- ===================================================================
          ABOUT — "A Little About Myself"
@@ -987,6 +1028,11 @@
       <div class="footer__bottom-row">
         <p>&copy; <span id="year">2026</span> Jhon Mark L. Lumibao</p>
         <p class="footer__built">Built with plain HTML, CSS &amp; a little JavaScript</p>
+        <button class="calm-toggle" id="calm-toggle" type="button" aria-pressed="false"
+                title="Turn off background motion, grain and glass blur">
+          <span class="calm-toggle__dot" aria-hidden="true"></span>
+          <span>Calm mode</span>
+        </button>
         <nav class="footer__links" aria-label="Footer">
           <a href="#about">About</a>
           <a href="#skills">Skills</a>
@@ -994,6 +1040,8 @@
           <a href="#contact">Contact</a>
         </nav>
       </div>
+
+      <p class="footer__wordmark" aria-hidden="true">Jhon&nbsp;Mark</p>
     </div>
   </footer>
 
