@@ -1,23 +1,24 @@
 # Jhon Mark L. Lumibao — My Little Digital Space
 
-A personal, one-page website for **Jhon Mark L. Lumibao**, a BSIT student at the
-University of Makati. It is a warm, blue-glass corner of the internet: part
-introduction, part sketchbook, part photo wall. Not a résumé, not a corporate
-portfolio — just a digital home.
+A personal, one-page website for **Jhon Mark L. Lumibao**, a first-year BSIT
+student at the University of Makati. A warm blue-glass corner of the internet:
+part introduction, part sketchbook, part photo wall. Not a résumé, not a
+corporate portfolio — just a digital home.
 
-Built with **HTML5, CSS3 and vanilla JavaScript** only. No frameworks, no build
-step, no package manager, no trackers, no CDNs. Every file is plain text you can
-open and edit.
+Built with **HTML5 and CSS3 only**. No JavaScript, no frameworks, no build step,
+no package manager, no trackers, no CDNs. Every file is plain text you can open
+and edit, and every interaction on the page — the theme switch, the gallery
+filters, the image lightbox, the mobile navigation and calm mode — is handled by
+CSS.
 
 ---
 
 ## 1. Open it
 
 **The short version:** double-click `index.html`. That's it. The whole site runs
-straight from the filesystem — fonts, images, icons and scripts are all local.
+straight from the filesystem — fonts, images, icons and styles are all local.
 
-If you prefer a proper local server (recommended, and required for the
-"copy email" button to use the modern clipboard API in some browsers):
+If you prefer a proper local server:
 
 ```bash
 # from inside this folder
@@ -31,11 +32,6 @@ Or, with Node installed:
 npx serve .
 ```
 
-> **Why a server sometimes matters:** browsers treat `file://` pages as
-> untrusted. The copy-to-clipboard button still works there because the script
-> falls back to a legacy method, but everything else — theme memory, gallery
-> filters, lightbox, animations — behaves identically either way.
-
 There is **no build step**. Edit a file, save it, refresh. That's the workflow.
 
 ---
@@ -46,14 +42,13 @@ There is **no build step**. Edit a file, save it, refresh. That's the workflow.
 Personal-Website/            (rename the folder freely — all paths are relative)
 ├── index.html              all page structure and text
 ├── css/
-│   └── style.css           all styling (23 numbered sections)
-├── js/
-│   └── script.js           all behaviour (vanilla, no dependencies)
+│   └── style.css           all styling (21 numbered sections)
 ├── assets/
-│   ├── images/             profile + gallery + social-preview artwork
+│   ├── images/             portrait + gallery + social-preview artwork
 │   ├── icons/              favicon, app icons, manifest icons
 │   └── fonts/              self-hosted WOFF2 subsets + OFL licences
 ├── site.webmanifest        makes the site installable on a phone
+├── robots.txt              a friendly "index this, please"
 └── README.md               this file
 ```
 
@@ -62,28 +57,49 @@ Personal-Website/            (rename the folder freely — all paths are relativ
 | File | Purpose |
 | --- | --- |
 | `index.html` | The skeleton and every word on the page. Organised into labelled comment blocks — one per section — so you can jump straight to the part you want. |
-| `css/style.css` | All visual design: tokens, glass surfaces, layout, motion, responsive rules, reduced-motion and print styles. Split into 23 numbered sections with a contents list at the top. |
-| `js/script.js` | Theme switching, preloader, mobile menu, smooth scrolling, active-nav tracking, typing effect, scroll reveals, gallery filters, lightbox, toast messages and the footer year. Each feature is its own commented function. |
+| `css/style.css` | All visual design: tokens, glass surfaces, layout, motion, responsive rules, reduced-motion and print styles. Split into 21 numbered sections with a contents list at the top. |
 | `site.webmanifest` | Name, colours and icons used when the site is added to a home screen. |
-| `assets/images/` | Illustrations, the Open Graph cover, and the photos used by the gallery. |
+| `assets/images/` | The portrait, the nine gallery photos and the social-preview cover. |
 | `assets/icons/` | Favicon (SVG + PNG), Apple touch icon and PWA icons. |
+
+There is **no `js/` folder** — and no `<script>` tag in the page.
 
 ---
 
-## 3. The design
+## 3. How the interactions work without JavaScript
+
+| Feature | How it is done |
+| --- | --- |
+| **Light / dark switch** | Two radio buttons in the navigation. `html:has(#theme-light:checked)` swaps the whole colour palette. |
+| **Mobile navigation** | No hamburger. Below 980px the bar grows a second row of links that scrolls sideways, so nothing opens or closes. |
+| **Gallery filters** | Four radio buttons. `html:has(#filter-me:checked)` hides every tile whose `data-category` doesn't match. |
+| **Image lightbox** | Each photo has a matching `#shot-N` panel. Clicking a tile jumps to that id, and `.lightbox:target` shows the panel. Prev / next / close are ordinary links. |
+| **Rotating hero role** | A 16-second CSS animation cycling four stacked phrases. |
+| **Scroll reveals** | The browser's own scroll timeline — `animation-timeline: view()`. |
+| **Reading progress line** | `animation-timeline: scroll(root block)` on the thin line in the nav bar. |
+| **Calm mode** | A checkbox in the footer; `html:has(#calm-switch:checked)` switches the effects off. |
+| **Smooth scrolling** | `scroll-behavior: smooth` in CSS. |
+
+**What that means in practice:** the theme choice and calm mode reset when the
+page is reloaded (the page opens in dark mode), and the lightbox closes with its
+own close button rather than the `Esc` key. Everything else behaves normally.
+Those three things need JavaScript, and there is none — which is the point.
+
+---
+
+## 4. The design
 
 **Blue glassmorphism.** Deep navy and midnight blues, electric and sky-blue
 accents, frosted translucent panels, soft blue shadows, rounded corners, and a
-lightly layered background of slow-drifting light orbs and a faint grid. Neon is
-used sparingly — a glow on a hover, a gradient on a heading — never as a wall of
-light.
+layered background of slow-drifting light orbs and a faint grid. Neon is used
+sparingly — a glow on a hover, a gradient on a heading — never a wall of light.
 
-Both themes are built from the same set of CSS custom properties, so changing one
-value changes the whole site consistently.
+Both themes are built from one set of CSS custom properties, so changing a value
+changes the whole site consistently.
 
 ### Colour palette
 
-| Role | Dark theme (default for dark-preferring visitors) | Light theme |
+| Role | Dark theme (default) | Light theme |
 | --- | --- | --- |
 | Page background | `#050b17` → `#030711` | `#eef5ff` → `#dbe9fb` |
 | Primary text | `#eaf3ff` | `#0a1930` |
@@ -97,32 +113,27 @@ value changes the whole site consistently.
 | Button gradient | `#2563eb` → `#0d47b0` | `#1d5be0` → `#0b3ea8` |
 | Background orbs | `#1d4ed8`, `#0e7490`, `#3730a3` | `#8dbcff`, `#a8dcff`, `#b7c4ff` |
 
-Every one of these lives at the top of `css/style.css` under **02. Design
-tokens**. There are two blocks — `:root` (light) and `[data-theme="dark"]`
-(dark). Change both if you want a colour to match across themes.
+All of these live at the top of `css/style.css` under **02. Design tokens**:
+`:root` holds the dark theme, and `html:has(#theme-light:checked)` holds the
+light override. Change both if you want a colour to match across themes.
 
 > **Contrast:** text colours in both themes were checked against WCAG AA (4.5:1
 > for body text, 3:1 for large text and UI edges). The lowest body-text pairing
-> is 4.61:1. If you swap in your own colours, run them through a contrast checker
-> before committing.
+> is 4.61:1.
 
 ### Keeping it light
 
-The page looks heavier than it is. A few deliberate choices keep scrolling
-smooth on phones and older laptops:
+The page looks heavier than it is:
 
 - The background orbs are **soft radial gradients, not blurred layers** — the
   glow you see costs no `filter: blur()`.
 - Glass blur is 13–15px on desktop and **switched off entirely on phones,
-  touch-first devices and when the system asks for reduced transparency**,
-  where a slightly more opaque tint takes over.
-- The ticker pauses when it scrolls out of view or the tab is in the
-  background; the hero typing effect pauses when the hero leaves the screen.
-- Gallery images are lazy-loaded, decoded asynchronously and paint-contained.
-- Scroll reveals animate **opacity and transform only**. They used to animate a
-  blur on top of every frosted card, which is the classic cause of scroll jank.
-- The small pulsing dots ripple with `transform`, not `box-shadow`.
-- Nothing on the page animates anything except `transform` and `opacity`.
+  touch-first devices and when the system asks for reduced transparency**, where
+  a slightly more opaque tint takes over.
+- Reveals animate **only opacity and transform** — never a blur across frosted
+  panels, which is the classic cause of scroll jank.
+- The pulsing dots ripple with `transform`, not animated `box-shadow`.
+- Gallery photos are lazy-loaded, decoded asynchronously and paint-contained.
 
 ### Type
 
@@ -130,51 +141,31 @@ smooth on phones and older laptops:
 - **Plus Jakarta Sans** — body copy.
 - System monospace — small labels and the `thought__date` note.
 
-Both webfonts are self-hosted as Latin-subset WOFF2 files in `assets/fonts/`
-(with the OFL licence text beside them). They load from your own folder, so the
-site works offline and makes no third-party requests. If a font ever fails to
-load, the CSS falls back to the system UI font stack.
+Both webfonts are self-hosted Latin subsets in `assets/fonts/` (with the OFL
+licence text beside them). They load from your own folder, so the site works
+offline and makes no third-party requests.
 
 ---
 
-## 4. Editing the content
+## 5. Editing the content
 
 Search `index.html` for the `[EDIT: …]` markers. Each section has a comment block
 above it describing the exact edit.
 
 ### Name, hero and roles
 
-- **`[EDIT: NAME]`** — the headline, the intro line and the three floating chips
-  around the portrait.
-- The **typing roles** are *not* in the HTML. Open `js/script.js`, find
-  **07. Typing animation** and edit the `ROLES` array:
-
-```js
-var ROLES = [
-  "a BSIT student",
-  "an aspiring developer",
-  "a technology enthusiast",
-  "a creative soul"
-];
-```
-
-Keep them lowercase and short — the line is designed for two to four words. Add
-or remove as many as you like; the animation loops automatically.
-
-### The ticker strip
-
-Between the hero and the About section there is a slow-moving line of small
-facts — find **`[EDIT: TICKER]`** in `index.html`. Each phrase is a
-`<span class="ticker__item">` with an icon. Keep the two `.ticker__group`
-blocks **identical**: the animation slides the track by exactly 50%, so
-duplicated content is what makes the loop seamless. Delete the whole
-`<div class="ticker">` if you would rather not have it.
+- **`[EDIT: NAME]`** — the headline, the intro line and the floating chips around
+  the portrait.
+- The **rotating roles** are the four `<span class="hero__role-item">` lines in
+  the hero. Keep them short (two to four words). Add a fifth and give it an
+  `animation-delay` 4 seconds later than the last one, then lengthen the
+  `role-cycle` duration in `css/style.css` from `16s` to `20s`.
 
 ### About Me
 
-**`[EDIT: ABOUT]`** holds the story, the little fact list and the pull quote.
-Replace the sample copy with your own voice. It's written in first person on
-purpose — keep that if you want the site to feel like *you*.
+**`[EDIT: ABOUT]`** holds the story, the fact list and the pull quote. The
+details currently shown are: name, BS Information Technology (1st year),
+University of Makati, Metro Manila, and four interests. Edit any `<dd>` directly.
 
 ### Adding or removing a skill
 
@@ -194,38 +185,33 @@ Find **`[EDIT: SKILLS]`**. Each card is a self-contained `<article>`:
 
 - **Add:** copy a whole `<article>` and change the icon, title, description,
   level and dots.
-- **Remove:** delete the `<article>` and nothing else — the grid reflows on its
-  own.
+- **Remove:** delete the `<article>` — the grid reflows on its own.
 - **Level labels** come in three strengths: `level--familiar`, `level--learning`
-  and `level--beginner`. Keep `data-level` in step (`3` / `2` / `1`) — it colours
-  the card accent. They describe a stage, not a percentage, because arbitrary
-  "87% Java" bars are fiction.
-- **Dots** are the three little `<i>` elements; give one a class of `is-on` for
-  each step of the stage. They are decorative (`aria-hidden`), so the text label
-  carries the meaning.
-- **Icons** come from the inline sprite at the bottom of the file. Use any
-  `<symbol id="i-…">` from the sprite; a full list is in section 7 below.
+  and `level--beginner`. Keep `data-level` in step (`3` / `2` / `1`). They
+  describe a stage, not a percentage, because arbitrary "87% Java" bars are
+  fiction.
+- **Icons** come from the inline sprite at the bottom of the file; a full list is
+  in section 7 below.
 
 ### Adding or removing a hobby
 
 Find **`[EDIT: HOBBIES]`**. Each hobby is an `<article class="hobby-card glass">`
-with an icon, a title, a line of text and an optional footnote. Duplicate one to
-add, delete one to remove. The grid is a simple responsive column layout, so any
-number from two to eight looks right; six is the sweet spot.
+with an icon, a number, a title and a line of text. Duplicate one to add, delete
+one to remove. Six is the sweet spot; the grid is a simple responsive column
+layout, so any number from two to eight looks right.
 
-### Adding a gallery picture
+### Adding a gallery photo
 
-Find **`[EDIT: GALLERY]`**.
+Find **`[EDIT: GALLERY]`**. Three steps, because a photo needs a tile *and* a
+lightbox panel:
 
-1. Drop your image into `assets/images/` — square crops work best
+1. Drop the image into `assets/images/` — square crops work best
    (e.g. `gallery-10.jpg`, roughly 1200 × 1200, under ~250 KB).
-2. Copy any `<a class="gallery__item" …>` block and update five things:
+2. Copy a `<a class="gallery__item">` block and update:
 
 ```html
-<a class="gallery__item" href="assets/images/gallery-10.jpg"
-   data-category="memories" data-title="Your title"
-   data-caption="A sentence about this moment." data-reveal>
-  <img src="assets/images/gallery-10.jpg" alt="Describe the image for screen readers."
+<a class="gallery__item" href="#shot-10" data-category="memories" data-reveal>
+  <img src="assets/images/gallery-10.jpg" alt="A real description of the photo."
        width="1200" height="1200" loading="lazy" decoding="async">
   <span class="gallery__overlay">
     <span class="gallery__cat">Memories</span>
@@ -235,172 +221,81 @@ Find **`[EDIT: GALLERY]`**.
 </a>
 ```
 
-   - `href` and `src` — the file you just added (they can point to the same file).
-   - `data-category` — one of `me`, `memories`, `projects`. This drives the filters.
-   - `data-title` and `data-caption` — shown in the lightbox and the hover overlay.
-   - `alt` — a genuine description. This is required, not decoration.
+3. Copy a `<div class="lightbox" id="shot-…">` panel further down and change its
+   image, category, title, caption and the prev/next links so they point at the
+   right ids.
+4. Update the four numbers in the filter labels (`All`, `Me`, `Memories`,
+   `Projects`) — they are plain text, so they are always correct for readers.
 
-3. Update the filter counts if you changed how many pictures sit in each
-   category (the numbers beside *All / Me / Memories / Projects*). They are plain
-   text in the filter buttons, so the page is still correct with JavaScript off.
-   The lightbox total updates itself when it opens.
+`data-category` must be exactly `me`, `memories` or `projects`; that is what the
+filters read. The first tile has an extra class, `gallery__item--feature`, which
+makes it a larger focal square — move it onto whichever photo deserves the
+spotlight, or delete it for a uniform grid.
 
-The first tile has an extra class, `gallery__item--feature`, which makes it a
-larger focal square. Move that class onto whichever picture deserves the
-spotlight — or delete it for a uniform grid.
-
-**Captions** live in `data-caption` on the link. Keep them one or two sentences;
-the lightbox caption area is styled for that length.
-
-### Thoughts
-
-**`[EDIT: THOUGHTS]`** contains short reflections written as sample copy. They are
-intentionally unattributed — no invented quotes from real people. Replace them
-with your own lines, or delete the cards and keep one.
-
-### Contact and social links
-
-**`[EDIT: CONTACT]`** holds:
-
-- an **email address placeholder** — `jhonmark.lumibao@example.com` — used both
-  in the visible text and in the `mailto:` link;
-- four **social placeholders** (GitHub, LinkedIn, Facebook, Instagram) pointing at
-  `#`;
-- a note explaining that these are placeholders.
-
-To make them real, replace the address in **two** places (the `href="mailto:…"`
-and the visible `<span>`), and give each social link its actual profile URL plus
-`target="_blank" rel="noopener noreferrer"`. Delete any network you don't use —
-the row wraps cleanly with two, three or four.
-
-> **There is no contact form, on purpose.** A static site cannot send mail on its
-> own, and a form that *looks* like it sends would be a lie. If you want one
-> later, point it at a service that actually handles submissions (Formspree,
-> Netlify Forms, or your own endpoint) and add proper success and error states,
-> including a spam honeypot.
-
-### Footer
-
-**`[EDIT: FOOTER]`** — the sign-off line, the copyright name and the back-to-top
-link. The year is filled in by JavaScript (`#year`) and falls back to a static
-year without it.
+**To hide a photo**, delete both its tile and its panel.
 
 ---
 
-## 5. Light and dark mode
+## 6. Light and dark mode
 
-The toggle in the navigation switches themes instantly. The choice is saved to
-`localStorage` under the key **`jml-theme`**, so it survives a refresh and is
-restored before the page paints — no bright flash when a dark-mode visitor
-arrives.
+The switch in the navigation has two radios, one for each theme. The page opens
+in **dark mode** — that is the design's signature — and choosing *Light* swaps
+the palette instantly.
 
-- **First visit:** the page follows the operating system preference
-  (`prefers-color-scheme`), defaulting to dark if that can't be read.
-- **To reset a visitor's choice:** in the browser console, run
-  `localStorage.removeItem('jml-theme')` and reload.
-- **To change the default:** edit the small inline bootstrap script near the top
-  of `index.html` (it exists only to prevent the theme flash) and the matching
-  fallback in `initTheme()` in `js/script.js`.
-
-The `meta[name="theme-color"]` value is updated alongside the theme, so mobile
-browser chrome matches the page in both modes.
-
----
-
-## 6. Animations — tuning or turning them off
-
-All motion is CSS-transition driven and revealed with `IntersectionObserver`.
-There are no particles, no flashing, no custom cursors and no heavy libraries.
-
-**To make motion faster or slower**, change the timing tokens at the top of
-`css/style.css`:
-
-```css
---t-fast: 160ms;
---t-med: 300ms;
---t-slow: 620ms;
-```
-
-**To disable the reveal animations only** (elements still appear, they just
-don't animate in), empty the `data-reveal` selectors in section **20. Motion &
-reveal animations**.
-
-**To disable all motion**, either:
-
-1. turn on your system's *Reduce Motion* setting — the site honours
-   `prefers-reduced-motion: reduce` by setting durations to near zero and
-   switching off floating shapes, the typing caret and the preloader; or
-2. edit `css/style.css`, section **22**, and change the reduced-motion block from
-   a media query to an always-on rule (remove the `@media` line and keep the
-   declarations).
-
-**To skip the typing effect**, remove the `#typed` element in `index.html` and the
-`initTyping` entry in the start-up list at the bottom of `js/script.js`. The hero
-sentence reads fine without it.
-
-### Calm mode — the switch in the footer
-
-The **Calm mode** button in the footer is a visitor-facing version of the same
-idea. It sets `data-calm="true"` on `<html>`, which stops the orbs, the ticker,
-the float animations and the typing loop, removes the grain, turns the glass
-into solid panels and drops the hover lifts. The choice is stored under
-`jml-calm` and applied before first paint, so it persists without a flash.
-
-It is independent of `prefers-reduced-motion`: the OS setting is honoured
-automatically, and Calm mode lets anyone opt in on top of that.
-
-**To remove Calm mode**, delete the `#calm-toggle` button and the
-`initCalmMode` call at the bottom of `js/script.js`; the CSS block for
-`[data-calm="true"]` becomes unused and can be removed too. **To make it the
-default**, add `data-calm="true"` to the `<html>` tag in `index.html`.
-
-**To remove the preloader**, delete the `#preloader` element and the
-`initPreloader` entry. It already removes itself after a short timeout even if an
-image fails to load, and it is skipped entirely for reduced-motion visitors.
+- Colours live in `css/style.css`, section 02: `:root` for dark,
+  `html:has(#theme-light:checked)` for light.
+- To make light the default, swap the `checked` attribute in `index.html` from
+  `#theme-dark` to `#theme-light` and move the two token blocks in the stylesheet.
+- The choice is not remembered after a reload, because remembering it needs
+  JavaScript. There is none in this build.
 
 ---
 
 ## 7. Icons and artwork
 
 - **Icons** are an inline SVG sprite at the bottom of `index.html` — hand-drawn
-  line icons (`#i-sun`, `#i-moon`, `#i-code`, `#i-camera`, `#i-zoom`,
-  `#i-chevron-left`, `#i-arrow-up`, brand marks for the social links, and more).
-  To add one, copy a `<symbol>`, give it a new `id` and draw inside the
-  `0 0 24 24` viewBox. Use it with
+  line icons: `#i-sun`, `#i-moon`, `#i-code`, `#i-camera`, `#i-zoom`,
+  `#i-chevron-left`, `#i-arrow-up`, `#i-facebook`, `#i-instagram` and more. To
+  add one, copy a `<symbol>`, give it a new `id` and draw inside the
+  `0 0 24 24` viewBox, then use it with
   `<svg aria-hidden="true"><use href="#i-your-id"></use></svg>`.
 - **Favicon and app icons** live in `assets/icons/`: an SVG favicon (crisp at any
   size), a 32 px PNG fallback, an Apple touch icon, and 192/512/maskable icons
-  for the web manifest. They share one mark: a blue glass square with a
-  monogram and a subtle glow.
-- **Gallery and profile artwork** are original blue-glass illustrations made for
-  this template. They are **placeholders, not photographs of Jhon Mark**. Replace
-  them with real pictures — including `assets/images/profile.jpg` and
-  `assets/images/og-cover.jpg` — before sharing the site publicly.
+  for the web manifest. They share one mark: a blue glass square with a monogram
+  and a subtle glow.
+- `profile.jpg` and `gallery-01.jpg` are **real photographs** of Jhon Mark.
+- The other eight gallery images, `feature.jpg` and `og-cover.jpg` are **blue-glass
+  illustrations** drawn for this layout — and the captions on those tiles say so
+  plainly rather than pretending to be photographs. Replace them with real
+  pictures any time, keeping the same file names.
 
 ---
 
 ## 8. Accessibility
 
-Things that were built in, not bolted on:
+Built in, not bolted on:
 
 - Semantic landmarks (`header`, `nav`, `main`, `section`, `footer`), one `<h1>`,
   and no skipped heading levels.
 - Every image has a purposeful `alt`; decorative icons are `aria-hidden`.
 - Visible focus rings everywhere, plus a "skip to content" link.
-- The mobile menu is keyboard operable: focus moves into it when it opens,
-  returns to the toggle on `Escape`, and the menu closes on outside clicks,
-  navigation and viewport changes.
-- The gallery lightbox is a real dialog: `aria-modal`, focus trap, `Esc` to
-  close, `←`/`→` to browse, and focus returns to the thumbnail you opened.
-- Filter buttons expose their state with `aria-pressed`, and a polite live region
-  announces how many pictures are showing.
-- The theme toggle reports its state with `aria-pressed`.
-- Colour contrast meets WCAG AA in both themes. Type and spacing are set in
-  relative units, so the layout still holds together at 200% zoom.
-- `prefers-reduced-motion` is respected throughout, and
-  `prefers-reduced-transparency` swaps the glass for solid panels.
-- With JavaScript disabled the page still reads, scrolls, and links to the full
-  images; the nav becomes a static wrapped panel on small screens.
+- The theme switch and the gallery filters are real radio buttons: they work with
+  the keyboard, and the arrow keys move between options.
+- The lightbox panels are `role="dialog"` with a label, and every control inside
+  is a link you can Tab to and open with Enter.
+- Colour contrast meets WCAG AA in both themes.
+- `prefers-reduced-motion` is respected throughout — the rotating role, the
+  ticker, the floating shapes and the reveals all stop.
+- `prefers-reduced-transparency` swaps the glass for solid panels.
+
+### Honest limitations of the script-free build
+
+- The theme choice and calm mode are **not remembered** between visits.
+- The lightbox closes with its close button or a click on the backdrop, not with
+  `Esc`, and it does not trap focus the way a scripted dialog would.
+- There is no "current section" highlight in the navigation.
+
+All three need JavaScript. They were left out on purpose.
 
 ---
 
@@ -408,16 +303,14 @@ Things that were built in, not bolted on:
 
 Targets current Chrome, Edge, Firefox and Safari (desktop and mobile).
 
-- **`backdrop-filter`** drives the glass look. Where it isn't supported, an
-  `@supports` rule swaps in a more opaque background so text stays readable.
-- **`100svh`** is used for full-height areas, with a `100vh` fallback first for
-  older browsers.
-- **Gradient text** is wrapped in `@supports (background-clip: text)` and falls
-  back to a solid accent colour.
-- **`clamp()`** handles fluid type and spacing, with plain values as the
-  fallback for browsers that ignore it.
-- **No `position: sticky` dependency**, no CSS subgrid, no container queries —
-  nothing that would break the page on a three-year-old phone.
+- **`:has()`** powers the theme, the filters and calm mode. Every browser since
+  late 2023 supports it; in anything older the page still reads and scrolls, but
+  the switch and filters will not change anything.
+- **`animation-timeline`** powers the reveals and the progress line. Where it is
+  missing, the content is simply visible from the start — nothing is hidden.
+- **`backdrop-filter`** drives the glass look; an `@supports` rule swaps in a
+  more opaque background where it is unavailable.
+- **`clamp()`** handles fluid type and spacing, with plain values as a fallback.
 
 ---
 
@@ -430,28 +323,21 @@ Any static host works, because there is nothing to compile:
   repo with no build command.
 - **Your own server** — copy the folder up; `index.html` is the entry point.
 
-After deploying, update the `<meta property="og:image">` URL in `index.html` to an
-absolute address (`https://your-domain/…/og-cover.jpg`) so link previews work on
-social sites, and swap the placeholder contact details.
+The page is live at **https://lumibao.github.io/Personal-Website/**.
 
 ---
 
-## 11. Honest placeholders
+## 11. Contact details in this build
 
-This template deliberately does not invent facts about a real person. Still
-placeholder:
-
-| Placeholder | Where |
+| Item | Value |
 | --- | --- |
-| Email address `jhonmark.lumibao@example.com` | Contact section, footer |
-| GitHub / LinkedIn / Facebook / Instagram links (`#`) | Contact section |
-| Profile illustration | `assets/images/profile.jpg`, hero |
-| Nine gallery artworks and captions | `assets/images/gallery-*.jpg` |
-| About text, skill descriptions, hobby notes, thoughts | `index.html` |
-| Social preview image | `assets/images/og-cover.jpg` |
+| Email | `jhonmarklumibao47@gmail.com` |
+| Facebook | [facebook.com/mrkyjhn](https://www.facebook.com/mrkyjhn) — @mrkyjhn |
+| Instagram | [instagram.com/lumibao_ph_jhon_mark](https://www.instagram.com/lumibao_ph_jhon_mark) — @hatsuki |
 
-Nothing here claims a certificate, a job, a client or a skill level that wasn't
-given. Keep it that way when you fill it in.
+There is **no contact form**, on purpose. A static page cannot send mail on its
+own, and a form that looked like it worked would be a lie. The "Say hello"
+button opens the visitor's own email app.
 
 ---
 
@@ -460,12 +346,12 @@ given. Keep it that way when you fill it in.
 | Symptom | Likely cause | Fix |
 | --- | --- | --- |
 | Page is unstyled | `css/style.css` not found | Check the folder wasn't renamed; the path is relative. |
-| Fonts look generic | Fonts blocked or missing | Confirm `assets/fonts/*.woff2` exist; the site intentionally falls back to system fonts. |
-| Theme resets on refresh | `localStorage` blocked (private mode) | Expected; the site still respects the OS preference. |
+| Fonts look generic | Fonts missing | Confirm `assets/fonts/*.woff2` exist; the site falls back to system fonts. |
+| Theme switch does nothing | Browser without `:has()` support | Update the browser. |
 | Glass looks flat | Browser lacks `backdrop-filter` | Expected — the opaque fallback keeps it readable. |
-| Gallery filter shows nothing | `data-category` typo | Must be exactly `me`, `memories` or `projects`. |
-| Lightbox image is wrong | `href`/`src` mismatch | The lightbox reads the image from the tile's `href`. |
-| Copy button says "Copy this address" | Clipboard API unavailable on `file://` | Normal; the message hands over the address instead. Run a local server for the nicer behaviour. |
+| Filter shows nothing | `data-category` typo | Must be exactly `me`, `memories` or `projects`. |
+| Lightbox opens the wrong photo | Tile `href` and panel `id` don't match | `#shot-4` must match `id="shot-4"`. |
+| Sections fade in late | Scroll-driven animations | Expected on first paint; they appear as you scroll. |
 
 ---
 
@@ -477,7 +363,8 @@ given. Keep it that way when you fill it in.
   under the SIL Open Font License. Licence texts are in `assets/fonts/`.
 - **Icons:** drawn for this site as inline SVG. Brand marks follow the official
   simple-icons paths, used nominatively to link to the networks themselves.
-- **Artwork:** original illustrations generated for this project as placeholders.
+- **Artwork:** the portrait is a real photograph; the remaining gallery and banner
+  images are original blue-glass illustrations made for this project.
 
 No analytics, no cookies, no third-party requests, no tracking.
 
