@@ -19,32 +19,38 @@
   [EDIT: SKILLS]      skill cards, descriptions and levels
   [EDIT: HOBBIES]     hobby cards
   [EDIT: GALLERY]     gallery photos, categories and captions
-  [EDIT: THOUGHTS]    sample reflections and quotes
+  [EDIT: THOUGHTS]    short reflections
   [EDIT: CONTACT]     email address + social links
   [EDIT: FOOTER]      footer line
 
-  THEME: the light/dark switch is handled in js/script.js. Colours live in
+  NO JAVASCRIPT: every interaction on this page — the theme switch, the
+  gallery filters, the image lightbox, the mobile menu and "calm mode" — is
+  done with HTML and CSS only. There is no JavaScript anywhere in this page.
+
+  THEME: the light/dark switch is two radio buttons. Colours live in
   css/style.css (search for "DESIGN TOKENS").
   ============================================================================
 -->
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
   <title>Jhon Mark L. Lumibao — My Little Digital Space</title>
-  <meta name="description" content="The personal space of Jhon Mark L. Lumibao — a BSIT student at the University of Makati. Skills, hobbies, memories, projects and a few thoughts, kept in one calm blue corner of the internet.">
+  <meta name="description" content="The personal space of Jhon Mark L. Lumibao — a first-year BSIT student at the University of Makati. Skills, hobbies, memories, projects and a few thoughts, kept in one calm blue corner of the internet.">
   <meta name="author" content="Jhon Mark L. Lumibao">
   <meta name="theme-color" content="#050b17">
   <meta name="color-scheme" content="dark light">
 
   <!-- Social sharing preview — replace the URLs after you publish the site -->
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lumibao.github.io/Personal-Website/">
   <meta property="og:title" content="Jhon Mark L. Lumibao — My Little Digital Space">
-  <meta property="og:description" content="A BSIT student at the University of Makati. Learning code, circuits and the little things that make a person. Welcome to my space.">
-  <meta property="og:image" content="assets/images/og-cover.jpg">
-  <meta property="og:image:alt" content="A blue glassmorphism cover graphic that says Hello, I'm Jhon Mark.">
+  <meta property="og:description" content="A first-year BSIT student at the University of Makati. Learning code, circuits and the little things that make a person. Welcome to my space.">
+  <meta property="og:image" content="https://lumibao.github.io/Personal-Website/assets/images/og-cover.jpg">
+  <meta property="og:image:alt" content="Blue glassmorphism cover reading: A little world, still being built. Jhon Mark L. Lumibao — BSIT, University of Makati.">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://lumibao.github.io/Personal-Website/assets/images/og-cover.jpg">
 
   <!-- Icons -->
   <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
@@ -58,100 +64,10 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="css/style.css">
-
-  <!--
-    NO-JAVASCRIPT FALLBACK
-    The site is readable and scrollable without scripts. This keeps the page
-    navigation reachable on small screens and hides controls that need JS.
-  -->
-  <noscript>
-    <style>
-      .theme-toggle,
-      .menu-toggle,
-      .calm-toggle {
-        display: none !important;
-      }
-
-      @media (max-width: 980px) {
-        .nav__links {
-          display: flex;
-          position: absolute;
-          top: calc(100% + 10px);
-          left: 0;
-          right: 0;
-          max-height: 60vh;
-          overflow-y: auto;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 2px 4px;
-          padding: 10px 12px;
-          border: 1px solid var(--glass-border);
-          border-radius: var(--r-md);
-          background: var(--nav-bg-scrolled);
-          box-shadow: var(--shadow-md);
-          -webkit-backdrop-filter: blur(14px);
-          backdrop-filter: blur(14px);
-        }
-
-        .nav__link {
-          font-size: 0.78rem;
-          padding: 0.4rem 0.55rem;
-        }
-      }
-    </style>
-  </noscript>
-
-  <!--
-    Apply the saved theme BEFORE the page paints, so there is no bright flash
-    when a dark-mode visitor loads the page. This is the only small inline
-    script in the file, and it exists purely to prevent that flash.
-  -->
-  <script>
-    (function () {
-      var saved = null;
-      var prefersDark = false; /* set by matchMedia below */
-
-      /* localStorage can be blocked in private modes — never let that stop us */
-      try {
-        saved = localStorage.getItem('jml-theme');
-      } catch (error) {}
-
-      try {
-        prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      } catch (error) {
-        prefersDark = true; /* if we cannot ask, the house default is dark */
-      }
-
-      var theme = saved === 'light' || saved === 'dark' ? saved : (prefersDark ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-theme', theme);
-
-      var meta = document.querySelector('meta[name="theme-color"]');
-      if (meta) meta.setAttribute('content', theme === 'dark' ? '#050b17' : '#eef5ff');
-
-      /* Calm mode is a visual preference, so it is applied before first paint */
-      try {
-        if (localStorage.getItem('jml-calm') === 'true') {
-          document.documentElement.setAttribute('data-calm', 'true');
-        }
-      } catch (error) {}
-    })();
-  </script>
 </head>
 
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-
-  <!-- =====================================================================
-       PRELOADER — a short, calm intro. Fades away on its own even if the
-       JavaScript file never loads (see the CSS fallback).
-       ===================================================================== -->
-  <div class="preloader" id="preloader" aria-hidden="true">
-    <div class="preloader__inner">
-      <div class="preloader__mark">JM</div>
-      <p class="preloader__label">Entering my space</p>
-      <div class="preloader__track"><span class="preloader__fill"></span></div>
-    </div>
-  </div>
 
   <!-- =====================================================================
        BACKGROUND SCENE — soft orbs, a faint grid and film grain.
@@ -166,12 +82,12 @@
   </div>
 
   <!-- =====================================================================
-       NAVIGATION — a floating glass bar. On phones it collapses into a
-       hamburger that opens a full glass menu.
+       NAVIGATION — a floating glass bar. On phones it grows a second row of
+       links that scrolls sideways.
        ===================================================================== -->
   <header class="nav" id="site-nav">
     <div class="nav__bar glass">
-      <a class="brand" href="#home" data-scroll aria-label="Jhon Mark — back to the top">
+      <a class="brand" href="#home" aria-label="Jhon Mark — back to the top">
         <span class="brand__mark" aria-hidden="true">JM</span>
         <span class="brand__text">
           <span class="brand__name">Jhon Mark</span>
@@ -190,43 +106,29 @@
       </nav>
 
       <div class="nav__actions">
-        <!-- LIGHT / DARK TOGGLE: label is updated by JavaScript -->
-        <button class="theme-toggle" id="theme-toggle" type="button"
-                aria-pressed="false" aria-label="Switch to light mode" title="Switch theme">
-          <span class="theme-toggle__track" aria-hidden="true">
-            <span class="theme-toggle__icon theme-toggle__icon--sun">
+        <!--
+          LIGHT / DARK SWITCH — pure CSS.
+          Two radio buttons, one visible switch. The page opens in dark mode;
+          choosing "Light" swaps the colour tokens in css/style.css. No script.
+        -->
+        <div class="theme-toggle" role="group" aria-label="Colour theme">
+          <input class="theme-toggle__input" type="radio" name="jml-theme" id="theme-light">
+          <input class="theme-toggle__input" type="radio" name="jml-theme" id="theme-dark" checked>
+          <span class="theme-toggle__track">
+            <label class="theme-toggle__side" for="theme-light" title="Light mode">
               <svg aria-hidden="true"><use href="#i-sun"></use></svg>
-            </span>
-            <span class="theme-toggle__icon theme-toggle__icon--moon">
+              <span class="visually-hidden">Use the light theme</span>
+            </label>
+            <label class="theme-toggle__side" for="theme-dark" title="Dark mode">
               <svg aria-hidden="true"><use href="#i-moon"></use></svg>
-            </span>
-            <span class="theme-toggle__thumb"></span>
+              <span class="visually-hidden">Use the dark theme</span>
+            </label>
+            <span class="theme-toggle__thumb" aria-hidden="true"></span>
           </span>
-        </button>
-
-        <button class="menu-toggle" id="menu-toggle" type="button"
-                aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
-          <span class="menu-toggle__box" aria-hidden="true">
-            <span></span><span></span><span></span>
-          </span>
-        </button>
+        </div>
       </div>
 
-      <span class="nav__progress" aria-hidden="true"><span id="nav-progress"></span></span>
-    </div>
-
-    <!-- Mobile menu: links + a small reminder of who this space belongs to -->
-    <div class="mobile-menu glass" id="mobile-menu" hidden>
-      <nav class="mobile-menu__links" aria-label="Mobile">
-        <a href="#home"><span>Home</span><span class="mobile-menu__num">01</span></a>
-        <a href="#about"><span>About me</span><span class="mobile-menu__num">02</span></a>
-        <a href="#skills"><span>Skills</span><span class="mobile-menu__num">03</span></a>
-        <a href="#hobbies"><span>Hobbies</span><span class="mobile-menu__num">04</span></a>
-        <a href="#gallery"><span>Gallery</span><span class="mobile-menu__num">05</span></a>
-        <a href="#thoughts"><span>Thoughts</span><span class="mobile-menu__num">06</span></a>
-        <a href="#contact"><span>Contact</span><span class="mobile-menu__num">07</span></a>
-      </nav>
-      <p class="mobile-menu__note">A BSIT student at the University of Makati — learning, building and collecting little moments.</p>
+      <span class="nav__progress" aria-hidden="true"><span></span></span>
     </div>
   </header>
 
@@ -242,7 +144,7 @@
         <div class="hero__content">
           <p class="eyebrow">
             <span class="eyebrow__dot" aria-hidden="true"></span>
-            <span id="greeting">Welcome to my little corner of the internet</span>
+            Welcome to my little corner of the internet
           </p>
 
           <h1 class="hero__title" id="hero-title">
@@ -250,12 +152,17 @@
             <span class="hero__title-line"><span>I&rsquo;m <em>Jhon Mark.</em></span></span>
           </h1>
 
-          <!-- The animated role text is decorative; the full list is read below. -->
+          <!-- The rotating role is decorative; the full sentence is read below. -->
           <p class="hero__role">
             <span class="hero__role-label">Currently:</span>
-            <span class="hero__typed" id="typed" aria-hidden="true">a BSIT student</span>
+            <span class="hero__roles" aria-hidden="true">
+              <span class="hero__role-item">a first-year BSIT student</span>
+              <span class="hero__role-item">an aspiring developer</span>
+              <span class="hero__role-item">a technology enthusiast</span>
+              <span class="hero__role-item">a creative soul</span>
+            </span>
             <span class="hero__caret" aria-hidden="true"></span>
-            <span class="visually-hidden">A BSIT student, an aspiring developer, a technology enthusiast and a creative soul.</span>
+            <span class="visually-hidden">A first-year BSIT student, an aspiring developer, a technology enthusiast and a creative soul.</span>
           </p>
 
           <p class="hero__intro">
@@ -264,30 +171,30 @@
           </p>
 
           <p class="hero__sub">
-            I&rsquo;m a BSIT student at the University of Makati, learning my way through
-            code, circuits and creative side quests. This is where I keep what I build,
-            what I remember, and what I&rsquo;m still figuring out.
+            I&rsquo;m a first-year BSIT student at the University of Makati, learning my way
+            through code, circuits and creative side quests. This is where I keep what I
+            build, what I remember, and what I&rsquo;m still figuring out.
           </p>
 
           <div class="hero__actions">
-            <a class="btn btn--primary" href="#gallery" data-scroll>
+            <a class="btn btn--primary" href="#gallery">
               Explore My World
               <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
             </a>
-            <a class="btn btn--ghost" href="#about" data-scroll>
+            <a class="btn btn--ghost" href="#about">
               Get to Know Me
               <svg class="btn__icon" aria-hidden="true"><use href="#i-arrow-down"></use></svg>
             </a>
           </div>
 
           <ul class="hero__chips" aria-label="A few quick facts">
-            <li class="chip"><svg aria-hidden="true"><use href="#i-cap"></use></svg>University of Makati</li>
+            <li class="chip"><svg aria-hidden="true"><use href="#i-cap"></use></svg>BSIT &middot; 1st year</li>
             <li class="chip"><svg aria-hidden="true"><use href="#i-bot"></use></svg>Robotics &amp; electronics</li>
             <li class="chip"><svg aria-hidden="true"><use href="#i-sparkle"></use></svg>Always learning</li>
           </ul>
         </div>
 
-        <!-- Portrait card. Replace assets/images/profile.jpg with your photo. -->
+        <!-- Portrait card — assets/images/profile.jpg (1000 x 1250). -->
         <div class="hero__visual">
           <span class="hero__watermark" aria-hidden="true">JM</span>
           <div class="portrait">
@@ -296,18 +203,18 @@
             <div class="portrait__card glass">
               <div class="portrait__frame">
                 <img src="assets/images/profile.jpg"
-                     alt="Placeholder portrait graphic that reads 'Add your photo' — replace it with a photo of Jhon Mark."
+                     alt="Jhon Mark L. Lumibao in a blue shirt, giving a thumbs-up in front of a wall of bird posters."
                      width="1000" height="1250" fetchpriority="high">
               </div>
               <div class="portrait__caption">
                 <span class="portrait__dot" aria-hidden="true"></span>
-                <span>That&rsquo;s me — photo coming soon</span>
+                <span>That&rsquo;s me.</span>
               </div>
             </div>
 
             <div class="float-chip float-chip--one glass">
               <svg aria-hidden="true"><use href="#i-cap"></use></svg>
-              <span><small>Studying</small>BS Information Technology</span>
+              <span><small>Studying</small>BSIT &middot; 1st year</span>
             </div>
             <div class="float-chip float-chip--two glass">
               <svg aria-hidden="true"><use href="#i-coffee"></use></svg>
@@ -321,7 +228,7 @@
         </div>
       </div>
 
-      <a class="hero__scroll" href="#about" data-scroll>
+      <a class="hero__scroll" href="#about">
         <span class="hero__scroll-track" aria-hidden="true"><span class="hero__scroll-dot"></span></span>
         Scroll to explore
       </a>
@@ -360,8 +267,8 @@
 
     <!-- ===================================================================
          ABOUT — "A Little About Myself"
-         [EDIT: ABOUT] Everything inside this section is sample copy written
-         in a friendly voice. Change the words so they sound like you.
+         [EDIT: ABOUT] The story, the little fact list and the pull quote.
+         Written in a friendly first-person voice — keep that if you edit.
          =================================================================== -->
     <section class="section about" id="about" aria-labelledby="about-title">
       <div class="container">
@@ -377,11 +284,11 @@
           <div class="about__media" data-reveal>
             <figure class="photo-frame glass">
               <img src="assets/images/profile.jpg"
-                   alt="Placeholder portrait graphic — replace with a photo of Jhon Mark."
+                   alt="Jhon Mark L. Lumibao, smiling with a thumbs-up."
                    width="1000" height="1250" loading="lazy" decoding="async">
               <figcaption>
-                <span class="photo-frame__tag">me, for now</span>
-                <span class="photo-frame__hint">assets/images/profile.jpg</span>
+                <span class="photo-frame__tag">that&rsquo;s me</span>
+                <span class="photo-frame__hint">first year, BSIT</span>
               </figcaption>
             </figure>
 
@@ -397,8 +304,8 @@
 
           <div class="about__body glass" data-reveal>
             <p class="about__hello">
-              Hi again — I&rsquo;m <strong>Jhon Mark L. Lumibao</strong>, a BSIT student at the
-              <strong>University of Makati</strong>.
+              Hi again — I&rsquo;m <strong>Jhon Mark L. Lumibao</strong>, a first-year BSIT
+              student at the <strong>University of Makati</strong>.
             </p>
             <p>
               I&rsquo;m drawn to programming, technology, robotics and creative projects — the kind
@@ -408,7 +315,8 @@
               pixels around until a page feels right.
             </p>
             <p>
-              Most of my time right now goes into learning the basics properly — understanding
+              Now that I&rsquo;m in my first year, most of my time goes into learning the basics
+              properly — understanding
               <em>why</em> code behaves the way it does instead of just copying something that
               runs. I&rsquo;m still at the beginning of that journey, and honestly, I like it here.
               There&rsquo;s a lot I want to build, especially things that could be useful to people
@@ -427,15 +335,15 @@
               </div>
               <div class="facts__item">
                 <dt><svg aria-hidden="true"><use href="#i-book"></use></svg>Program</dt>
-                <dd>BS Information Technology</dd>
+                <dd>BS Information Technology &middot; 1st year</dd>
               </div>
               <div class="facts__item">
                 <dt><svg aria-hidden="true"><use href="#i-cap"></use></svg>School</dt>
-                <dd>University of Makati</dd>
+                <dd>University of Makati &middot; Makati City</dd>
               </div>
               <div class="facts__item">
                 <dt><svg aria-hidden="true"><use href="#i-pin"></use></svg>Based in</dt>
-                <dd><span class="is-placeholder" title="Editable placeholder">Metro Manila, Philippines</span></dd>
+                <dd>Metro Manila, Philippines</dd>
               </div>
               <div class="facts__item facts__item--wide">
                 <dt><svg aria-hidden="true"><use href="#i-sparkle"></use></svg>Into</dt>
@@ -448,10 +356,6 @@
               </div>
             </dl>
 
-            <p class="micro-note">
-              <svg aria-hidden="true"><use href="#i-pen"></use></svg>
-              Dashed details are placeholders waiting for your real info.
-            </p>
           </div>
         </div>
       </div>
@@ -674,7 +578,7 @@
 
         <figure class="hobbies__banner glass" data-reveal>
           <img src="assets/images/feature.jpg"
-               alt="Wide placeholder banner artwork with the words 'A little world, still being built.'"
+               alt="Banner artwork in deep blue reading 'A little world, still being built.'"
                width="1600" height="800" loading="lazy" decoding="async">
           <figcaption>
             <span class="eyebrow">A work in progress</span>
@@ -688,10 +592,12 @@
          GALLERY — "Little Moments, Memories, and Me"
          [EDIT: GALLERY] To add a photo:
            1. Save it in assets/images/ (e.g. gallery-10.jpg, square works best)
-           2. Copy one <a class="gallery__item"> block and update:
-              href, src, alt, data-category (me | memories | projects),
-              data-title and data-caption.
-         To hide a photo, delete its block. Filters count themselves.
+           2. Copy one <a class="gallery__item"> block and update src, alt and
+              data-category (me | memories | projects).
+           3. Copy the matching <div class="lightbox" id="shot-…"> panel further
+              down, change its image, caption and prev/next links.
+           4. Update the numbers in the filter labels above.
+         To hide a photo, delete its tile and its lightbox panel.
          =================================================================== -->
     <section class="section gallery" id="gallery" aria-labelledby="gallery-title">
       <div class="container">
@@ -699,149 +605,139 @@
           <p class="eyebrow">04 — Gallery</p>
           <h2 class="section__title" id="gallery-title">Little Moments, Memories, and Me</h2>
           <p class="section__lead">
-            Photos will go here as I collect them — for now, a few placeholders
-            are keeping the frames warm.
+            A few frames from ordinary days — the people, the small wins and the
+            projects that kept me up late. Some are photos; the ones without a
+            camera in the room are drawn in the same blue I built the page with.
           </p>
         </header>
 
+        <!--
+          FILTERS — pure CSS. Each choice is a radio button; the stylesheet
+          hides the tiles that do not match. The counts are written out here so
+          they stay correct with no script at all.
+        -->
         <div class="gallery__toolbar" data-reveal>
           <div class="filters" role="group" aria-label="Filter the gallery">
-            <button class="filter is-active" type="button" data-filter="all" aria-pressed="true">
-              All <span class="filter__count" data-count-for="all">9</span>
-            </button>
-            <button class="filter" type="button" data-filter="me" aria-pressed="false">
-              Me <span class="filter__count" data-count-for="me">3</span>
-            </button>
-            <button class="filter" type="button" data-filter="memories" aria-pressed="false">
-              Memories <span class="filter__count" data-count-for="memories">3</span>
-            </button>
-            <button class="filter" type="button" data-filter="projects" aria-pressed="false">
-              Projects <span class="filter__count" data-count-for="projects">3</span>
-            </button>
+            <label class="filter">
+              <input class="filter__input" type="radio" name="gallery-filter" id="filter-all" checked>
+              <span>All</span><span class="filter__count">9</span>
+            </label>
+            <label class="filter">
+              <input class="filter__input" type="radio" name="gallery-filter" id="filter-me">
+              <span>Me</span><span class="filter__count">3</span>
+            </label>
+            <label class="filter">
+              <input class="filter__input" type="radio" name="gallery-filter" id="filter-memories">
+              <span>Memories</span><span class="filter__count">3</span>
+            </label>
+            <label class="filter">
+              <input class="filter__input" type="radio" name="gallery-filter" id="filter-projects">
+              <span>Projects</span><span class="filter__count">3</span>
+            </label>
           </div>
           <p class="gallery__hint">
             <svg aria-hidden="true"><use href="#i-camera"></use></svg>
-            Placeholders — swap in your own shots
+            Tap any photo to open it larger
           </p>
         </div>
 
-        <p class="visually-hidden" id="gallery-status" role="status" aria-live="polite"></p>
-
         <div class="gallery__grid" id="gallery-grid" data-reveal-group>
 
-          <a class="gallery__item gallery__item--feature" href="assets/images/gallery-01.jpg"
-             data-category="me" data-title="You, in your element"
-             data-caption="A favorite photo of yourself belongs here. Replace the placeholder and give it a caption that means something."
-             data-reveal>
-            <img src="assets/images/gallery-01.jpg" alt="Placeholder portrait graphic that reads 'Your face here'."
+          <a class="gallery__item gallery__item--feature" href="#shot-1"
+             data-category="me" data-reveal>
+            <img src="assets/images/gallery-01.jpg" alt="Jhon Mark giving a thumbs-up in front of a wall of bird posters."
                  width="1200" height="1200" loading="lazy" decoding="async">
             <span class="gallery__overlay">
               <span class="gallery__cat">Me</span>
-              <span class="gallery__title">You, in your element</span>
+              <span class="gallery__title">That's me</span>
               <span class="gallery__zoom" aria-hidden="true"><svg><use href="#i-zoom"></use></svg></span>
             </span>
           </a>
 
-          <a class="gallery__item" href="assets/images/gallery-02.jpg"
-             data-category="memories" data-title="Golden hour, remembered"
-             data-caption="A day that stayed with you — a sunset, a street, a quiet moment."
-             data-reveal>
-            <img src="assets/images/gallery-02.jpg" alt="Placeholder artwork of soft blue hills at dusk."
-                 width="1200" height="1200" loading="lazy" decoding="async">
-            <span class="gallery__overlay">
-              <span class="gallery__cat">Memories</span>
-              <span class="gallery__title">Golden hour, remembered</span>
-              <span class="gallery__zoom" aria-hidden="true"><svg><use href="#i-zoom"></use></svg></span>
-            </span>
-          </a>
-
-          <a class="gallery__item" href="assets/images/gallery-03.jpg"
-             data-category="projects" data-title="Code, first drafts"
-             data-caption="A screenshot of something you built — even the ugly first version counts."
-             data-reveal>
-            <img src="assets/images/gallery-03.jpg" alt="Placeholder artwork of a code editor window on a blue background."
-                 width="1200" height="1200" loading="lazy" decoding="async">
-            <span class="gallery__overlay">
-              <span class="gallery__cat">Projects</span>
-              <span class="gallery__title">Code, first drafts</span>
-              <span class="gallery__zoom" aria-hidden="true"><svg><use href="#i-zoom"></use></svg></span>
-            </span>
-          </a>
-
-          <a class="gallery__item" href="assets/images/gallery-04.jpg"
-             data-category="me" data-title="Just being me"
-             data-caption="A candid little moment — laughing mid-sentence, probably."
-             data-reveal>
-            <img src="assets/images/gallery-04.jpg" alt="Placeholder artwork of a smiling face icon inside a glass circle."
+          <a class="gallery__item" href="#shot-2"
+             data-category="me" data-reveal>
+            <img src="assets/images/gallery-02.jpg" alt="An illustration of two open windows on a deep blue desk scene."
                  width="1200" height="1200" loading="lazy" decoding="async">
             <span class="gallery__overlay">
               <span class="gallery__cat">Me</span>
-              <span class="gallery__title">Just being me</span>
+              <span class="gallery__title">Two windows open</span>
               <span class="gallery__zoom" aria-hidden="true"><svg><use href="#i-zoom"></use></svg></span>
             </span>
           </a>
 
-          <a class="gallery__item" href="assets/images/gallery-05.jpg"
-             data-category="memories" data-title="By the water"
-             data-caption="A place worth going back to. Swap this for a photo from a trip."
-             data-reveal>
-            <img src="assets/images/gallery-05.jpg" alt="Placeholder artwork of waves and a moon over the sea."
+          <a class="gallery__item" href="#shot-3"
+             data-category="memories" data-reveal>
+            <img src="assets/images/gallery-03.jpg" alt="An illustration of a walk home at dusk with a small heart."
                  width="1200" height="1200" loading="lazy" decoding="async">
             <span class="gallery__overlay">
               <span class="gallery__cat">Memories</span>
-              <span class="gallery__title">By the water</span>
+              <span class="gallery__title">The long way home</span>
               <span class="gallery__zoom" aria-hidden="true"><svg><use href="#i-zoom"></use></svg></span>
             </span>
           </a>
 
-          <a class="gallery__item" href="assets/images/gallery-06.jpg"
-             data-category="projects" data-title="Work in progress"
-             data-caption="Robotics and electronics experiments — the messy desk version of progress."
-             data-reveal>
-            <img src="assets/images/gallery-06.jpg" alt="Placeholder artwork of a glowing microchip."
-                 width="1200" height="1200" loading="lazy" decoding="async">
-            <span class="gallery__overlay">
-              <span class="gallery__cat">Projects</span>
-              <span class="gallery__title">Work in progress</span>
-              <span class="gallery__zoom" aria-hidden="true"><svg><use href="#i-zoom"></use></svg></span>
-            </span>
-          </a>
-
-          <a class="gallery__item" href="assets/images/gallery-07.jpg"
-             data-category="me" data-title="A good kind of day"
-             data-caption="A moment with your people, or a very ordinary day worth keeping."
-             data-reveal>
-            <img src="assets/images/gallery-07.jpg" alt="Placeholder artwork of a tilted photo frame with a heart."
-                 width="1200" height="1200" loading="lazy" decoding="async">
-            <span class="gallery__overlay">
-              <span class="gallery__cat">Me</span>
-              <span class="gallery__title">A good kind of day</span>
-              <span class="gallery__zoom" aria-hidden="true"><svg><use href="#i-zoom"></use></svg></span>
-            </span>
-          </a>
-
-          <a class="gallery__item" href="assets/images/gallery-08.jpg"
-             data-category="memories" data-title="Up somewhere high"
-             data-caption="A trip you want to remember — mountains, rooftops, anywhere with a view."
-             data-reveal>
-            <img src="assets/images/gallery-08.jpg" alt="Placeholder artwork of mountains under a bright moon."
+          <a class="gallery__item" href="#shot-4"
+             data-category="memories" data-reveal>
+            <img src="assets/images/gallery-04.jpg" alt="An illustration of a book and a new beginning."
                  width="1200" height="1200" loading="lazy" decoding="async">
             <span class="gallery__overlay">
               <span class="gallery__cat">Memories</span>
-              <span class="gallery__title">Up somewhere high</span>
+              <span class="gallery__title">New room, new start</span>
               <span class="gallery__zoom" aria-hidden="true"><svg><use href="#i-zoom"></use></svg></span>
             </span>
           </a>
 
-          <a class="gallery__item" href="assets/images/gallery-09.jpg"
-             data-category="projects" data-title="Born in a browser"
-             data-caption="One of your web experiments — a layout, a landing page, anything you coded."
-             data-reveal>
-            <img src="assets/images/gallery-09.jpg" alt="Placeholder artwork of a website layout in a browser window."
+          <a class="gallery__item" href="#shot-5"
+             data-category="memories" data-reveal>
+            <img src="assets/images/gallery-05.jpg" alt="An illustration of a sparkle that stands for a shared joke."
+                 width="1200" height="1200" loading="lazy" decoding="async">
+            <span class="gallery__overlay">
+              <span class="gallery__cat">Memories</span>
+              <span class="gallery__title">Laughing at nothing</span>
+              <span class="gallery__zoom" aria-hidden="true"><svg><use href="#i-zoom"></use></svg></span>
+            </span>
+          </a>
+
+          <a class="gallery__item" href="#shot-6"
+             data-category="projects" data-reveal>
+            <img src="assets/images/gallery-06.jpg" alt="An illustration of a clock and late golden light."
                  width="1200" height="1200" loading="lazy" decoding="async">
             <span class="gallery__overlay">
               <span class="gallery__cat">Projects</span>
-              <span class="gallery__title">Born in a browser</span>
+              <span class="gallery__title">Golden hour</span>
+              <span class="gallery__zoom" aria-hidden="true"><svg><use href="#i-zoom"></use></svg></span>
+            </span>
+          </a>
+
+          <a class="gallery__item" href="#shot-7"
+             data-category="projects" data-reveal>
+            <img src="assets/images/gallery-07.jpg" alt="An illustration of a gear from a half-built robot."
+                 width="1200" height="1200" loading="lazy" decoding="async">
+            <span class="gallery__overlay">
+              <span class="gallery__cat">Projects</span>
+              <span class="gallery__title">Robot, half-built</span>
+              <span class="gallery__zoom" aria-hidden="true"><svg><use href="#i-zoom"></use></svg></span>
+            </span>
+          </a>
+
+          <a class="gallery__item" href="#shot-8"
+             data-category="projects" data-reveal>
+            <img src="assets/images/gallery-08.jpg" alt="An illustration of a coffee cup beside a glowing screen."
+                 width="1200" height="1200" loading="lazy" decoding="async">
+            <span class="gallery__overlay">
+              <span class="gallery__cat">Projects</span>
+              <span class="gallery__title">Screen glow</span>
+              <span class="gallery__zoom" aria-hidden="true"><svg><use href="#i-zoom"></use></svg></span>
+            </span>
+          </a>
+
+          <a class="gallery__item" href="#shot-9"
+             data-category="projects" data-reveal>
+            <img src="assets/images/gallery-09.jpg" alt="An illustration of a pen and a page of layout sketches."
+                 width="1200" height="1200" loading="lazy" decoding="async">
+            <span class="gallery__overlay">
+              <span class="gallery__cat">Projects</span>
+              <span class="gallery__title">Sketch before code</span>
               <span class="gallery__zoom" aria-hidden="true"><svg><use href="#i-zoom"></use></svg></span>
             </span>
           </a>
@@ -851,7 +747,7 @@
 
     <!-- ===================================================================
          THOUGHTS — "A Few Words From My Mind"
-         [EDIT: THOUGHTS] Sample reflections — replace with your own words.
+         [EDIT: THOUGHTS] Short reflections — replace them with your own words.
          =================================================================== -->
     <section class="section thoughts" id="thoughts" aria-labelledby="thoughts-title">
       <div class="container">
@@ -859,8 +755,8 @@
           <p class="eyebrow">05 — Thoughts</p>
           <h2 class="section__title" id="thoughts-title">A Few Words From My Mind</h2>
           <p class="section__lead">
-            Short notes I jot down when the day gets quiet. Starting samples —
-            swap them for your own.
+            Short notes I jot down when the day gets quiet — the things worth
+            remembering when a week goes sideways.
           </p>
         </header>
 
@@ -874,7 +770,7 @@
             </p>
             <footer class="thought__meta">
               <span class="thought__tag">a note to self</span>
-              <span class="thought__date">kept for later</span>
+              <span class="thought__date">kept in my notes</span>
             </footer>
           </article>
 
@@ -884,7 +780,7 @@
               I&rsquo;d rather understand one thing properly than nod along to ten
               things I don&rsquo;t.
             </p>
-            <footer class="thought__meta"><span class="thought__tag">sample</span></footer>
+            <footer class="thought__meta"><span class="thought__tag">from my notes</span></footer>
           </article>
 
           <article class="thought glass" data-reveal>
@@ -893,7 +789,7 @@
               The version of me that makes mistakes is still the version that
               showed up. That counts for something.
             </p>
-            <footer class="thought__meta"><span class="thought__tag">sample</span></footer>
+            <footer class="thought__meta"><span class="thought__tag">from my notes</span></footer>
           </article>
 
           <aside class="reminders glass" data-reveal aria-labelledby="reminders-title">
@@ -911,10 +807,9 @@
 
     <!-- ===================================================================
          CONTACT — "Let's Connect"
-         [EDIT: CONTACT] Replace the email address, the GitHub / LinkedIn /
-         Facebook / Instagram URLs and their labels. They are placeholders.
-         There is deliberately NO fake contact form here — the buttons open
-         the visitor's own email app. See README.md for adding a real form.
+         [EDIT: CONTACT] The email address, the Facebook and Instagram links
+         and their labels. There is deliberately NO contact form here — the
+         button opens the visitor's own email app.
          =================================================================== -->
     <section class="section contact" id="contact" aria-labelledby="contact-title">
       <div class="container">
@@ -928,25 +823,24 @@
             </p>
 
             <div class="contact__actions">
-              <a class="btn btn--primary" href="mailto:jhonmark.lumibao@example.com?subject=Hello%20from%20your%20website">
+              <a class="btn btn--primary" href="mailto:jhonmarklumibao47@gmail.com?subject=Hello%20from%20your%20website">
                 Say hello
                 <svg class="btn__icon" aria-hidden="true"><use href="#i-send"></use></svg>
               </a>
-              <button class="btn btn--ghost" type="button" data-copy="jhonmark.lumibao@example.com">
-                Copy email
-                <svg class="btn__icon" aria-hidden="true"><use href="#i-copy"></use></svg>
-              </button>
+              <a class="btn btn--ghost" href="https://www.facebook.com/mrkyjhn" target="_blank" rel="noopener noreferrer">
+                Message me on Facebook
+                <svg class="btn__icon" aria-hidden="true"><use href="#i-facebook"></use></svg>
+              </a>
             </div>
 
             <p class="contact__email">
               <svg aria-hidden="true"><use href="#i-mail"></use></svg>
-              <a href="mailto:jhonmark.lumibao@example.com">jhonmark.lumibao@example.com</a>
-              <span class="is-placeholder" title="Editable placeholder">placeholder</span>
+              <a href="mailto:jhonmarklumibao47@gmail.com">jhonmarklumibao47@gmail.com</a>
             </p>
 
             <p class="contact__note">
-              These are obvious placeholders — swap the email and social links in
-              <code>index.html</code> (search for <code>[EDIT: CONTACT]</code>).
+              That address goes straight to my phone. If email isn&rsquo;t your thing,
+              a Facebook message works just as well.
             </p>
           </div>
 
@@ -955,30 +849,16 @@
               <h3 class="contact__heading">Find me elsewhere</h3>
               <ul class="socials" aria-label="Social links">
                 <li>
-                  <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">
-                    <span class="socials__icon"><svg aria-hidden="true"><use href="#i-github"></use></svg></span>
-                    <span class="socials__text"><small>GitHub</small>@yourusername</span>
-                    <svg class="socials__arrow" aria-hidden="true"><use href="#i-external"></use></svg>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer">
-                    <span class="socials__icon"><svg aria-hidden="true"><use href="#i-linkedin"></use></svg></span>
-                    <span class="socials__text"><small>LinkedIn</small>in/yourusername</span>
-                    <svg class="socials__arrow" aria-hidden="true"><use href="#i-external"></use></svg>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.facebook.com/yourusername" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.facebook.com/mrkyjhn" target="_blank" rel="noopener noreferrer">
                     <span class="socials__icon"><svg aria-hidden="true"><use href="#i-facebook"></use></svg></span>
-                    <span class="socials__text"><small>Facebook</small>@yourusername</span>
+                    <span class="socials__text"><small>Facebook</small>@mrkyjhn</span>
                     <svg class="socials__arrow" aria-hidden="true"><use href="#i-external"></use></svg>
                   </a>
                 </li>
                 <li>
-                  <a href="https://www.instagram.com/yourusername" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.instagram.com/lumibao_ph_jhon_mark" target="_blank" rel="noopener noreferrer">
                     <span class="socials__icon"><svg aria-hidden="true"><use href="#i-instagram"></use></svg></span>
-                    <span class="socials__text"><small>Instagram</small>@yourusername</span>
+                    <span class="socials__text"><small>Instagram</small>@hatsuki</span>
                     <svg class="socials__arrow" aria-hidden="true"><use href="#i-external"></use></svg>
                   </a>
                 </li>
@@ -989,8 +869,8 @@
               <h3 class="contact__heading">Best way to reach me</h3>
               <p>
                 Email is the surest way to get me. I read everything, even if a
-                reply takes a little while — I&rsquo;m usually between classes or
-                mid-debug.
+                reply takes a little while — I&rsquo;m usually in class, on the way
+                home, or debugging something at an unreasonable hour.
               </p>
               <p class="contact__status">
                 <span class="pulse-dot" aria-hidden="true"></span>
@@ -1009,7 +889,7 @@
   <footer class="footer">
     <div class="container footer__inner">
       <div class="footer__top-row">
-        <a class="brand brand--footer" href="#home" data-scroll aria-label="Back to the top">
+        <a class="brand brand--footer" href="#home" aria-label="Back to the top">
           <span class="brand__mark" aria-hidden="true">JM</span>
           <span class="brand__text">
             <span class="brand__name">Jhon Mark L. Lumibao</span>
@@ -1019,20 +899,20 @@
 
         <p class="footer__signoff">Made with curiosity by Jhon Mark.</p>
 
-        <button class="footer__back" type="button" data-scroll-top>
+        <a class="footer__back" href="#home">
           Back to top
           <svg aria-hidden="true"><use href="#i-arrow-up"></use></svg>
-        </button>
+        </a>
       </div>
 
       <div class="footer__bottom-row">
-        <p>&copy; <span id="year">2026</span> Jhon Mark L. Lumibao</p>
-        <p class="footer__built">Built with plain HTML, CSS &amp; a little JavaScript</p>
-        <button class="calm-toggle" id="calm-toggle" type="button" aria-pressed="false"
-                title="Turn off background motion, grain and glass blur">
+        <p>&copy; 2026 Jhon Mark L. Lumibao</p>
+        <p class="footer__built">Built with plain HTML &amp; CSS &mdash; nothing else</p>
+        <label class="calm-toggle" title="Turn off background motion, grain and glass blur">
+          <input class="calm-toggle__input" type="checkbox" id="calm-switch">
           <span class="calm-toggle__dot" aria-hidden="true"></span>
           <span>Calm mode</span>
-        </button>
+        </label>
         <nav class="footer__links" aria-label="Footer">
           <a href="#about">About</a>
           <a href="#skills">Skills</a>
@@ -1045,59 +925,298 @@
     </div>
   </footer>
 
-  <!-- Floating back-to-top button with a scroll-progress ring -->
-  <button class="to-top" id="to-top" type="button" aria-label="Scroll back to the top" title="Back to top">
-    <svg class="to-top__ring" viewBox="0 0 44 44" aria-hidden="true">
-      <circle class="to-top__ring-bg" cx="22" cy="22" r="20"></circle>
-      <circle class="to-top__ring-fg" id="to-top-ring" cx="22" cy="22" r="20"></circle>
-    </svg>
-    <svg class="to-top__icon" aria-hidden="true"><use href="#i-arrow-up"></use></svg>
-  </button>
-
-  <!-- Small toast used when something is copied to the clipboard -->
-  <div class="toast" id="toast" role="status" aria-live="polite">
-    <svg aria-hidden="true"><use href="#i-check"></use></svg>
-    <span id="toast-message">Email copied</span>
-  </div>
-
   <!-- =====================================================================
-       LIGHTBOX — filled in by JavaScript when a gallery photo is opened.
+       LIGHTBOX — one panel per photo, opened with a plain #anchor link.
+       The panel whose id matches the address bar is the one that shows, so
+       this works with no JavaScript at all. Close, prev and next are links.
        ===================================================================== -->
-  <div class="lightbox" id="lightbox" hidden>
-    <div class="lightbox__backdrop" data-lightbox-close></div>
 
-    <div class="lightbox__dialog" role="dialog" aria-modal="true"
-         aria-labelledby="lightbox-title" aria-describedby="lightbox-caption">
-      <button class="lightbox__close" type="button" data-lightbox-close aria-label="Close the gallery (Escape)">
+  <div class="lightbox" id="shot-1" role="dialog" aria-modal="true" aria-labelledby="shot-1-title">
+    <a class="lightbox__backdrop" href="#gallery" aria-label="Close and return to the gallery"></a>
+
+    <div class="lightbox__dialog">
+      <a class="lightbox__close" href="#gallery" aria-label="Close the gallery">
         <svg aria-hidden="true"><use href="#i-close"></use></svg>
-      </button>
+      </a>
 
       <div class="lightbox__stage">
-        <button class="lightbox__nav lightbox__nav--prev" id="lightbox-prev" type="button" aria-label="Previous image">
+        <a class="lightbox__nav lightbox__nav--prev" href="#shot-9" aria-label="Previous image">
           <svg aria-hidden="true"><use href="#i-chevron-left"></use></svg>
-        </button>
+        </a>
 
         <figure class="lightbox__figure">
           <div class="lightbox__image-wrap">
-            <img id="lightbox-image" src="assets/images/gallery-01.jpg" alt="" width="1200" height="1200">
+            <img src="assets/images/gallery-01.jpg" alt="Jhon Mark giving a thumbs-up in front of a wall of bird posters." width="1200" height="1200" loading="lazy" decoding="async">
           </div>
-          <figcaption class="lightbox__caption" aria-live="polite">
-            <span class="lightbox__cat" id="lightbox-cat">Me</span>
-            <h3 class="lightbox__title" id="lightbox-title">A moment</h3>
-            <p class="lightbox__text" id="lightbox-caption"></p>
-            <p class="lightbox__count"><span id="lightbox-index">1</span> / <span id="lightbox-total">9</span></p>
+          <figcaption class="lightbox__caption">
+            <span class="lightbox__cat">Me</span>
+            <h3 class="lightbox__title" id="shot-1-title">That's me</h3>
+            <p class="lightbox__text">Blue shirt, thumbs up, a wall of bird posters behind me. Probably the most &ldquo;me&rdquo; photo I have.</p>
+            <p class="lightbox__count">1 / 9</p>
           </figcaption>
         </figure>
 
-        <button class="lightbox__nav lightbox__nav--next" id="lightbox-next" type="button" aria-label="Next image">
+        <a class="lightbox__nav lightbox__nav--next" href="#shot-2" aria-label="Next image">
           <svg aria-hidden="true"><use href="#i-chevron-right"></use></svg>
-        </button>
+        </a>
       </div>
     </div>
+  </div>
 
-    <p class="lightbox__keys">
-      <kbd>&larr;</kbd><kbd>&rarr;</kbd> to browse &nbsp;&middot;&nbsp; <kbd>Esc</kbd> to close
-    </p>
+  <div class="lightbox" id="shot-2" role="dialog" aria-modal="true" aria-labelledby="shot-2-title">
+    <a class="lightbox__backdrop" href="#gallery" aria-label="Close and return to the gallery"></a>
+
+    <div class="lightbox__dialog">
+      <a class="lightbox__close" href="#gallery" aria-label="Close the gallery">
+        <svg aria-hidden="true"><use href="#i-close"></use></svg>
+      </a>
+
+      <div class="lightbox__stage">
+        <a class="lightbox__nav lightbox__nav--prev" href="#shot-1" aria-label="Previous image">
+          <svg aria-hidden="true"><use href="#i-chevron-left"></use></svg>
+        </a>
+
+        <figure class="lightbox__figure">
+          <div class="lightbox__image-wrap">
+            <img src="assets/images/gallery-02.jpg" alt="An illustration of two open windows on a deep blue desk scene." width="1200" height="1200" loading="lazy" decoding="async">
+          </div>
+          <figcaption class="lightbox__caption">
+            <span class="lightbox__cat">Me</span>
+            <h3 class="lightbox__title" id="shot-2-title">Two windows open</h3>
+            <p class="lightbox__text">Most evenings: one window for the code, one for whatever I&rsquo;m trying to understand.</p>
+            <p class="lightbox__count">2 / 9</p>
+          </figcaption>
+        </figure>
+
+        <a class="lightbox__nav lightbox__nav--next" href="#shot-3" aria-label="Next image">
+          <svg aria-hidden="true"><use href="#i-chevron-right"></use></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="lightbox" id="shot-3" role="dialog" aria-modal="true" aria-labelledby="shot-3-title">
+    <a class="lightbox__backdrop" href="#gallery" aria-label="Close and return to the gallery"></a>
+
+    <div class="lightbox__dialog">
+      <a class="lightbox__close" href="#gallery" aria-label="Close the gallery">
+        <svg aria-hidden="true"><use href="#i-close"></use></svg>
+      </a>
+
+      <div class="lightbox__stage">
+        <a class="lightbox__nav lightbox__nav--prev" href="#shot-2" aria-label="Previous image">
+          <svg aria-hidden="true"><use href="#i-chevron-left"></use></svg>
+        </a>
+
+        <figure class="lightbox__figure">
+          <div class="lightbox__image-wrap">
+            <img src="assets/images/gallery-03.jpg" alt="An illustration of a walk home at dusk with a small heart." width="1200" height="1200" loading="lazy" decoding="async">
+          </div>
+          <figcaption class="lightbox__caption">
+            <span class="lightbox__cat">Memories</span>
+            <h3 class="lightbox__title" id="shot-3-title">The long way home</h3>
+            <p class="lightbox__text">The walk back from school that always turns into thinking time.</p>
+            <p class="lightbox__count">3 / 9</p>
+          </figcaption>
+        </figure>
+
+        <a class="lightbox__nav lightbox__nav--next" href="#shot-4" aria-label="Next image">
+          <svg aria-hidden="true"><use href="#i-chevron-right"></use></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="lightbox" id="shot-4" role="dialog" aria-modal="true" aria-labelledby="shot-4-title">
+    <a class="lightbox__backdrop" href="#gallery" aria-label="Close and return to the gallery"></a>
+
+    <div class="lightbox__dialog">
+      <a class="lightbox__close" href="#gallery" aria-label="Close the gallery">
+        <svg aria-hidden="true"><use href="#i-close"></use></svg>
+      </a>
+
+      <div class="lightbox__stage">
+        <a class="lightbox__nav lightbox__nav--prev" href="#shot-3" aria-label="Previous image">
+          <svg aria-hidden="true"><use href="#i-chevron-left"></use></svg>
+        </a>
+
+        <figure class="lightbox__figure">
+          <div class="lightbox__image-wrap">
+            <img src="assets/images/gallery-04.jpg" alt="An illustration of a book and a new beginning." width="1200" height="1200" loading="lazy" decoding="async">
+          </div>
+          <figcaption class="lightbox__caption">
+            <span class="lightbox__cat">Memories</span>
+            <h3 class="lightbox__title" id="shot-4-title">New room, new start</h3>
+            <p class="lightbox__text">First week of college: new building, new faces, the same nervous smile. It got easier fast.</p>
+            <p class="lightbox__count">4 / 9</p>
+          </figcaption>
+        </figure>
+
+        <a class="lightbox__nav lightbox__nav--next" href="#shot-5" aria-label="Next image">
+          <svg aria-hidden="true"><use href="#i-chevron-right"></use></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="lightbox" id="shot-5" role="dialog" aria-modal="true" aria-labelledby="shot-5-title">
+    <a class="lightbox__backdrop" href="#gallery" aria-label="Close and return to the gallery"></a>
+
+    <div class="lightbox__dialog">
+      <a class="lightbox__close" href="#gallery" aria-label="Close the gallery">
+        <svg aria-hidden="true"><use href="#i-close"></use></svg>
+      </a>
+
+      <div class="lightbox__stage">
+        <a class="lightbox__nav lightbox__nav--prev" href="#shot-4" aria-label="Previous image">
+          <svg aria-hidden="true"><use href="#i-chevron-left"></use></svg>
+        </a>
+
+        <figure class="lightbox__figure">
+          <div class="lightbox__image-wrap">
+            <img src="assets/images/gallery-05.jpg" alt="An illustration of a sparkle that stands for a shared joke." width="1200" height="1200" loading="lazy" decoding="async">
+          </div>
+          <figcaption class="lightbox__caption">
+            <span class="lightbox__cat">Memories</span>
+            <h3 class="lightbox__title" id="shot-5-title">Laughing at nothing</h3>
+            <p class="lightbox__text">One of those moments nobody can explain afterwards — which is exactly why it stuck.</p>
+            <p class="lightbox__count">5 / 9</p>
+          </figcaption>
+        </figure>
+
+        <a class="lightbox__nav lightbox__nav--next" href="#shot-6" aria-label="Next image">
+          <svg aria-hidden="true"><use href="#i-chevron-right"></use></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="lightbox" id="shot-6" role="dialog" aria-modal="true" aria-labelledby="shot-6-title">
+    <a class="lightbox__backdrop" href="#gallery" aria-label="Close and return to the gallery"></a>
+
+    <div class="lightbox__dialog">
+      <a class="lightbox__close" href="#gallery" aria-label="Close the gallery">
+        <svg aria-hidden="true"><use href="#i-close"></use></svg>
+      </a>
+
+      <div class="lightbox__stage">
+        <a class="lightbox__nav lightbox__nav--prev" href="#shot-5" aria-label="Previous image">
+          <svg aria-hidden="true"><use href="#i-chevron-left"></use></svg>
+        </a>
+
+        <figure class="lightbox__figure">
+          <div class="lightbox__image-wrap">
+            <img src="assets/images/gallery-06.jpg" alt="An illustration of a clock and late golden light." width="1200" height="1200" loading="lazy" decoding="async">
+          </div>
+          <figcaption class="lightbox__caption">
+            <span class="lightbox__cat">Projects</span>
+            <h3 class="lightbox__title" id="shot-6-title">Golden hour</h3>
+            <p class="lightbox__text">The late-afternoon light doing most of the work. I just happened to be there.</p>
+            <p class="lightbox__count">6 / 9</p>
+          </figcaption>
+        </figure>
+
+        <a class="lightbox__nav lightbox__nav--next" href="#shot-7" aria-label="Next image">
+          <svg aria-hidden="true"><use href="#i-chevron-right"></use></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="lightbox" id="shot-7" role="dialog" aria-modal="true" aria-labelledby="shot-7-title">
+    <a class="lightbox__backdrop" href="#gallery" aria-label="Close and return to the gallery"></a>
+
+    <div class="lightbox__dialog">
+      <a class="lightbox__close" href="#gallery" aria-label="Close the gallery">
+        <svg aria-hidden="true"><use href="#i-close"></use></svg>
+      </a>
+
+      <div class="lightbox__stage">
+        <a class="lightbox__nav lightbox__nav--prev" href="#shot-6" aria-label="Previous image">
+          <svg aria-hidden="true"><use href="#i-chevron-left"></use></svg>
+        </a>
+
+        <figure class="lightbox__figure">
+          <div class="lightbox__image-wrap">
+            <img src="assets/images/gallery-07.jpg" alt="An illustration of a gear from a half-built robot." width="1200" height="1200" loading="lazy" decoding="async">
+          </div>
+          <figcaption class="lightbox__caption">
+            <span class="lightbox__cat">Projects</span>
+            <h3 class="lightbox__title" id="shot-7-title">Robot, half-built</h3>
+            <p class="lightbox__text">Wires everywhere, half the screws missing — but it moved, and that was enough for one night.</p>
+            <p class="lightbox__count">7 / 9</p>
+          </figcaption>
+        </figure>
+
+        <a class="lightbox__nav lightbox__nav--next" href="#shot-8" aria-label="Next image">
+          <svg aria-hidden="true"><use href="#i-chevron-right"></use></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="lightbox" id="shot-8" role="dialog" aria-modal="true" aria-labelledby="shot-8-title">
+    <a class="lightbox__backdrop" href="#gallery" aria-label="Close and return to the gallery"></a>
+
+    <div class="lightbox__dialog">
+      <a class="lightbox__close" href="#gallery" aria-label="Close the gallery">
+        <svg aria-hidden="true"><use href="#i-close"></use></svg>
+      </a>
+
+      <div class="lightbox__stage">
+        <a class="lightbox__nav lightbox__nav--prev" href="#shot-7" aria-label="Previous image">
+          <svg aria-hidden="true"><use href="#i-chevron-left"></use></svg>
+        </a>
+
+        <figure class="lightbox__figure">
+          <div class="lightbox__image-wrap">
+            <img src="assets/images/gallery-08.jpg" alt="An illustration of a coffee cup beside a glowing screen." width="1200" height="1200" loading="lazy" decoding="async">
+          </div>
+          <figcaption class="lightbox__caption">
+            <span class="lightbox__cat">Projects</span>
+            <h3 class="lightbox__title" id="shot-8-title">Screen glow</h3>
+            <p class="lightbox__text">Debugging past midnight, one line at a time, until the error finally gives up.</p>
+            <p class="lightbox__count">8 / 9</p>
+          </figcaption>
+        </figure>
+
+        <a class="lightbox__nav lightbox__nav--next" href="#shot-9" aria-label="Next image">
+          <svg aria-hidden="true"><use href="#i-chevron-right"></use></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="lightbox" id="shot-9" role="dialog" aria-modal="true" aria-labelledby="shot-9-title">
+    <a class="lightbox__backdrop" href="#gallery" aria-label="Close and return to the gallery"></a>
+
+    <div class="lightbox__dialog">
+      <a class="lightbox__close" href="#gallery" aria-label="Close the gallery">
+        <svg aria-hidden="true"><use href="#i-close"></use></svg>
+      </a>
+
+      <div class="lightbox__stage">
+        <a class="lightbox__nav lightbox__nav--prev" href="#shot-8" aria-label="Previous image">
+          <svg aria-hidden="true"><use href="#i-chevron-left"></use></svg>
+        </a>
+
+        <figure class="lightbox__figure">
+          <div class="lightbox__image-wrap">
+            <img src="assets/images/gallery-09.jpg" alt="An illustration of a pen and a page of layout sketches." width="1200" height="1200" loading="lazy" decoding="async">
+          </div>
+          <figcaption class="lightbox__caption">
+            <span class="lightbox__cat">Projects</span>
+            <h3 class="lightbox__title" id="shot-9-title">Sketch before code</h3>
+            <p class="lightbox__text">Every page I build starts as a scribble on paper. The good ones keep the scribble.</p>
+            <p class="lightbox__count">9 / 9</p>
+          </figcaption>
+        </figure>
+
+        <a class="lightbox__nav lightbox__nav--next" href="#shot-1" aria-label="Next image">
+          <svg aria-hidden="true"><use href="#i-chevron-right"></use></svg>
+        </a>
+      </div>
+    </div>
   </div>
 
   <!-- =====================================================================
@@ -1139,12 +1258,9 @@
     <symbol id="i-camera" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5h3l1.5-2.4h7L17 8.5h3a1.6 1.6 0 0 1 1.6 1.6v8a1.6 1.6 0 0 1-1.6 1.6H4a1.6 1.6 0 0 1-1.6-1.6v-8A1.6 1.6 0 0 1 4 8.5Z"/><circle cx="12" cy="13.7" r="3.3"/></g></symbol>
     <symbol id="i-quote" viewBox="0 0 24 24"><g fill="currentColor"><path d="M9.6 5.6c-3.2 1.3-5.2 4-5.2 7.4 0 2.6 1.5 4.4 3.8 4.4 1.9 0 3.3-1.4 3.3-3.3 0-1.8-1.3-3.1-3-3.1-.3 0-.6 0-.8.1.4-1.4 1.5-2.6 3.1-3.3l-1.2-2.2Zm9.6 0c-3.2 1.3-5.2 4-5.2 7.4 0 2.6 1.5 4.4 3.8 4.4 1.9 0 3.3-1.4 3.3-3.3 0-1.8-1.3-3.1-3-3.1-.3 0-.6 0-.8.1.4-1.4 1.5-2.6 3.1-3.3l-1.2-2.2Z"/></g></symbol>
     <symbol id="i-zoom" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.8" cy="10.8" r="6.4"/><path d="m15.6 15.6 4.2 4.2M10.8 8.2v5.2M8.2 10.8h5.2"/></g></symbol>
-    <symbol id="i-github" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.2.8-.5v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.7 2.6 1.2 3.3.9.1-.7.4-1.2.7-1.5-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.6.8.5A12 12 0 0 0 12 .3Z"/></symbol>
-    <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></symbol>
     <symbol id="i-facebook" viewBox="0 0 24 24"><path fill="currentColor" d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97H15.8c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07Z"/></symbol>
     <symbol id="i-instagram" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.35 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.06 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.35-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.06-1.8-.25-2.23-.41a3.8 3.8 0 0 1-1.38-.9 3.8 3.8 0 0 1-.9-1.38c-.16-.42-.35-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.06-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.35 2.23-.41C8.42 2.17 8.8 2.16 12 2.16ZM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63a5.9 5.9 0 0 0-2.13 1.38A5.9 5.9 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.79.72 1.46 1.38 2.13a5.9 5.9 0 0 0 2.13 1.38c.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.9 5.9 0 0 0 2.13-1.38 5.9 5.9 0 0 0 1.38-2.13c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.38-2.13A5.9 5.9 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0Zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm7.85-10.4a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0Z"/></symbol>
   </svg>
 
-  <script src="js/script.js" defer></script>
 </body>
 </html>

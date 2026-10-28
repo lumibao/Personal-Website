@@ -11,23 +11,21 @@
    04. Accessibility helpers
    05. Layout primitives (container, sections, headings)
    06. Background scene (orbs, grid, grain)
-   07. Preloader
-   08. Glass surfaces, buttons, chips
-   09. Navigation + theme toggle + mobile menu
-   10. Hero
-   11. About
-   12. Skills
-   13. Hobbies
-   14. Gallery + filters
-   15. Lightbox
-   16. Thoughts
-   17. Contact
-   18. Footer
-   19. Back-to-top + toast
-   20. Motion & reveal animations
-   21. Responsive tweaks
-   22. Reduced motion, print, forced colours
-   23. Calm mode — the manual "fewer effects" switch
+   07. Glass surfaces, buttons, chips
+   08. Navigation + light/dark switch
+   09. Hero
+   10. About
+   11. Skills
+   12. Hobbies
+   13. Gallery + filters
+   14. Lightbox
+   15. Thoughts
+   16. Contact
+   17. Footer + calm mode switch
+   18. Motion & scroll-driven reveals
+   19. Responsive tweaks
+   20. Reduced motion, print, forced colours
+   21. Calm mode
 
    EDITING TIP
    -----------
@@ -57,9 +55,9 @@
 /* ==========================================================================
    02. DESIGN TOKENS
    --------------------------------------------------------------------------
-   [EDIT: COLOURS] — LIGHT THEME is the default set below.
-   The DARK THEME overrides further down. Keep both in sync when you change
-   a colour, or simply change the shared values.
+   [EDIT: COLOURS] — DARK THEME is the default, set on :root below.
+   LIGHT THEME lives further down and is switched on by the radio button in
+   the navigation bar (html:has(#theme-light:checked)). Keep both in sync.
    ========================================================================== */
 :root {
   /* Type */
@@ -87,7 +85,76 @@
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
 
-  /* ---------- LIGHT THEME ---------- */
+  /* ---------- DARK THEME (the default) ---------- */
+  color-scheme: dark;
+  color-scheme: dark;
+
+  --bg: #050b17;
+  --bg-deep: #030711;
+  --text: #eaf3ff;
+  --text-soft: #d2e3f8;
+  --muted: #9db2d0;
+  --faint: #7c91b0;
+
+  --accent: #8ecbff;
+  --accent-bright: #67e8f9;
+  --accent-soft: rgba(102, 179, 255, 0.14);
+  --accent-ink: #04121f;
+  --link: #a5d8ff;
+
+  --glass: rgba(255, 255, 255, 0.055);
+  --glass-strong: rgba(255, 255, 255, 0.09);
+  --glass-soft: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-border-strong: rgba(255, 255, 255, 0.2);
+  --glass-highlight: rgba(255, 255, 255, 0.16);
+  --glass-solid: rgba(15, 28, 50, 0.9);
+  --blur: 15px;
+
+  --shadow-lg: 0 40px 90px -40px rgba(0, 0, 0, 0.85);
+  --shadow-md: 0 24px 56px -30px rgba(0, 0, 0, 0.75);
+  --shadow-sm: 0 12px 30px -18px rgba(0, 0, 0, 0.7);
+  --glow: rgba(56, 189, 248, 0.18);
+  --ring-track: rgba(255, 255, 255, 0.12);
+
+  --hairline: rgba(255, 255, 255, 0.08);
+  --chip-bg: rgba(255, 255, 255, 0.05);
+  --nav-bg: rgba(9, 20, 38, 0.55);
+  --nav-bg-scrolled: rgba(8, 18, 34, 0.82);
+
+  --btn-from: #2563eb;
+  --btn-to: #0d47b0;
+  --btn-ink: #ffffff;
+  --btn-shadow: 0 16px 36px -14px rgba(47, 123, 255, 0.6);
+
+  --scene-one: #1d4ed8;
+  --scene-two: #0e7490;
+  --scene-three: #3730a3;
+  --scene-opacity: 0.55;
+  --grid-line: rgba(148, 197, 255, 0.06);
+  --grain-opacity: 0.04;
+
+  --focus: #9bd8ff;
+  --selection: rgba(125, 211, 252, 0.25);
+  --scroll-thumb: rgba(148, 197, 255, 0.24);
+
+  --lv-familiar-bg: rgba(142, 203, 255, 0.14);
+  --lv-familiar-ink: #a9d8ff;
+  --lv-learning-bg: rgba(103, 232, 249, 0.12);
+  --lv-learning-ink: #8ceefb;
+  --lv-beginner-bg: rgba(203, 213, 225, 0.12);
+  --lv-beginner-ink: #c3d2e6;
+
+  --overlay: rgba(2, 6, 14, 0.72);
+  --dialog-bg: rgba(10, 22, 41, 0.94);
+}
+
+/* --------------------------------------------------------------------------
+   LIGHT THEME — chosen with the switch in the navigation bar.
+   The switch is two radio buttons, so this is pure CSS: when the "light"
+   radio is checked, the browser re-reads every token below.
+   -------------------------------------------------------------------------- */
+html:has(#theme-light:checked) {
   color-scheme: light;
 
   --bg: #eef5ff;
@@ -151,70 +218,6 @@
   --overlay: rgba(9, 22, 43, 0.55);
   --dialog-bg: rgba(250, 253, 255, 0.94);
 }
-
-[data-theme="dark"] {
-  color-scheme: dark;
-
-  --bg: #050b17;
-  --bg-deep: #030711;
-  --text: #eaf3ff;
-  --text-soft: #d2e3f8;
-  --muted: #9db2d0;
-  --faint: #7c91b0;
-
-  --accent: #8ecbff;
-  --accent-bright: #67e8f9;
-  --accent-soft: rgba(102, 179, 255, 0.14);
-  --accent-ink: #04121f;
-  --link: #a5d8ff;
-
-  --glass: rgba(255, 255, 255, 0.055);
-  --glass-strong: rgba(255, 255, 255, 0.09);
-  --glass-soft: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-border-strong: rgba(255, 255, 255, 0.2);
-  --glass-highlight: rgba(255, 255, 255, 0.16);
-  --glass-solid: rgba(15, 28, 50, 0.9);
-  --blur: 15px;
-
-  --shadow-lg: 0 40px 90px -40px rgba(0, 0, 0, 0.85);
-  --shadow-md: 0 24px 56px -30px rgba(0, 0, 0, 0.75);
-  --shadow-sm: 0 12px 30px -18px rgba(0, 0, 0, 0.7);
-  --glow: rgba(56, 189, 248, 0.18);
-  --ring-track: rgba(255, 255, 255, 0.12);
-
-  --hairline: rgba(255, 255, 255, 0.08);
-  --chip-bg: rgba(255, 255, 255, 0.05);
-  --nav-bg: rgba(9, 20, 38, 0.55);
-  --nav-bg-scrolled: rgba(8, 18, 34, 0.82);
-
-  --btn-from: #2563eb;
-  --btn-to: #0d47b0;
-  --btn-ink: #ffffff;
-  --btn-shadow: 0 16px 36px -14px rgba(47, 123, 255, 0.6);
-
-  --scene-one: #1d4ed8;
-  --scene-two: #0e7490;
-  --scene-three: #3730a3;
-  --scene-opacity: 0.55;
-  --grid-line: rgba(148, 197, 255, 0.06);
-  --grain-opacity: 0.04;
-
-  --focus: #9bd8ff;
-  --selection: rgba(125, 211, 252, 0.25);
-  --scroll-thumb: rgba(148, 197, 255, 0.24);
-
-  --lv-familiar-bg: rgba(142, 203, 255, 0.14);
-  --lv-familiar-ink: #a9d8ff;
-  --lv-learning-bg: rgba(103, 232, 249, 0.12);
-  --lv-learning-ink: #8ceefb;
-  --lv-beginner-bg: rgba(203, 213, 225, 0.12);
-  --lv-beginner-ink: #c3d2e6;
-
-  --overlay: rgba(2, 6, 14, 0.72);
-  --dialog-bg: rgba(10, 22, 41, 0.94);
-}
-
 /* ==========================================================================
    03. RESET & BASE
    ========================================================================== */
@@ -245,10 +248,6 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   transition: background-color var(--t-slow) var(--ease), color var(--t-slow) var(--ease);
-}
-
-body.no-scroll {
-  overflow: hidden;
 }
 
 img,
@@ -372,16 +371,6 @@ kbd {
 /* ==========================================================================
    04. ACCESSIBILITY HELPERS
    ========================================================================== */
-/* Off-screen helper used by the clipboard fallback in js/script.js */
-.clipboard-helper {
-  position: fixed;
-  top: -1000px;
-  left: 0;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-  pointer-events: none;
-}
 
 .visually-hidden {
   position: absolute !important;
@@ -648,84 +637,7 @@ svg {
 }
 
 /* ==========================================================================
-   07. PRELOADER
-   --------------------------------------------------------------------------
-   Fades out when the page has loaded. The CSS animation is a safety net so
-   the site can never get stuck behind it (even with JavaScript disabled).
-   ========================================================================== */
-.preloader {
-  position: fixed;
-  inset: 0;
-  z-index: 4000;
-  display: grid;
-  place-items: center;
-  background:
-    radial-gradient(circle at 50% 40%, var(--accent-soft), transparent 60%),
-    var(--bg);
-  transition: opacity 620ms var(--ease), visibility 620ms var(--ease);
-  animation: preloader-fallback 0.5s var(--ease) 3.4s forwards;
-}
-
-.preloader.is-done {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.preloader__inner {
-  display: grid;
-  justify-items: center;
-  gap: 18px;
-  padding: 24px;
-  text-align: center;
-}
-
-.preloader__mark {
-  display: grid;
-  place-items: center;
-  width: 74px;
-  height: 74px;
-  border-radius: 22px;
-  font-family: var(--font-display);
-  font-size: 1.4rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: #f3fbff;
-  background: linear-gradient(145deg, #2563eb, #0b3ea8);
-  box-shadow:
-    0 24px 60px -24px rgba(29, 78, 216, 0.9),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  animation: mark-in 700ms var(--ease-spring) both;
-}
-
-.preloader__label {
-  font-family: var(--font-display);
-  font-size: 0.76rem;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.preloader__track {
-  width: min(220px, 60vw);
-  height: 3px;
-  border-radius: 999px;
-  background: var(--ring-track);
-  overflow: hidden;
-}
-
-.preloader__fill {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, var(--accent), var(--accent-bright));
-  transform-origin: left center;
-  animation: preloader-fill 1.15s var(--ease) both;
-}
-
-/* ==========================================================================
-   08. GLASS SURFACES, BUTTONS, CHIPS
+   07. GLASS SURFACES, BUTTONS, CHIPS
    ========================================================================== */
 .glass {
   position: relative;
@@ -764,7 +676,6 @@ svg {
 @media (max-width: 820px), (hover: none) and (pointer: coarse) {
   .glass,
   .nav__bar,
-  .mobile-menu,
   .filters,
   .contact__block--soft {
     background: var(--glass-solid);
@@ -776,7 +687,6 @@ svg {
 @media (prefers-reduced-transparency: reduce) {
   .glass,
   .nav__bar,
-  .mobile-menu,
   .filters,
   .contact__block--soft {
     background: var(--glass-solid);
@@ -980,7 +890,7 @@ svg {
 }
 
 /* ==========================================================================
-   09. NAVIGATION
+   08. NAVIGATION
    ========================================================================== */
 .nav {
   position: fixed;
@@ -1006,10 +916,9 @@ svg {
   pointer-events: auto;
 }
 
-.nav.is-scrolled .nav__bar {
+/* The bar is always in its "scrolled" state — there is no script to change it */
+.nav__bar {
   background: var(--nav-bg-scrolled);
-  border-color: var(--glass-border-strong);
-  box-shadow: var(--shadow-md);
 }
 
 /* Brand / JM logo */
@@ -1088,6 +997,7 @@ svg {
   transition: color var(--t-fast) var(--ease), background-color var(--t-fast) var(--ease);
 }
 
+/* A small gradient underline grows in on hover */
 .nav__link::after {
   content: "";
   position: absolute;
@@ -1101,17 +1011,15 @@ svg {
   transition: width var(--t-med) var(--ease);
 }
 
+/* The nav has no "current section" state without a script, so hovering is the
+   only highlight — a soft tinted pill plus the underline. */
 .nav__link:hover {
-  color: var(--text);
-  background: var(--glass);
-}
-
-.nav__link.is-active {
   color: var(--text);
   background: var(--accent-soft);
 }
 
-.nav__link.is-active::after {
+.nav__link:hover::after,
+.nav__link:focus-visible::after {
   width: 16px;
 }
 
@@ -1122,12 +1030,27 @@ svg {
   flex: none;
 }
 
-/* Theme toggle */
+/* Light / dark switch — two radio buttons wearing a sliding pill
+   --------------------------------------------------------------------------
+   No JavaScript: the radios carry the state, :has() reads it. */
 .theme-toggle {
+  position: relative;
   display: inline-flex;
   padding: 6px;
   border-radius: var(--r-pill);
   color: var(--muted);
+}
+
+.theme-toggle__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 
 .theme-toggle__track {
@@ -1144,12 +1067,20 @@ svg {
   transition: background-color var(--t-med) var(--ease), border-color var(--t-med) var(--ease);
 }
 
+.theme-toggle__side {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
 .theme-toggle__icon {
   display: grid;
   place-items: center;
   width: 14px;
   height: 14px;
-  opacity: 0.45;
+  opacity: 0.42;
   transition: opacity var(--t-med) var(--ease), color var(--t-med) var(--ease);
 }
 
@@ -1160,70 +1091,53 @@ svg {
 
 .theme-toggle__thumb {
   position: absolute;
+  z-index: 1;
   top: 3px;
   left: 3px;
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: linear-gradient(145deg, #ffffff, #d8e8ff);
+  background: linear-gradient(145deg, #8ed3ff, #2f7bff);
   box-shadow: 0 3px 8px rgba(10, 30, 60, 0.28);
   transition: transform var(--t-med) var(--ease-spring), background var(--t-med) var(--ease);
 }
 
-[data-theme="dark"] .theme-toggle__thumb {
-  transform: translateX(30px);
-  background: linear-gradient(145deg, #8ed3ff, #2f7bff);
+/* The thumb sits under the sun when light is chosen */
+html:has(#theme-light:checked) .theme-toggle__thumb {
+  transform: translateX(0);
+  background: linear-gradient(145deg, #ffffff, #d8e8ff);
 }
 
-[data-theme="light"] .theme-toggle__icon--sun,
-[data-theme="dark"] .theme-toggle__icon--moon {
+html:has(#theme-dark:checked) .theme-toggle__thumb {
+  transform: translateX(30px);
+}
+
+/* Only the icon that matches the current theme is bright */
+.theme-toggle__icon--sun,
+html:has(#theme-dark:checked) .theme-toggle__icon--sun {
+  opacity: 0.42;
+  color: var(--muted);
+}
+
+html:has(#theme-light:checked) .theme-toggle__icon--sun,
+html:has(#theme-dark:checked) .theme-toggle__icon--moon {
   opacity: 1;
   color: var(--accent);
 }
 
-/* Mobile menu button */
-.menu-toggle {
-  display: none;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 1px solid var(--glass-border);
-  background: var(--glass-soft);
-  color: var(--text);
-  transition: background-color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+html:has(#theme-light:checked) .theme-toggle__icon--moon {
+  opacity: 0.42;
+  color: var(--muted);
 }
 
-.menu-toggle:hover {
-  background: var(--glass);
-  border-color: var(--glass-border-strong);
+.theme-toggle__side:hover .theme-toggle__icon {
+  opacity: 1;
 }
 
-.menu-toggle__box {
-  display: grid;
-  gap: 4px;
-  width: 18px;
-}
-
-.menu-toggle__box span {
-  display: block;
-  height: 1.8px;
-  width: 100%;
-  border-radius: 2px;
-  background: currentColor;
-  transition: transform var(--t-med) var(--ease), opacity var(--t-fast) var(--ease);
-}
-
-.menu-toggle[aria-expanded="true"] .menu-toggle__box span:nth-child(1) {
-  transform: translateY(5.8px) rotate(45deg);
-}
-
-.menu-toggle[aria-expanded="true"] .menu-toggle__box span:nth-child(2) {
-  opacity: 0;
-}
-
-.menu-toggle[aria-expanded="true"] .menu-toggle__box span:nth-child(3) {
-  transform: translateY(-5.8px) rotate(-45deg);
+/* Keyboard focus lands on the hidden radio, so light the whole pill */
+.theme-toggle__input:focus-visible ~ .theme-toggle__track {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
 }
 
 /* Scroll progress line inside the nav bar */
@@ -1249,77 +1163,23 @@ svg {
   opacity: 0.55;
 }
 
-/* Mobile menu panel */
-.mobile-menu {
-  position: absolute;
-  top: calc(100% - 4px);
-  max-height: calc(100vh - var(--nav-height) - 32px);
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  left: var(--gutter);
-  right: var(--gutter);
-  width: min(var(--container), calc(100% - (2 * var(--gutter))));
-  margin-inline: auto;
-  padding: 16px;
-  border-radius: var(--r-lg);
-  background: var(--nav-bg-scrolled);
-  box-shadow: var(--shadow-lg);
-  pointer-events: auto;
-  transform-origin: top center;
-  animation: menu-in 260ms var(--ease) both;
+/* The progress line is driven by the scroll position itself — no script. */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .nav__progress span {
+      animation: nav-progress linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
 }
 
-.mobile-menu[hidden] {
-  display: none;
-}
-
-.mobile-menu__links {
-  display: grid;
-  gap: 2px;
-}
-
-.mobile-menu__links a {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 46px;
-  padding: 0.72rem 0.9rem;
-  border-radius: var(--r-sm);
-  color: var(--text);
-  font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-.mobile-menu__links a:hover,
-.mobile-menu__links a:focus-visible,
-.mobile-menu__links a.is-active {
-  background: var(--accent-soft);
-  color: var(--accent);
-}
-
-.mobile-menu__links a.is-active .mobile-menu__num {
-  color: var(--accent);
-}
-
-.mobile-menu__num {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--faint);
-}
-
-.mobile-menu__note {
-  margin-top: 12px;
-  padding: 12px 14px;
-  border-radius: var(--r-sm);
-  border: 1px dashed var(--glass-border-strong);
-  color: var(--muted);
-  font-size: 0.82rem;
-  line-height: 1.6;
+@keyframes nav-progress {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
 }
 
 /* ==========================================================================
-   10. HERO
+   09. HERO
    ========================================================================== */
 .hero {
   position: relative;
@@ -1406,12 +1266,47 @@ svg {
   color: var(--faint);
 }
 
-.hero__typed {
+.hero__roles {
+  display: inline-grid;
   min-height: 1.4em;
   font-size: clamp(1.05rem, 0.98rem + 0.45vw, 1.3rem);
   font-weight: 600;
   color: var(--accent);
   letter-spacing: -0.01em;
+  vertical-align: bottom;
+}
+
+/* All four phrases share one cell, so the line never jumps width */
+.hero__role-item {
+  grid-area: 1 / 1;
+  opacity: 0;
+  animation: role-cycle 16s var(--ease) infinite;
+}
+
+.hero__role-item:nth-child(1) { animation-delay: 0s; }
+.hero__role-item:nth-child(2) { animation-delay: 4s; }
+.hero__role-item:nth-child(3) { animation-delay: 8s; }
+.hero__role-item:nth-child(4) { animation-delay: 12s; }
+
+@keyframes role-cycle {
+  0%   { opacity: 0; transform: translateY(7px); }
+  2%   { opacity: 1; transform: translateY(0); }
+  23%  { opacity: 1; transform: translateY(0); }
+  25%  { opacity: 0; transform: translateY(-7px); }
+  100% { opacity: 0; transform: translateY(-7px); }
+}
+
+/* With reduced motion the first phrase simply stays put */
+@media (prefers-reduced-motion: reduce) {
+  .hero__role-item {
+    animation: none;
+    opacity: 0;
+  }
+
+  .hero__role-item:first-child {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .hero__caret {
@@ -1702,9 +1597,7 @@ svg {
 }
 
 .ticker:hover .ticker__track,
-.ticker:focus-within .ticker__track,
-.ticker__track.is-paused,
-.ticker__track.is-asleep {
+.ticker:focus-within .ticker__track {
   animation-play-state: paused;
 }
 
@@ -1758,7 +1651,7 @@ svg {
 }
 
 /* ==========================================================================
-   11. ABOUT
+   10. ABOUT
    ========================================================================== */
 .about__grid {
   display: grid;
@@ -1933,7 +1826,7 @@ svg {
 }
 
 /* ==========================================================================
-   12. SKILLS
+   11. SKILLS
    ========================================================================== */
 .skills__grid {
   display: grid;
@@ -2051,7 +1944,7 @@ svg {
 }
 
 /* ==========================================================================
-   13. HOBBIES
+   12. HOBBIES
    ========================================================================== */
 .hobbies__grid {
   display: grid;
@@ -2201,7 +2094,7 @@ svg {
 }
 
 /* ==========================================================================
-   14. GALLERY + FILTERS
+   13. GALLERY + FILTERS
    ========================================================================== */
 .gallery__toolbar {
   display: flex;
@@ -2226,6 +2119,7 @@ svg {
 }
 
 .filter {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 7px;
@@ -2235,10 +2129,23 @@ svg {
   font-size: 0.83rem;
   font-weight: 500;
   color: var(--muted);
+  cursor: pointer;
   transition:
     color var(--t-fast) var(--ease),
     background-color var(--t-fast) var(--ease),
     box-shadow var(--t-med) var(--ease);
+}
+
+.filter__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 
 .filter:hover {
@@ -2246,10 +2153,16 @@ svg {
   background: var(--glass-strong);
 }
 
-.filter.is-active {
+/* The chosen filter lights up. :has() reads the radio inside the label. */
+.filter:has(.filter__input:checked) {
   color: var(--btn-ink);
   background: linear-gradient(135deg, var(--btn-from), var(--btn-to));
   box-shadow: var(--btn-shadow);
+}
+
+.filter:has(.filter__input:focus-visible) {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
 }
 
 .filter__count {
@@ -2268,7 +2181,7 @@ svg {
   color: var(--faint);
 }
 
-.filter.is-active .filter__count {
+.filter:has(.filter__input:checked) .filter__count {
   border-color: rgba(255, 255, 255, 0.24);
   background: rgba(255, 255, 255, 0.16);
   color: #ffffff;
@@ -2453,38 +2366,44 @@ svg {
   }
 }
 
-.gallery__item.is-hidden {
+/* ------------------------------------------------------------------------
+   GALLERY FILTERING — pure CSS.
+   Checking a filter hides every tile that belongs to another category.
+   ------------------------------------------------------------------------ */
+html:has(#filter-me:checked) .gallery__item:not([data-category="me"]),
+html:has(#filter-memories:checked) .gallery__item:not([data-category="memories"]),
+html:has(#filter-projects:checked) .gallery__item:not([data-category="projects"]) {
   display: none;
 }
 
-/* A soft "pop" as a filtered tile re-appears */
-.gallery__item.is-appearing {
-  animation: tile-in 420ms var(--ease) backwards;
-}
-
 /* ==========================================================================
-   15. LIGHTBOX
+   14. LIGHTBOX
    ========================================================================== */
+/* ------------------------------------------------------------------------
+   LIGHTBOX — one panel per photo, shown when its id is the URL fragment.
+   A fixed element is already in the viewport, so opening a panel does not
+   scroll the page. Close / prev / next are ordinary links.
+   ------------------------------------------------------------------------ */
 .lightbox {
   position: fixed;
   inset: 0;
   z-index: 2000;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 10px;
   padding: clamp(12px, 2.6vw, 28px);
-  opacity: 0;
-  transition: opacity var(--t-med) var(--ease);
 }
 
-.lightbox[hidden] {
-  display: none;
+.lightbox:target {
+  display: flex;
+  animation: lightbox-in 240ms var(--ease) both;
 }
 
-.lightbox.is-open {
-  opacity: 1;
+@keyframes lightbox-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 .lightbox__backdrop {
@@ -2512,8 +2431,14 @@ svg {
   transition: transform var(--t-med) var(--ease);
 }
 
-.lightbox.is-open .lightbox__dialog {
+.lightbox:target .lightbox__dialog {
   transform: translateY(0) scale(1);
+  animation: dialog-in 300ms var(--ease) both;
+}
+
+@keyframes dialog-in {
+  from { transform: translateY(16px) scale(0.985); }
+  to   { transform: translateY(0) scale(1); }
 }
 
 .lightbox__stage {
@@ -2658,23 +2583,9 @@ svg {
   transform: none;
 }
 
-.lightbox__keys {
-  position: relative;
-  z-index: 1;
-  font-size: 0.72rem;
-  color: #d7e9ff;
-  text-align: center;
-  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);
-}
-
-.lightbox__keys kbd {
-  border-color: rgba(255, 255, 255, 0.24);
-  background: rgba(255, 255, 255, 0.1);
-  color: #eaf6ff;
-}
 
 /* ==========================================================================
-   16. THOUGHTS
+   15. THOUGHTS
    ========================================================================== */
 .thoughts__grid {
   display: grid;
@@ -2802,7 +2713,7 @@ svg {
 }
 
 /* ==========================================================================
-   17. CONTACT
+   16. CONTACT
    ========================================================================== */
 .contact__card {
   position: relative;
@@ -2992,7 +2903,7 @@ svg {
 }
 
 /* ==========================================================================
-   18. FOOTER
+   17. FOOTER
    ========================================================================== */
 .footer {
   position: relative;
@@ -3085,8 +2996,22 @@ svg {
   mask-image: linear-gradient(180deg, #000 10%, transparent 94%);
 }
 
+.calm-toggle__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
 .calm-toggle {
+  position: relative;
   display: inline-flex;
+  cursor: pointer;
   align-items: center;
   gap: 8px;
   min-height: 34px;
@@ -3118,15 +3043,20 @@ svg {
   background: var(--glass);
 }
 
-.calm-toggle.is-on {
+.calm-toggle:has(.calm-toggle__input:checked) {
   color: var(--accent);
   border-color: var(--accent);
   background: var(--accent-soft);
 }
 
-.calm-toggle.is-on .calm-toggle__dot {
+.calm-toggle:has(.calm-toggle__input:checked) .calm-toggle__dot {
   background: currentColor;
   box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.calm-toggle:has(.calm-toggle__input:focus-visible) {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
 }
 
 .footer__links {
@@ -3145,118 +3075,11 @@ svg {
 }
 
 /* ==========================================================================
-   19. BACK-TO-TOP + TOAST
-   ========================================================================== */
-.to-top {
-  position: fixed;
-  right: clamp(14px, 2.4vw, 26px);
-  bottom: calc(clamp(14px, 2.4vw, 26px) + env(safe-area-inset-bottom, 0px));
-  z-index: 900;
-  display: grid;
-  place-items: center;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 1px solid var(--glass-border-strong);
-  background: var(--glass-strong);
-  color: var(--text);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
-  box-shadow: var(--shadow-md);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(14px) scale(0.9);
-  transition:
-    opacity var(--t-med) var(--ease),
-    visibility var(--t-med) var(--ease),
-    transform var(--t-med) var(--ease),
-    color var(--t-fast) var(--ease),
-    border-color var(--t-fast) var(--ease);
-}
-
-.to-top.is-visible {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0) scale(1);
-}
-
-.to-top:hover {
-  color: var(--accent);
-  border-color: var(--accent);
-  transform: translateY(-3px);
-}
-
-.to-top__ring {
-  position: absolute;
-  inset: -1px;
-  width: calc(100% + 2px);
-  height: calc(100% + 2px);
-  transform: rotate(-90deg);
-  fill: none;
-  stroke-width: 2;
-}
-
-.to-top__ring-bg {
-  stroke: var(--ring-track);
-}
-
-.to-top__ring-fg {
-  stroke: var(--accent);
-  stroke-linecap: round;
-  stroke-dasharray: 125.66;
-  stroke-dashoffset: 125.66;
-  transition: stroke-dashoffset 120ms linear;
-}
-
-.to-top__icon {
-  position: relative;
-  width: 18px;
-  height: 18px;
-}
-
-.toast {
-  position: fixed;
-  left: 50%;
-  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
-  z-index: 2500;
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  max-width: calc(100vw - 32px);
-  padding: 0.72rem 1.1rem;
-  border-radius: var(--r-pill);
-  border: 1px solid var(--glass-border-strong);
-  background: var(--glass-strong);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
-  box-shadow: var(--shadow-md);
-  font-size: 0.83rem;
-  color: var(--text);
-  opacity: 0;
-  visibility: hidden;
-  transform: translate(-50%, 16px);
-  transition: opacity var(--t-med) var(--ease), visibility var(--t-med) var(--ease), transform var(--t-med) var(--ease);
-}
-
-.toast.is-on {
-  opacity: 1;
-  visibility: visible;
-  transform: translate(-50%, 0);
-}
-
-.toast svg {
-  width: 15px;
-  height: 15px;
-  flex: none;
-  color: #38d39f;
-}
-
-/* ==========================================================================
-   20. MOTION & REVEAL ANIMATIONS
+   18. MOTION & SCROLL-DRIVEN REVEALS
    --------------------------------------------------------------------------
    All motion lives here so it is easy to slow down or switch off.
-   The scroll-reveal base is applied by JavaScript (the .js class), which
-   means every section stays visible if scripts are blocked or fail.
+   Reveals run on the browser's own scroll timeline, so they work with no
+   script at all — and the content is simply visible where it is unsupported.
    ========================================================================== */
 @keyframes dot-ripple {
   0%, 100% { transform: scale(0.9); opacity: 0.55; }
@@ -3316,46 +3139,31 @@ svg {
   100% { transform: translate(-50%, 12px); opacity: 0; }
 }
 
-@keyframes mark-in {
-  from { transform: scale(0.7) rotate(-8deg); opacity: 0; }
-  to   { transform: scale(1) rotate(0deg); opacity: 1; }
-}
 
-@keyframes preloader-fill {
-  from { transform: scaleX(0); }
-  to   { transform: scaleX(1); }
-}
 
-@keyframes preloader-fallback {
-  to { opacity: 0; visibility: hidden; }
-}
 
-@keyframes menu-in {
-  from { opacity: 0; transform: translateY(-8px) scale(0.98); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-@keyframes reveal-up {
-  /* Opacity + transform only. An animated blur here used to sit on top of
-     every glass card's backdrop-filter — the single most expensive thing on
-     the page while scrolling. The fade still reads as "soft" without it. */
-  from { opacity: 0; transform: translateY(22px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
 
 @keyframes tile-in {
   from { opacity: 0; transform: scale(0.96); }
   to   { opacity: 1; transform: scale(1); }
 }
 
-/* Scroll-reveal base state — removed when the element enters the viewport */
-.js [data-reveal] {
-  opacity: 0;
+/* Scroll reveals without JavaScript: the browser's own scroll timeline fades
+   each block in as it enters the viewport. Where scroll-driven animations are
+   not supported the content is simply visible from the start. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    [data-reveal] {
+      animation: reveal-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+  }
 }
 
-.js [data-reveal].is-revealed {
-  opacity: 1;
-  animation: reveal-up 820ms var(--ease) backwards;
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 /* Floating labels and portrait pause when hovered, so text stays readable */
@@ -3366,7 +3174,7 @@ svg {
 }
 
 /* ==========================================================================
-   21. RESPONSIVE
+   19. RESPONSIVE
    --------------------------------------------------------------------------
    Mobile-first would be ideal, but the design is progressive: everything is
    fluid, and these breakpoints only simplify layouts as space shrinks.
@@ -3408,27 +3216,56 @@ svg {
   }
 }
 
-/* Switch to the mobile menu before the links start to crowd */
+/* Small screens: the nav bar grows a second row of links that scrolls
+   sideways. No hamburger, so there is no menu state to lose. */
 @media (max-width: 980px) {
   /* The monogram would sit entirely behind the portrait at this size */
   .hero__watermark {
     display: none;
   }
 
-  .nav__links {
-    display: none;
+  /* Anchor jumps need to clear the taller two-row bar */
+  html {
+    scroll-padding-top: calc(var(--nav-height) + 20px);
   }
 
-  .menu-toggle {
-    display: grid;
+  :root {
+    --nav-height: 112px;
   }
 
   .nav__bar {
+    flex-wrap: wrap;
     justify-content: space-between;
+    border-radius: var(--r-lg);
+    padding: 9px 10px 8px 12px;
+    row-gap: 6px;
   }
 
   .nav__actions {
     margin-left: auto;
+  }
+
+  .nav__links {
+    order: 3;
+    flex: 1 0 100%;
+    justify-content: flex-start;
+    gap: 2px;
+    padding-top: 7px;
+    border-top: 1px solid var(--hairline);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .nav__links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav__link {
+    flex: none;
+    white-space: nowrap;
+    min-height: 38px;
   }
 
   .hero {
@@ -3528,9 +3365,7 @@ svg {
     border-radius: var(--r-sm);
   }
 
-  .lightbox__keys {
-    display: none;
-  }
+
 
   .lightbox__dialog {
     max-height: calc(100svh - 48px);
@@ -3544,10 +3379,6 @@ svg {
 @media (max-width: 640px) {
   .section {
     padding-block: clamp(58px, 12vw, 84px);
-  }
-
-  .toast {
-    bottom: calc(84px + env(safe-area-inset-bottom, 0px));
   }
 
   .section__head {
@@ -3674,13 +3505,8 @@ svg {
     width: 56px;
   }
 
-  [data-theme="dark"] .theme-toggle__thumb {
+  html:has(#theme-dark:checked) .theme-toggle__thumb {
     transform: translateX(24px);
-  }
-
-  .menu-toggle {
-    width: 38px;
-    height: 38px;
   }
 
   .hero__title {
@@ -3702,7 +3528,7 @@ svg {
 }
 
 /* ==========================================================================
-   22. REDUCED MOTION, PRINT & FORCED COLOURS
+   20. REDUCED MOTION, PRINT & FORCED COLOURS
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -3718,11 +3544,9 @@ svg {
     scroll-behavior: auto !important;
   }
 
-  .js [data-reveal],
-  .js [data-reveal].is-revealed {
+  [data-reveal] {
     opacity: 1;
     animation: none;
-    filter: none;
     transform: none;
   }
 
@@ -3734,21 +3558,21 @@ svg {
   .eyebrow__dot,
   .eyebrow__dot::after,
   .hero__caret,
-  .hero__scroll-dot {
+  .hero__scroll-dot,
+  .ticker__track,
+  .hero__role-item {
     animation: none !important;
   }
 
-  .preloader {
-    animation: none;
+  .hero__role-item:first-child {
+    opacity: 1;
+    transform: none;
   }
 }
 
 @media print {
   .nav,
   .scene,
-  .preloader,
-  .to-top,
-  .toast,
   .lightbox,
   .hero__scroll,
   .float-chip,
@@ -3756,7 +3580,6 @@ svg {
   .portrait__glow,
   .filters,
   .gallery__hint,
-  .menu-toggle,
   .theme-toggle {
     display: none !important;
   }
@@ -3780,8 +3603,10 @@ svg {
     break-inside: avoid;
   }
 
-  .js [data-reveal] {
+  [data-reveal] {
+    animation: none !important;
     opacity: 1 !important;
+    transform: none !important;
   }
 
   a {
@@ -3795,79 +3620,74 @@ svg {
   .btn,
   .filter,
   .gallery__item,
-  .socials a,
-  .to-top {
+  .socials a {
     border: 1px solid CanvasText;
   }
 
-  .gallery__overlay,
-  .lightbox__keys {
+  .gallery__overlay {
     background: Canvas;
     color: CanvasText;
   }
 }
 
 /* ==========================================================================
-   23. CALM MODE
+   21. CALM MODE
    --------------------------------------------------------------------------
    The footer switch sets data-calm="true" on <html>. It is a real, persisted
    preference: motion stops, the glass turns solid, and the grain disappears.
    Everything here is additive, so the normal design is untouched.
    ========================================================================== */
-html[data-calm="true"] .scene__orb,
-html[data-calm="true"] .portrait,
-html[data-calm="true"] .portrait__glow,
-html[data-calm="true"] .portrait__ring,
-html[data-calm="true"] .float-chip,
-html[data-calm="true"] .eyebrow__dot,
-html[data-calm="true"] .eyebrow__dot::after,
-html[data-calm="true"] .pulse-dot,
-html[data-calm="true"] .pulse-dot::after,
-html[data-calm="true"] .hero__caret,
-html[data-calm="true"] .hero__scroll-dot,
-html[data-calm="true"] .ticker__track {
+html:has(#calm-switch:checked) .scene__orb,
+html:has(#calm-switch:checked) .portrait,
+html:has(#calm-switch:checked) .portrait__glow,
+html:has(#calm-switch:checked) .portrait__ring,
+html:has(#calm-switch:checked) .float-chip,
+html:has(#calm-switch:checked) .eyebrow__dot,
+html:has(#calm-switch:checked) .eyebrow__dot::after,
+html:has(#calm-switch:checked) .pulse-dot,
+html:has(#calm-switch:checked) .pulse-dot::after,
+html:has(#calm-switch:checked) .hero__caret,
+html:has(#calm-switch:checked) .hero__scroll-dot,
+html:has(#calm-switch:checked) .ticker__track {
   animation: none !important;
 }
 
-html[data-calm="true"] .scene__noise {
+html:has(#calm-switch:checked) .scene__noise {
   opacity: 0;
 }
 
-html[data-calm="true"] .ticker__group:nth-child(2) {
+html:has(#calm-switch:checked) .ticker__group:nth-child(2) {
   display: none;
 }
 
-html[data-calm="true"] .glass,
-html[data-calm="true"] .nav__bar,
-html[data-calm="true"] .mobile-menu,
-html[data-calm="true"] .filters,
-html[data-calm="true"] .contact__block--soft,
-html[data-calm="true"] .lightbox__dialog,
-html[data-calm="true"] .lightbox__close,
-html[data-calm="true"] .lightbox__nav,
-html[data-calm="true"] .to-top,
-html[data-calm="true"] .toast,
-html[data-calm="true"] .footer__back {
+html:has(#calm-switch:checked) .glass,
+html:has(#calm-switch:checked) .nav__bar,
+html:has(#calm-switch:checked) .filters,
+html:has(#calm-switch:checked) .contact__block--soft,
+html:has(#calm-switch:checked) .lightbox__dialog,
+html:has(#calm-switch:checked) .lightbox__close,
+html:has(#calm-switch:checked) .lightbox__nav,
+html:has(#calm-switch:checked) .footer__back {
   background: var(--glass-solid);
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
 }
 
-html[data-calm="true"] .hero__scroll-dot {
+html:has(#calm-switch:checked) .hero__scroll-dot {
   top: 50%;
 }
 
-html[data-calm="true"] .gallery__item:hover,
-html[data-calm="true"] .gallery__item:focus-visible,
-html[data-calm="true"] .socials a:hover,
-html[data-calm="true"] .footer__back:hover {
+html:has(#calm-switch:checked) .gallery__item:hover,
+html:has(#calm-switch:checked) .gallery__item:focus-visible,
+html:has(#calm-switch:checked) .socials a:hover,
+html:has(#calm-switch:checked) .footer__back:hover {
   transform: none;
 }
 
-html[data-calm="true"] .gallery__item:hover img {
+html:has(#calm-switch:checked) .gallery__item:hover img {
   transform: none;
 }
 
-html[data-calm="true"] .btn--primary::after {
+html:has(#calm-switch:checked) .btn--primary::after {
   display: none;
 }
