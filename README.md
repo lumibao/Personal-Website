@@ -5,11 +5,14 @@ student at the University of Makati. A warm blue-glass corner of the internet:
 part introduction, part sketchbook, part photo wall. Not a résumé, not a
 corporate portfolio — just a digital home.
 
-Built with **HTML5 and CSS3 only**. No JavaScript, no frameworks, no build step,
-no package manager, no trackers, no CDNs. Every file is plain text you can open
-and edit, and every interaction on the page — the theme switch, the gallery
-filters, the image lightbox, the mobile navigation and calm mode — is handled by
-CSS.
+Built with **HTML5 and CSS3 only**. No JavaScript of our own, no frameworks, no
+build step, no package manager. Every file is plain text you can open and edit,
+and every interaction on the page — the theme switch, the gallery filters, the
+image lightbox, the mobile navigation and calm mode — is handled by CSS.
+
+The one exception to "no third-party anything" is the **YouTube embeds** in the
+Videos section and the looping background reel: those are YouTube's own iframe
+players, so they necessarily load from `youtube-nocookie.com`. See section 6.
 
 ---
 
@@ -42,7 +45,7 @@ There is **no build step**. Edit a file, save it, refresh. That's the workflow.
 Personal-Website/            (rename the folder freely — all paths are relative)
 ├── index.html              all page structure and text
 ├── css/
-│   └── style.css           all styling (21 numbered sections)
+│   └── style.css           all styling (22 numbered sections)
 ├── assets/
 │   ├── images/             portrait + gallery + social-preview artwork
 │   ├── icons/              favicon, app icons, manifest icons
@@ -56,8 +59,8 @@ Personal-Website/            (rename the folder freely — all paths are relativ
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | The skeleton and every word on the page. Organised into labelled comment blocks — one per section — so you can jump straight to the part you want. |
-| `css/style.css` | All visual design: tokens, glass surfaces, layout, motion, responsive rules, reduced-motion and print styles. Split into 21 numbered sections with a contents list at the top. |
+| `index.html` | The skeleton and every word on the page, including the YouTube embeds. Organised into labelled comment blocks — one per section — so you can jump straight to the part you want. |
+| `css/style.css` | All visual design: tokens, glass surfaces, layout, motion, responsive rules, reduced-motion and print styles. Split into 22 numbered sections with a contents list at the top. |
 | `site.webmanifest` | Name, colours and icons used when the site is added to a home screen. |
 | `assets/images/` | The portrait, the nine gallery photos and the social-preview cover. |
 | `assets/icons/` | Favicon (SVG + PNG), Apple touch icon and PWA icons. |
@@ -79,6 +82,8 @@ There is **no `js/` folder** — and no `<script>` tag in the page.
 | **Reading progress line** | `animation-timeline: scroll(root block)` on the thin line in the nav bar. |
 | **Calm mode** | A checkbox in the footer; `html:has(#calm-switch:checked)` switches the effects off. |
 | **Smooth scrolling** | `scroll-behavior: smooth` in CSS. |
+| **Videos** | Plain `<iframe>` embeds pointed at `youtube-nocookie.com`, with `autoplay=1&mute=1&loop=1&playlist=…`. Browsers allow autoplay only when muted, which is why the players start silent. |
+| **Background reel** | The same kind of iframe, fixed inside the background layer, with `controls=0` and `pointer-events: none` so it can never be clicked. |
 
 **What that means in practice:** the theme choice and calm mode reset when the
 page is reloaded (the page opens in dark mode), and the lightbox closes with its
@@ -236,7 +241,60 @@ spotlight, or delete it for a uniform grid.
 
 ---
 
-## 6. Light and dark mode
+## 6. Videos and the background reel
+
+### The two embeds
+
+**`[EDIT: VIDEOS]`** in `index.html` holds two cards, each with its own iframe:
+
+| Card | Video ID | Length |
+| --- | --- | --- |
+| Announcement! | `S4v7WWXhd5w` | 0:29 |
+| Presentation | `V--aR9PrrME` | 3:03 |
+
+Both play **muted, automatically, on a loop** — no click needed. Click a player
+if you want the sound. They are also lazy-loaded, so they only start when the
+section scrolls near the screen.
+
+**To change a video**, replace the ID in *both* places inside that iframe's
+`src`: the `/embed/VIDEOID` part **and** the `playlist=VIDEOID` part. The second
+one is what makes `loop=1` repeat a single video; if the two differ, playback
+jumps to the other video instead of looping.
+
+**To add a third video**, copy a whole `<article class="video-card glass">`
+block, swap the two IDs, and edit the badge, title and description.
+
+### The background reel
+
+Behind the whole page there is a third, silent iframe — the video
+`D3bBNbML2Yk` ("I'm strong now :)"), looping at 30% opacity under the blue orbs.
+It has `controls=0`, `pointer-events: none` and `tabindex="-1"`, so a visitor can
+never click it or tab into it.
+
+It is deliberately **not shown** in any of these cases, because it would cost
+more than it gives:
+
+- screens narrower than 1024px (mobile data),
+- `prefers-reduced-motion: reduce`,
+- **calm mode** (the footer switch removes it completely, which also stops the
+  playback rather than just hiding a playing video).
+
+In the light theme it stays, but sits at 16% opacity behind a pale wash so it
+never fights with the bright palette.
+
+To remove it entirely, delete the `<div class="scene__reel">` block in
+`index.html`, or delete the `.scene__reel` rules in `css/style.css`.
+
+### Two honest notes
+
+- **Autoplay is muted by design.** Every modern browser blocks a video that
+  starts with sound, so the embeds begin silent. There is no way around that in
+  HTML alone, and forcing sound on arrival would be hostile anyway.
+- **The embeds need internet.** Offline, or behind a school firewall that blocks
+  YouTube, the frames will show an empty dark box. The card titles and the link
+  to the channel still work, so the section never becomes useless.
+
+## 7. Light and dark mode
 
 The switch in the navigation has two radios, one for each theme. The page opens
 in **dark mode** — that is the design's signature — and choosing *Light* swaps
@@ -251,11 +309,12 @@ the palette instantly.
 
 ---
 
-## 7. Icons and artwork
+## 8. Icons and artwork
 
 - **Icons** are an inline SVG sprite at the bottom of `index.html` — hand-drawn
   line icons: `#i-sun`, `#i-moon`, `#i-code`, `#i-camera`, `#i-zoom`,
-  `#i-chevron-left`, `#i-arrow-up`, `#i-facebook`, `#i-instagram` and more. To
+  `#i-chevron-left`, `#i-arrow-up`, `#i-github`, `#i-youtube`, `#i-facebook`,
+  `#i-instagram` and more. To
   add one, copy a `<symbol>`, give it a new `id` and draw inside the
   `0 0 24 24` viewBox, then use it with
   `<svg aria-hidden="true"><use href="#i-your-id"></use></svg>`.
@@ -271,7 +330,7 @@ the palette instantly.
 
 ---
 
-## 8. Accessibility
+## 9. Accessibility
 
 Built in, not bolted on:
 
@@ -285,7 +344,11 @@ Built in, not bolted on:
   is a link you can Tab to and open with Enter.
 - Colour contrast meets WCAG AA in both themes.
 - `prefers-reduced-motion` is respected throughout — the rotating role, the
-  ticker, the floating shapes and the reveals all stop.
+  ticker, the floating shapes and the reveals all stop, and the background reel
+  is removed entirely.
+- Every video player has a descriptive `title`, so a screen reader announces
+  what it is instead of "frame". The decorative background reel is
+  `aria-hidden`, muted and removed from the tab order.
 - `prefers-reduced-transparency` swaps the glass for solid panels.
 
 ### Honest limitations of the script-free build
@@ -297,9 +360,14 @@ Built in, not bolted on:
 
 All three need JavaScript. They were left out on purpose.
 
+One more, specific to the videos: the embeds only start once the Videos section
+approaches the viewport (they are lazy-loaded). On a very slow connection a
+visitor may reach the section before the players have loaded, and see the empty
+frame for a moment.
+
 ---
 
-## 9. Browser support and fallbacks
+## 10. Browser support and fallbacks
 
 Targets current Chrome, Edge, Firefox and Safari (desktop and mobile).
 
@@ -314,7 +382,7 @@ Targets current Chrome, Edge, Firefox and Safari (desktop and mobile).
 
 ---
 
-## 10. Publishing
+## 11. Publishing
 
 Any static host works, because there is nothing to compile:
 
@@ -327,11 +395,13 @@ The page is live at **https://lumibao.github.io/Personal-Website/**.
 
 ---
 
-## 11. Contact details in this build
+## 12. Contact details in this build
 
 | Item | Value |
 | --- | --- |
 | Email | `jhonmarklumibao47@gmail.com` |
+| GitHub | [github.com/lumibao](https://github.com/lumibao) — @lumibao |
+| YouTube | [youtube.com/@lumibaoBG](https://www.youtube.com/@lumibaoBG) — @lumibaoBG (channel: LumibaoPH) |
 | Facebook | [facebook.com/mrkyjhn](https://www.facebook.com/mrkyjhn) — @mrkyjhn |
 | Instagram | [instagram.com/lumibao_ph_jhon_mark](https://www.instagram.com/lumibao_ph_jhon_mark) — @hatsuki |
 
@@ -341,7 +411,7 @@ button opens the visitor's own email app.
 
 ---
 
-## 12. If something looks wrong
+## 13. If something looks wrong
 
 | Symptom | Likely cause | Fix |
 | --- | --- | --- |
@@ -352,10 +422,13 @@ button opens the visitor's own email app.
 | Filter shows nothing | `data-category` typo | Must be exactly `me`, `memories` or `projects`. |
 | Lightbox opens the wrong photo | Tile `href` and panel `id` don't match | `#shot-4` must match `id="shot-4"`. |
 | Sections fade in late | Scroll-driven animations | Expected on first paint; they appear as you scroll. |
+| Video box is empty / black | No internet, YouTube blocked, or a wrong video ID | Check the ID with `youtube.com/watch?v=ID`. |
+| Video will not autoplay | Browser blocked it, or the URL lost `mute=1` | Autoplay only works muted; keep `mute=1` in the `src`. |
+| Background reel missing | Normal on phones, light theme, reduced motion or calm mode | It is intentionally hidden there. |
 
 ---
 
-## 13. Credits
+## 14. Credits
 
 - **Design and code:** written for Jhon Mark L. Lumibao, 2026.
 - **Typefaces:** [Sora](https://fonts.google.com/specimen/Sora) and
@@ -366,7 +439,10 @@ button opens the visitor's own email app.
 - **Artwork:** the portrait is a real photograph; the remaining gallery and banner
   images are original blue-glass illustrations made for this project.
 
-No analytics, no cookies, no third-party requests, no tracking.
+No analytics and no tracking scripts. The only third-party requests on the page
+come from the three YouTube embeds (served from `youtube-nocookie.com`, which
+does not set advertising cookies before playback). Everything else — fonts,
+images, icons, styles — is served from this folder.
 
 ---
 
