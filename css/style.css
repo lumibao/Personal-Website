@@ -19,13 +19,14 @@
    12. Hobbies
    13. Gallery + filters
    14. Lightbox
-   15. Thoughts
-   16. Contact
-   17. Footer + calm mode switch
-   18. Motion & scroll-driven reveals
-   19. Responsive tweaks
-   20. Reduced motion, print, forced colours
-   21. Calm mode
+   15. Videos + background reel
+   16. Thoughts
+   17. Contact
+   18. Footer + calm mode switch
+   19. Motion & scroll-driven reveals
+   20. Responsive tweaks
+   21. Reduced motion, print, forced colours
+   22. Calm mode
 
    EDITING TIP
    -----------
@@ -570,6 +571,77 @@ svg {
     radial-gradient(1200px 700px at 78% -12%, var(--accent-soft), transparent 62%),
     linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
   transition: background-color var(--t-slow) var(--ease);
+}
+
+/* The background reel sits under the orbs, so the blue light still washes over
+   it. It has its own copy of the page gradient so nothing below it shows
+   through, then the video plays at low opacity on top. */
+.scene__reel {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(1200px 700px at 78% -12%, var(--accent-soft), transparent 62%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+}
+
+.scene__reel iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 56.25vw;
+  min-width: 177.78vh;
+  min-height: 100vh;
+  border: 0;
+  transform: translate(-50%, -50%) scale(1.01);
+  opacity: 0.38;
+  pointer-events: none;
+}
+
+/* A tint over the reel keeps every word on the page easy to read */
+.scene__reel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(5, 11, 23, 0.46) 0%,
+    rgba(5, 11, 23, 0.62) 55%,
+    rgba(3, 7, 17, 0.78) 100%
+  );
+}
+
+/* No reel where it would cost more than it gives: small screens, light theme
+   and anyone who asked for less motion. */
+@media (max-width: 1023px) {
+  .scene__reel {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene__reel {
+    display: none;
+  }
+}
+
+/* In the light theme the reel stays, faded right down behind a pale wash */
+html:has(#theme-light:checked) .scene__reel iframe {
+  opacity: 0.16;
+}
+
+html:has(#theme-light:checked) .scene__reel::after {
+  background: linear-gradient(
+    180deg,
+    rgba(238, 245, 255, 0.8) 0%,
+    rgba(238, 245, 255, 0.88) 55%,
+    rgba(219, 233, 251, 0.94) 100%
+  );
+}
+
+html:has(#calm-switch:checked) .scene__reel {
+  display: none;
 }
 
 .scene__orb {
@@ -2585,7 +2657,92 @@ html:has(#filter-projects:checked) .gallery__item:not([data-category="projects"]
 
 
 /* ==========================================================================
-   15. THOUGHTS
+   15. VIDEOS + BACKGROUND REEL
+   ========================================================================== */
+.videos__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 2.4vw, 26px);
+}
+
+.video-card {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+}
+
+.video-card:hover {
+  border-color: var(--glass-border-strong);
+  box-shadow: 0 26px 58px -32px var(--glow), var(--shadow-md);
+}
+
+/* 16:9 box; the iframe fills it exactly, so nothing jumps while loading */
+.video-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: calc(var(--r-xl) - 9px);
+  overflow: hidden;
+  background: #05080f;
+  box-shadow: inset 0 0 0 1px var(--hairline);
+}
+
+.video-frame iframe {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-card__meta {
+  display: grid;
+  gap: 7px;
+  padding: 16px 10px 10px;
+}
+
+.video-card__badge {
+  justify-self: start;
+  padding: 0.22rem 0.6rem;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--glass-border);
+  background: var(--accent-soft);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.03em;
+  color: var(--accent);
+}
+
+.video-card__title {
+  font-size: clamp(1rem, 0.95rem + 0.3vw, 1.15rem);
+  color: var(--text);
+}
+
+.video-card__text {
+  font-size: 0.88rem;
+  line-height: 1.68;
+  color: var(--muted);
+}
+
+.videos__cta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: clamp(24px, 3.4vw, 40px);
+}
+
+.videos__note {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--faint);
+}
+
+/* ==========================================================================
+   16. THOUGHTS
    ========================================================================== */
 .thoughts__grid {
   display: grid;
@@ -2713,7 +2870,7 @@ html:has(#filter-projects:checked) .gallery__item:not([data-category="projects"]
 }
 
 /* ==========================================================================
-   16. CONTACT
+   17. CONTACT
    ========================================================================== */
 .contact__card {
   position: relative;
@@ -2903,7 +3060,7 @@ html:has(#filter-projects:checked) .gallery__item:not([data-category="projects"]
 }
 
 /* ==========================================================================
-   17. FOOTER
+   18. FOOTER
    ========================================================================== */
 .footer {
   position: relative;
@@ -3075,7 +3232,7 @@ html:has(#filter-projects:checked) .gallery__item:not([data-category="projects"]
 }
 
 /* ==========================================================================
-   18. MOTION & SCROLL-DRIVEN REVEALS
+   19. MOTION & SCROLL-DRIVEN REVEALS
    --------------------------------------------------------------------------
    All motion lives here so it is easy to slow down or switch off.
    Reveals run on the browser's own scroll timeline, so they work with no
@@ -3174,7 +3331,7 @@ html:has(#filter-projects:checked) .gallery__item:not([data-category="projects"]
 }
 
 /* ==========================================================================
-   19. RESPONSIVE
+   20. RESPONSIVE
    --------------------------------------------------------------------------
    Mobile-first would be ideal, but the design is progressive: everything is
    fluid, and these breakpoints only simplify layouts as space shrinks.
@@ -3305,6 +3462,22 @@ html:has(#filter-projects:checked) .gallery__item:not([data-category="projects"]
   }
 }
 
+/* Eight links need slightly tighter padding before the two-row layout kicks in */
+@media (min-width: 981px) and (max-width: 1140px) {
+  .nav__bar {
+    gap: 8px;
+  }
+
+  .nav__link {
+    padding-inline: 0.5rem;
+    font-size: 0.82rem;
+  }
+
+  .brand__sub {
+    display: none;
+  }
+}
+
 @media (max-width: 860px) {
   .gallery__grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -3316,6 +3489,10 @@ html:has(#filter-projects:checked) .gallery__item:not([data-category="projects"]
 }
 
 @media (max-width: 760px) {
+  .videos__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .about__media {
     grid-template-columns: minmax(0, 1fr);
     max-width: 460px;
@@ -3528,7 +3705,7 @@ html:has(#filter-projects:checked) .gallery__item:not([data-category="projects"]
 }
 
 /* ==========================================================================
-   20. REDUCED MOTION, PRINT & FORCED COLOURS
+   21. REDUCED MOTION, PRINT & FORCED COLOURS
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -3573,6 +3750,7 @@ html:has(#filter-projects:checked) .gallery__item:not([data-category="projects"]
 @media print {
   .nav,
   .scene,
+  .scene__reel,
   .lightbox,
   .hero__scroll,
   .float-chip,
@@ -3631,7 +3809,7 @@ html:has(#filter-projects:checked) .gallery__item:not([data-category="projects"]
 }
 
 /* ==========================================================================
-   21. CALM MODE
+   22. CALM MODE
    --------------------------------------------------------------------------
    The footer switch sets data-calm="true" on <html>. It is a real, persisted
    preference: motion stops, the glass turns solid, and the grain disappears.
