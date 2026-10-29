@@ -416,6 +416,7 @@ button opens the visitor's own email app.
 | Symptom | Likely cause | Fix |
 | --- | --- | --- |
 | Page is unstyled | `css/style.css` not found | Check the folder wasn't renamed; the path is relative. |
+| Favicon is missing | `assets/icons/favicon-32.png` moved or renamed | Keep the file at exactly that path — `index.html` and the browser both look there. |
 | Fonts look generic | Fonts missing | Confirm `assets/fonts/*.woff2` exist; the site falls back to system fonts. |
 | Theme switch does nothing | Browser without `:has()` support | Update the browser. |
 | Glass looks flat | Browser lacks `backdrop-filter` | Expected — the opaque fallback keeps it readable. |
