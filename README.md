@@ -336,7 +336,9 @@ the palette instantly.
   icon `index.html` links to, plus an Apple touch icon and 192/512/maskable PNGs
   for the web manifest. Keep the file name and its **capitalisation** exactly as
   written — Linux servers are case-sensitive, so `JM.PNG` would 404 while
-  `JM.png` loads.
+  `JM.png` loads. (Uploading a second file under an existing name makes GitHub
+  store it as `JM (1).png`; the space and brackets are awkward in a URL, so
+  rename it back to `JM.png` and delete the copy you are replacing.)
 - `profile.jpg` and `gallery-01.jpg` are **real photographs** of Jhon Mark.
 - The other eight gallery images, `feature.jpg` and `og-cover.jpg` are **blue-glass
   illustrations** drawn for this layout — and the captions on those tiles say so
