@@ -266,10 +266,24 @@ block, swap the two IDs, and edit the badge, title and description.
 
 ### The background reel
 
-Behind the whole page there is a third, silent iframe — the video
-`D3bBNbML2Yk` ("I'm strong now :)"), looping at 30% opacity under the blue orbs.
-It has `controls=0`, `pointer-events: none` and `tabindex="-1"`, so a visitor can
-never click it or tab into it.
+Behind the whole page there is a third, silent iframe:
+
+| | |
+| --- | --- |
+| Video | **Blue Moon Live Wallpaper** |
+| Video ID | `F1uvD5tMClQ` |
+| Channel | Live Wallpapers (`@livewallpapers6286`) |
+| Length | 0:24, looping |
+
+It is a public, embeddable clip used purely as ambient light, sitting at 38%
+opacity underneath the blue orbs. It has `controls=0`,
+`pointer-events: none` and `tabindex="-1"`, so a visitor can never click it or
+tab into it.
+
+**To swap the loop**, change the ID in *both* places in that iframe's `src` —
+the `/embed/ID` part and the `playlist=ID` part. A short clip loops best; a long
+one is wasted bandwidth because the page only ever shows a blurred fragment of
+it.
 
 It is deliberately **not shown** in any of these cases, because it would cost
 more than it gives:
@@ -318,10 +332,13 @@ the palette instantly.
   add one, copy a `<symbol>`, give it a new `id` and draw inside the
   `0 0 24 24` viewBox, then use it with
   `<svg aria-hidden="true"><use href="#i-your-id"></use></svg>`.
-- **Favicon and app icons** live in `assets/icons/`: an SVG favicon (crisp at any
-  size), a 32 px PNG fallback, an Apple touch icon, and 192/512/maskable icons
-  for the web manifest. They share one mark: a blue glass square with a monogram
-  and a subtle glow.
+- **Favicon and app icons** live in `assets/icons/`: `JM.png` is the browser
+  icon `index.html` links to, plus an Apple touch icon and 192/512/maskable PNGs
+  for the web manifest. Keep the file name and its **capitalisation** exactly as
+  written — Linux servers are case-sensitive, so `JM.PNG` would 404 while
+  `JM.png` loads. (Uploading a second file under an existing name makes GitHub
+  store it as `JM (1).png`; the space and brackets are awkward in a URL, so
+  rename it back to `JM.png` and delete the copy you are replacing.)
 - `profile.jpg` and `gallery-01.jpg` are **real photographs** of Jhon Mark.
 - The other eight gallery images, `feature.jpg` and `og-cover.jpg` are **blue-glass
   illustrations** drawn for this layout — and the captions on those tiles say so
@@ -438,6 +455,11 @@ button opens the visitor's own email app.
   simple-icons paths, used nominatively to link to the networks themselves.
 - **Artwork:** the portrait is a real photograph; the remaining gallery and banner
   images are original blue-glass illustrations made for this project.
+- **Background reel:** "Blue Moon Live Wallpaper" by
+  [Live Wallpapers](https://www.youtube.com/@livewallpapers6286), embedded from
+  YouTube as a public video. All credit stays with the channel — the embed links
+  back to it. If the channel ever removes or restricts the video, swap the ID as
+  described in section 6.
 
 No analytics and no tracking scripts. The only third-party requests on the page
 come from the three YouTube embeds (served from `youtube-nocookie.com`, which

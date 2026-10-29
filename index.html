@@ -3,7 +3,7 @@
   ============================================================================
   index.html — JHON MARK L. LUMIBAO · PERSONAL SPACE
   ----------------------------------------------------------------------------
-  BLUE GLASSMORPHISM · single page · plain HTML + CSS + vanilla JS
+  BLUE GLASSMORPHISM · single page · plain HTML + CSS, no JavaScript
   No frameworks, no build tools, no trackers.
 
   THIS FILE
@@ -53,8 +53,7 @@
   <meta name="twitter:image" content="https://lumibao.github.io/Personal-Website/assets/images/og-cover.jpg">
 
   <!-- Icons -->
-  <link rel="icon" href="assets/icons/JM.PNG" type="image/png">
-  <link rel="icon" href="assets/icons/JM.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="assets/icons/JM.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
 
@@ -75,14 +74,15 @@
        ===================================================================== -->
   <div class="scene" aria-hidden="true">
     <!--
-      BACKGROUND REEL — my own channel video, muted, looping, no click needed.
-      It is hidden on phones, for reduced-motion visitors and in calm mode,
+      BACKGROUND REEL — "Blue Moon Live Wallpaper", a 24-second looping clip
+      used as ambient light behind the page. Muted, looping, impossible to
+      click. Hidden on phones, for reduced-motion visitors and in calm mode,
       so nobody pays for it unless they have the screen for it.
-      Swap the ID in the iframe src to change the loop.
+      Swap the ID in the iframe src (both places) to change the loop.
     -->
     <div class="scene__reel">
-      <iframe src="https://www.youtube.com/embed/F1uvD5tMClQ?autoplay=1&mute=1&loop=1&playlist=D3bBNbML2Yk&controls=0&modestbranding=1&playsinline=1&rel=0&iv_load_policy=3&disablekb=1&fs=0"
-              title="Background reel from my YouTube channel"
+      <iframe src="https://www.youtube-nocookie.com/embed/F1uvD5tMClQ?autoplay=1&mute=1&loop=1&playlist=F1uvD5tMClQ&controls=0&modestbranding=1&playsinline=1&rel=0&iv_load_policy=3&disablekb=1&fs=0"
+              title="Blue Moon Live Wallpaper — ambient background loop"
               loading="lazy" tabindex="-1" aria-hidden="true"
               allow="autoplay; encrypted-media; picture-in-picture"
               referrerpolicy="strict-origin-when-cross-origin"></iframe>
