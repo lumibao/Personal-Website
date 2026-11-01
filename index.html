@@ -1,35 +1,7 @@
 <!DOCTYPE html>
 <!--
-  ============================================================================
-  index.html — JHON MARK L. LUMIBAO · PERSONAL SPACE
-  ----------------------------------------------------------------------------
-  BLUE GLASSMORPHISM · single page · plain HTML + CSS, no JavaScript
-  No frameworks, no build tools, no trackers.
-
-  THIS FILE
-  ---------
-  Holds all of the page structure and text. Every section is wrapped in a
-  labelled comment block so you can jump straight to the part you want to edit.
-
-  QUICK EDIT INDEX (search for these markers)
-  -------------------------------------------
-  [EDIT: NAME]        your name, initials and roles
-  [EDIT: TICKER]      the scrolling strip between the hero and About
-  [EDIT: ABOUT]       the About Me story and personal details
-  [EDIT: SKILLS]      skill cards, descriptions and levels
-  [EDIT: HOBBIES]     hobby cards
-  [EDIT: GALLERY]     gallery photos, categories and captions
-  [EDIT: THOUGHTS]    short reflections
-  [EDIT: CONTACT]     email address + social links
-  [EDIT: FOOTER]      footer line
-
-  NO JAVASCRIPT: every interaction on this page — the theme switch, the
-  gallery filters, the image lightbox, the mobile menu and "calm mode" — is
-  done with HTML and CSS only. There is no JavaScript anywhere in this page.
-
-  THEME: the light/dark switch is two radio buttons. Colours live in
-  css/style.css (search for "DESIGN TOKENS").
-  ============================================================================
+  index.html — Jhon Mark L. Lumibao · Personal Space
+  Single page, plain HTML and CSS. No JavaScript anywhere in this file.
 -->
 <html lang="en">
 <head>
@@ -37,18 +9,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
   <title>Jhon Mark L. Lumibao — My Little Digital Space</title>
-  <meta name="description" content="The personal space of Jhon Mark L. Lumibao — a first-year BSIT student at the University of Makati. Skills, hobbies, memories, projects and a few thoughts, kept in one calm blue corner of the internet.">
+  <meta name="description" content="Jhon Mark L. Lumibao — a first-year BSIT student at the University of Makati. Skills, hobbies, memories and the projects I have built, kept in one calm blue corner of the internet.">
   <meta name="author" content="Jhon Mark L. Lumibao">
   <meta name="theme-color" content="#050b17">
   <meta name="color-scheme" content="dark light">
 
-  <!-- Social sharing preview — replace the URLs after you publish the site -->
+  <!-- Social sharing preview -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://lumibao.github.io/Personal-Website/">
   <meta property="og:title" content="Jhon Mark L. Lumibao — My Little Digital Space">
-  <meta property="og:description" content="A first-year BSIT student at the University of Makati. Learning code, circuits and the little things that make a person. Welcome to my space.">
+  <meta property="og:description" content="A first-year BSIT student at the University of Makati. Code, circuits and the little things that make a person. Welcome to my space.">
   <meta property="og:image" content="https://lumibao.github.io/Personal-Website/assets/images/og-cover.jpg">
-  <meta property="og:image:alt" content="Blue glassmorphism cover reading: A little world, still being built. Jhon Mark L. Lumibao — BSIT, University of Makati.">
+  <meta property="og:image:alt" content="Blue cover reading: HELLO, I'm Jhon Mark. BSIT student at the University of Makati.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://lumibao.github.io/Personal-Website/assets/images/og-cover.jpg">
 
@@ -68,25 +40,9 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- =====================================================================
-       BACKGROUND SCENE — soft orbs, a faint grid and film grain.
-       Decorative only: aria-hidden and untouchable by the pointer.
-       ===================================================================== -->
+  <!-- Background scene — soft orbs, a faint grid and film grain. Decorative
+       only: aria-hidden and untouchable by the pointer. -->
   <div class="scene" aria-hidden="true">
-    <!--
-      BACKGROUND REEL — "Blue Moon Live Wallpaper", a 24-second looping clip
-      used as ambient light behind the page. Muted, looping, impossible to
-      click. Hidden on phones, for reduced-motion visitors and in calm mode,
-      so nobody pays for it unless they have the screen for it.
-      Swap the ID in the iframe src (both places) to change the loop.
-    -->
-    <div class="scene__reel">
-      <iframe src="https://www.youtube-nocookie.com/embed/F1uvD5tMClQ?autoplay=1&mute=1&loop=1&playlist=F1uvD5tMClQ&controls=0&modestbranding=1&playsinline=1&rel=0&iv_load_policy=3&disablekb=1&fs=0"
-              title="Blue Moon Live Wallpaper — ambient background loop"
-              loading="lazy" tabindex="-1" aria-hidden="true"
-              allow="autoplay; encrypted-media; picture-in-picture"
-              referrerpolicy="strict-origin-when-cross-origin"></iframe>
-    </div>
     <span class="scene__orb scene__orb--one"></span>
     <span class="scene__orb scene__orb--two"></span>
     <span class="scene__orb scene__orb--three"></span>
@@ -94,10 +50,8 @@
     <span class="scene__noise"></span>
   </div>
 
-  <!-- =====================================================================
-       NAVIGATION — a floating glass bar. On phones it grows a second row of
-       links that scrolls sideways.
-       ===================================================================== -->
+  <!-- Navigation — a floating glass bar. On phones it grows a second row of
+       links that scrolls sideways. -->
   <header class="nav" id="site-nav">
     <div class="nav__bar glass">
       <a class="brand" href="#home" aria-label="Jhon Mark — back to the top">
@@ -114,17 +68,12 @@
         <a class="nav__link" href="#skills">Skills</a>
         <a class="nav__link" href="#hobbies">Hobbies</a>
         <a class="nav__link" href="#gallery">Gallery</a>
-        <a class="nav__link" href="#videos">Videos</a>
         <a class="nav__link" href="#thoughts">Thoughts</a>
         <a class="nav__link" href="#contact">Contact</a>
       </nav>
 
       <div class="nav__actions">
-        <!--
-          LIGHT / DARK SWITCH — pure CSS.
-          Two radio buttons, one visible switch. The page opens in dark mode;
-          choosing "Light" swaps the colour tokens in css/style.css. No script.
-        -->
+        <!-- Light / dark switch — two radio buttons, no script. -->
         <div class="theme-toggle" role="group" aria-label="Colour theme">
           <input class="theme-toggle__input" type="radio" name="jml-theme" id="theme-light">
           <input class="theme-toggle__input" type="radio" name="jml-theme" id="theme-dark" checked>
@@ -148,10 +97,7 @@
 
   <main id="main">
 
-    <!-- ===================================================================
-         HERO — "Welcome to my space"
-         [EDIT: NAME] headline, intro line and the rotating roles live here.
-         =================================================================== -->
+    <!-- Hero -->
     <section class="hero" id="home" aria-labelledby="hero-title">
       <div class="container hero__inner">
 
@@ -180,14 +126,13 @@
           </p>
 
           <p class="hero__intro">
-            A work in progress, a curious mind, and a collection of little things
-            that make me who I am.
+            A curious mind and a collection of little things that make me who I am.
           </p>
 
           <p class="hero__sub">
-            I&rsquo;m a first-year BSIT student at the University of Makati, learning my way
+            I&rsquo;m a first-year BSIT student at the University of Makati, working my way
             through code, circuits and creative side quests. This is where I keep what I
-            build, what I remember, and what I&rsquo;m still figuring out.
+            build, what I remember, and the parts I&rsquo;m still learning.
           </p>
 
           <div class="hero__actions">
@@ -204,11 +149,11 @@
           <ul class="hero__chips" aria-label="A few quick facts">
             <li class="chip"><svg aria-hidden="true"><use href="#i-cap"></use></svg>BSIT &middot; 1st year</li>
             <li class="chip"><svg aria-hidden="true"><use href="#i-bot"></use></svg>Robotics &amp; electronics</li>
-            <li class="chip"><svg aria-hidden="true"><use href="#i-sparkle"></use></svg>Always learning</li>
+            <li class="chip"><svg aria-hidden="true"><use href="#i-pin"></use></svg>Makati City</li>
           </ul>
         </div>
 
-        <!-- Portrait card — assets/images/profile.jpg (1000 x 1250). -->
+        <!-- Portrait card -->
         <div class="hero__visual">
           <span class="hero__watermark" aria-hidden="true">JM</span>
           <div class="portrait">
@@ -217,7 +162,7 @@
             <div class="portrait__card glass">
               <div class="portrait__frame">
                 <img src="assets/images/profile.jpg"
-                     alt="Jhon Mark L. Lumibao in a blue shirt, giving a thumbs-up in front of a wall of bird posters."
+                     alt="Jhon Mark leaning against a sunlit stone wall in a dark polo shirt."
                      width="1000" height="1250" fetchpriority="high">
               </div>
               <div class="portrait__caption">
@@ -236,7 +181,7 @@
             </div>
             <div class="float-chip float-chip--three glass">
               <span class="pulse-dot" aria-hidden="true"></span>
-              <span><small>Status</small>Building this space</span>
+              <span><small>Based in</small>Makati City</span>
             </div>
           </div>
         </div>
@@ -248,12 +193,8 @@
       </a>
     </section>
 
-    <!-- ===================================================================
-         TICKER — a decorative strip of small facts. It scrolls slowly, pauses
-         on hover, and stops entirely for reduced-motion or calm-mode visitors.
-         [EDIT: TICKER] Change the phrases below; keep both groups identical so
-         the loop stays seamless.
-         =================================================================== -->
+    <!-- Ticker — decorative strip. Both groups must stay identical so the
+         loop remains seamless. -->
     <div class="ticker" aria-hidden="true">
       <div class="ticker__track">
         <div class="ticker__group">
@@ -279,15 +220,11 @@
       </div>
     </div>
 
-    <!-- ===================================================================
-         ABOUT — "A Little About Myself"
-         [EDIT: ABOUT] The story, the little fact list and the pull quote.
-         Written in a friendly first-person voice — keep that if you edit.
-         =================================================================== -->
+    <!-- About -->
     <section class="section about" id="about" aria-labelledby="about-title">
       <div class="container">
         <header class="section__head" data-reveal>
-          <p class="eyebrow">01 — About me</p>
+          <p class="eyebrow">About me</p>
           <h2 class="section__title" id="about-title">A Little About Myself</h2>
           <p class="section__lead">
             Not a résumé — just the short version of who I am right now.
@@ -297,12 +234,12 @@
         <div class="about__grid" data-reveal-group>
           <div class="about__media" data-reveal>
             <figure class="photo-frame glass">
-              <img src="assets/images/profile.jpg"
-                   alt="Jhon Mark L. Lumibao, smiling with a thumbs-up."
+              <img src="assets/images/about-photo.jpg"
+                   alt="Jhon Mark in his senior high graduation portrait, blue sash and white gown."
                    width="1000" height="1250" loading="lazy" decoding="async">
               <figcaption>
                 <span class="photo-frame__tag">that&rsquo;s me</span>
-                <span class="photo-frame__hint">first year, BSIT</span>
+                <span class="photo-frame__hint">Class of 2026</span>
               </figcaption>
             </figure>
 
@@ -329,66 +266,38 @@
               pixels around until a page feels right.
             </p>
             <p>
+              I finished senior high at Maximo Estrella Senior High School in Makati, on the STEM
+              strand, and graduated with honors. Our research then — <strong>AQUALERT</strong>, an
+              Arduino-based flood alarm that cuts the power and sends an SMS — is still the project
+              I&rsquo;m proudest of.
+            </p>
+            <p>
               Now that I&rsquo;m in my first year, most of my time goes into learning the basics
               properly — understanding
               <em>why</em> code behaves the way it does instead of just copying something that
-              runs. I&rsquo;m still at the beginning of that journey, and honestly, I like it here.
-              There&rsquo;s a lot I want to build, especially things that could be useful to people
-              around me, and I&rsquo;d like to keep turning this curiosity into real skill.
+              runs. There&rsquo;s a lot I want to build, especially things that could be useful to
+              people around me.
             </p>
 
             <blockquote class="about__statement">
-              I&rsquo;m still growing. I make mistakes, I redo things, and I learn a little more each
-              time. This site is a snapshot of that — not a finished version of me, just an honest one.
+              I&rsquo;d rather understand one thing properly than nod along to ten things I
+              don&rsquo;t — and I&rsquo;d rather build something small that works than describe
+              something big that doesn&rsquo;t.
             </blockquote>
-
-            <dl class="facts">
-              <div class="facts__item">
-                <dt><svg aria-hidden="true"><use href="#i-user"></use></svg>Name</dt>
-                <dd>Jhon Mark L. Lumibao</dd>
-              </div>
-              <div class="facts__item">
-                <dt><svg aria-hidden="true"><use href="#i-book"></use></svg>Program</dt>
-                <dd>BS Information Technology &middot; 1st year</dd>
-              </div>
-              <div class="facts__item">
-                <dt><svg aria-hidden="true"><use href="#i-cap"></use></svg>School</dt>
-                <dd>University of Makati &middot; Makati City</dd>
-              </div>
-              <div class="facts__item">
-                <dt><svg aria-hidden="true"><use href="#i-pin"></use></svg>Based in</dt>
-                <dd>Metro Manila, Philippines</dd>
-              </div>
-              <div class="facts__item facts__item--wide">
-                <dt><svg aria-hidden="true"><use href="#i-sparkle"></use></svg>Into</dt>
-                <dd>
-                  <span class="tag">programming</span>
-                  <span class="tag">robotics</span>
-                  <span class="tag">electronics</span>
-                  <span class="tag">creative projects</span>
-                </dd>
-              </div>
-            </dl>
 
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ===================================================================
-         SKILLS — "Things I'm Learning and Building"
-         [EDIT: SKILLS] Each <article class="skill-card"> is one skill.
-         Change the title, description, the level label and data-level
-         (1 = beginner, 2 = learning, 3 = familiar).
-         =================================================================== -->
+    <!-- Skills -->
     <section class="section skills" id="skills" aria-labelledby="skills-title">
       <div class="container">
         <header class="section__head section__head--center" data-reveal>
-          <p class="eyebrow">02 — Skills</p>
+          <p class="eyebrow">Skills</p>
           <h2 class="section__title" id="skills-title">Things I&rsquo;m Learning and Building</h2>
           <p class="section__lead">
-            Honest labels, not buzzwords. These are starting points on the shelf,
-            not finished trophies.
+            The tools I reach for, and how far along I actually am with each one.
           </p>
         </header>
 
@@ -422,7 +331,7 @@
 
           <article class="skill-card glass" data-reveal data-level="2">
             <span class="skill-card__icon"><svg aria-hidden="true"><use href="#i-braces"></use></svg></span>
-            <h3 class="skill-card__title">JavaScript <span class="skill-card__badge">in progress</span></h3>
+            <h3 class="skill-card__title">JavaScript</h3>
             <p class="skill-card__text">
               Adding behaviour to pages — small interactions, event listeners and
               little experiments. Still early, still curious.
@@ -488,32 +397,20 @@
           <article class="skill-card skill-card--note glass" data-reveal>
             <span class="skill-card__icon"><svg aria-hidden="true"><use href="#i-sparkle"></use></svg></span>
             <h3 class="skill-card__title">Currently exploring</h3>
-            <p class="skill-card__text">Little things I&rsquo;m poking at next:</p>
-            <ul class="skill-card__list">
-              <li>responsive layouts</li>
-              <li>UI animation</li>
-              <li>sensor data</li>
-              <li>version control</li>
-            </ul>
+            <p class="skill-card__text">
+              Responsive layouts, UI animation, sensor data and version control —
+              whatever the next project asks for.
+            </p>
           </article>
         </div>
-
-        <p class="section__footnote" data-reveal>
-          <svg aria-hidden="true"><use href="#i-info"></use></svg>
-          Skill levels are gentle starting labels, not measurements. Edit them freely in
-          <code>index.html</code>.
-        </p>
       </div>
     </section>
 
-    <!-- ===================================================================
-         HOBBIES — "The Things I Enjoy"
-         [EDIT: HOBBIES] Duplicate or delete any <article class="hobby-card">.
-         =================================================================== -->
+    <!-- Hobbies -->
     <section class="section hobbies" id="hobbies" aria-labelledby="hobbies-title">
       <div class="container">
         <header class="section__head" data-reveal>
-          <p class="eyebrow">03 — Hobbies &amp; interests</p>
+          <p class="eyebrow">Hobbies &amp; interests</p>
           <h2 class="section__title" id="hobbies-title">The Things I Enjoy</h2>
           <p class="section__lead">
             The parts of my day that don&rsquo;t feel like school — and the ones that
@@ -591,45 +488,31 @@
         </div>
 
         <figure class="hobbies__banner glass" data-reveal>
-          <img src="assets/images/feature.jpg"
-               alt="Banner artwork in deep blue reading 'A little world, still being built.'"
+          <img src="assets/images/hobbies-banner.jpg"
+               alt="Jhon Mark cutting and wiring parts for a robot at a classroom table."
                width="1600" height="800" loading="lazy" decoding="async">
           <figcaption>
-            <span class="eyebrow">A work in progress</span>
-            <p>Every project starts as a messy idea. Mine just happen to live here.</p>
+            <span class="eyebrow">Building Flobot</span>
+            <p>Every project starts as a messy table. Mine just happen to live here.</p>
           </figcaption>
         </figure>
       </div>
     </section>
 
-    <!-- ===================================================================
-         GALLERY — "Little Moments, Memories, and Me"
-         [EDIT: GALLERY] To add a photo:
-           1. Save it in assets/images/ (e.g. gallery-10.jpg, square works best)
-           2. Copy one <a class="gallery__item"> block and update src, alt and
-              data-category (me | memories | projects).
-           3. Copy the matching <div class="lightbox" id="shot-…"> panel further
-              down, change its image, caption and prev/next links.
-           4. Update the numbers in the filter labels above.
-         To hide a photo, delete its tile and its lightbox panel.
-         =================================================================== -->
+    <!-- Gallery -->
     <section class="section gallery" id="gallery" aria-labelledby="gallery-title">
       <div class="container">
         <header class="section__head section__head--center" data-reveal>
-          <p class="eyebrow">04 — Gallery</p>
+          <p class="eyebrow">Gallery</p>
           <h2 class="section__title" id="gallery-title">Little Moments, Memories, and Me</h2>
           <p class="section__lead">
-            A few frames from ordinary days — the people, the small wins and the
-            projects that kept me up late. Some are photos; the ones without a
-            camera in the room are drawn in the same blue I built the page with.
+            Real photos from the last few years — the competitions, the defenses,
+            the small wins and the people I spent them with.
           </p>
         </header>
 
-        <!--
-          FILTERS — pure CSS. Each choice is a radio button; the stylesheet
-          hides the tiles that do not match. The counts are written out here so
-          they stay correct with no script at all.
-        -->
+        <!-- Filters — each choice is a radio button; the stylesheet hides the
+             tiles that do not match. -->
         <div class="gallery__toolbar" data-reveal>
           <div class="filters" role="group" aria-label="Filter the gallery">
             <label class="filter">
@@ -642,116 +525,112 @@
             </label>
             <label class="filter">
               <input class="filter__input" type="radio" name="gallery-filter" id="filter-memories">
-              <span>Memories</span><span class="filter__count">3</span>
+              <span>Memories</span><span class="filter__count">2</span>
             </label>
             <label class="filter">
               <input class="filter__input" type="radio" name="gallery-filter" id="filter-projects">
-              <span>Projects</span><span class="filter__count">3</span>
+              <span>Projects</span><span class="filter__count">4</span>
             </label>
           </div>
-          <p class="gallery__hint">
-            <svg aria-hidden="true"><use href="#i-camera"></use></svg>
-            Tap any photo to open it larger
-          </p>
         </div>
 
         <div class="gallery__grid" id="gallery-grid" data-reveal-group>
 
           <a class="gallery__item gallery__item--feature" href="#shot-1"
              data-category="me" data-reveal>
-            <img src="assets/images/gallery-01.jpg" alt="Jhon Mark giving a thumbs-up in front of a wall of bird posters."
-                 width="1200" height="1200" loading="lazy" decoding="async">
+            <img src="assets/images/gallery-01.jpg" alt="Jhon Mark's senior high graduation graphic, with honors and an award citation for AQUALERT."
+                 width="1300" height="1300" loading="lazy" decoding="async">
             <span class="gallery__overlay">
               <span class="gallery__cat">Me</span>
-              <span class="gallery__title">That's me</span>
+              <span class="gallery__title">Graduated with honors</span>
               <span class="gallery__zoom" aria-hidden="true"><svg><use href="#i-zoom"></use></svg></span>
             </span>
           </a>
 
           <a class="gallery__item" href="#shot-2"
              data-category="me" data-reveal>
-            <img src="assets/images/gallery-02.jpg" alt="An illustration of two open windows on a deep blue desk scene."
-                 width="1200" height="1200" loading="lazy" decoding="async">
+            <img src="assets/images/gallery-02.jpg" alt="Jhon Mark leaning over a chess board mid-game, clock running."
+                 width="1000" height="1000" loading="lazy" decoding="async">
             <span class="gallery__overlay">
               <span class="gallery__cat">Me</span>
-              <span class="gallery__title">Two windows open</span>
+              <span class="gallery__title">A long game</span>
               <span class="gallery__zoom" aria-hidden="true"><svg><use href="#i-zoom"></use></svg></span>
             </span>
           </a>
 
           <a class="gallery__item" href="#shot-3"
              data-category="memories" data-reveal>
-            <img src="assets/images/gallery-03.jpg" alt="An illustration of a walk home at dusk with a small heart."
-                 width="1200" height="1200" loading="lazy" decoding="async">
+            <img src="assets/images/gallery-03.jpg" alt="A group of classmates in suits and gowns posing for a prom photo."
+                 width="1000" height="1000" loading="lazy" decoding="async">
             <span class="gallery__overlay">
               <span class="gallery__cat">Memories</span>
-              <span class="gallery__title">The long way home</span>
+              <span class="gallery__title">Senior prom</span>
               <span class="gallery__zoom" aria-hidden="true"><svg><use href="#i-zoom"></use></svg></span>
             </span>
           </a>
 
           <a class="gallery__item" href="#shot-4"
              data-category="memories" data-reveal>
-            <img src="assets/images/gallery-04.jpg" alt="An illustration of a book and a new beginning."
-                 width="1200" height="1200" loading="lazy" decoding="async">
+            <img src="assets/images/gallery-04.jpg" alt="Jhon Mark taking a selfie with his classmates at their Christmas party."
+                 width="1000" height="1000" loading="lazy" decoding="async">
             <span class="gallery__overlay">
               <span class="gallery__cat">Memories</span>
-              <span class="gallery__title">New room, new start</span>
+              <span class="gallery__title">Class Christmas party</span>
               <span class="gallery__zoom" aria-hidden="true"><svg><use href="#i-zoom"></use></svg></span>
             </span>
           </a>
 
           <a class="gallery__item" href="#shot-5"
-             data-category="memories" data-reveal>
-            <img src="assets/images/gallery-05.jpg" alt="An illustration of a sparkle that stands for a shared joke."
-                 width="1200" height="1200" loading="lazy" decoding="async">
+             data-category="me" data-reveal>
+            <img src="assets/images/gallery-05.jpg" alt="Jhon Mark receiving a certificate on stage during the school's recognition rites."
+                 width="1000" height="1000" loading="lazy" decoding="async">
             <span class="gallery__overlay">
-              <span class="gallery__cat">Memories</span>
-              <span class="gallery__title">Laughing at nothing</span>
+              <span class="gallery__cat">Me</span>
+              <span class="gallery__title">On stage</span>
               <span class="gallery__zoom" aria-hidden="true"><svg><use href="#i-zoom"></use></svg></span>
             </span>
           </a>
 
           <a class="gallery__item" href="#shot-6"
              data-category="projects" data-reveal>
-            <img src="assets/images/gallery-06.jpg" alt="An illustration of a clock and late golden light."
-                 width="1200" height="1200" loading="lazy" decoding="async">
+            <img src="assets/images/gallery-06.jpg" alt="The AQUALERT research poster, presented outside the school hall."
+                 width="1000" height="1000" loading="lazy" decoding="async">
             <span class="gallery__overlay">
               <span class="gallery__cat">Projects</span>
-              <span class="gallery__title">Golden hour</span>
+              <span class="gallery__title">AQUALERT poster</span>
               <span class="gallery__zoom" aria-hidden="true"><svg><use href="#i-zoom"></use></svg></span>
             </span>
           </a>
 
           <a class="gallery__item" href="#shot-7"
              data-category="projects" data-reveal>
-            <img src="assets/images/gallery-07.jpg" alt="An illustration of a gear from a half-built robot."
-                 width="1200" height="1200" loading="lazy" decoding="async">
+            <img src="assets/images/gallery-07.jpg" alt="The research group presenting AQUALERT to the panel, projected on screen."
+                 width="1000" height="1000" loading="lazy" decoding="async">
             <span class="gallery__overlay">
               <span class="gallery__cat">Projects</span>
-              <span class="gallery__title">Robot, half-built</span>
+              <span class="gallery__title">Final defense</span>
               <span class="gallery__zoom" aria-hidden="true"><svg><use href="#i-zoom"></use></svg></span>
             </span>
           </a>
 
           <a class="gallery__item" href="#shot-8"
              data-category="projects" data-reveal>
-            <img src="assets/images/gallery-08.jpg" alt="An illustration of a coffee cup beside a glowing screen."
-                 width="1200" height="1200" loading="lazy" decoding="async">
+            <img src="assets/images/gallery-08.jpg" alt="The AQUALERT team at their exhibit table with the working prototype."
+                 width="1000" height="1000" loading="lazy" decoding="async">
             <span class="gallery__overlay">
               <span class="gallery__cat">Projects</span>
-              <span class="gallery__title">Screen glow</span>
+              <span class="gallery__title">Exhibit day</span>
               <span class="gallery__zoom" aria-hidden="true"><svg><use href="#i-zoom"></use></svg></span>
             </span>
           </a>
 
           <a class="gallery__item" href="#shot-9"
              data-category="projects" data-reveal>
-            <img src="assets/images/gallery-09.jpg" alt="An illustration of a pen and a page of layout sketches."
-                 width="1200" height="1200" loading="lazy" decoding="async">
+            <img src="assets/images/gallery-09.jpg" alt="Jhon Mark wiring a robot's parts at a classroom table."
+                 width="1000" height="1000" loading="lazy" decoding="async">
             <span class="gallery__overlay">
               <span class="gallery__cat">Projects</span>
-              <span class="gallery__title">Sketch before code</span>
+              <span class="gallery__title">Building Flobot</span>
               <span class="gallery__zoom" aria-hidden="true"><svg><use href="#i-zoom"></use></svg></span>
             </span>
           </a>
@@ -759,94 +638,12 @@
       </div>
     </section>
 
-    <!-- ===================================================================
-         VIDEOS — everything I have posted on YouTube.
-         [EDIT: VIDEOS] Two embeds, both muted and looping so they play on
-         their own (browsers only allow autoplay when there is no sound).
-         Click a player to unmute it. To swap a video, replace the ID in the
-         iframe src in both places — the /embed/ part and the playlist= part.
-             Announcement! .......... S4v7WWXhd5w
-             presentation ........... V--aR9PrrME
-         A third embed can be added by copying one whole <article>.
-         =================================================================== -->
-    <section class="section videos" id="videos" aria-labelledby="videos-title">
-      <div class="container">
-        <header class="section__head section__head--center" data-reveal>
-          <p class="eyebrow">05 — Videos</p>
-          <h2 class="section__title" id="videos-title">Things I&rsquo;ve Posted</h2>
-          <p class="section__lead">
-            I make videos too — short ones mostly: announcements, school
-            presentations and the occasional life update. They play quietly on
-            their own; tap a player if you want the sound.
-          </p>
-        </header>
 
-        <div class="videos__grid" data-reveal-group>
-
-          <article class="video-card glass" data-reveal>
-            <div class="video-frame">
-              <iframe src="https://www.youtube-nocookie.com/embed/S4v7WWXhd5w?autoplay=1&mute=1&loop=1&playlist=S4v7WWXhd5w&controls=1&modestbranding=1&playsinline=1&rel=0"
-                      title="Announcement! — my first video on the channel"
-                      loading="lazy"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      referrerpolicy="strict-origin-when-cross-origin"
-                      allowfullscreen></iframe>
-            </div>
-            <div class="video-card__meta">
-              <span class="video-card__badge">Channel intro &middot; 0:29</span>
-              <h3 class="video-card__title">Announcement!</h3>
-              <p class="video-card__text">
-                The first thing I ever posted — short, a little nervous, and
-                still true.
-              </p>
-            </div>
-          </article>
-
-          <article class="video-card glass" data-reveal>
-            <div class="video-frame">
-              <iframe src="https://www.youtube-nocookie.com/embed/V--aR9PrrME?autoplay=1&mute=1&loop=1&playlist=V--aR9PrrME&controls=1&modestbranding=1&playsinline=1&rel=0"
-                      title="presentation — a school presentation I recorded"
-                      loading="lazy"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      referrerpolicy="strict-origin-when-cross-origin"
-                      allowfullscreen></iframe>
-            </div>
-            <div class="video-card__meta">
-              <span class="video-card__badge">School &middot; 3:03</span>
-              <h3 class="video-card__title">Presentation</h3>
-              <p class="video-card__text">
-                Something I stood up and presented. Watching it back is the
-                quickest way to see how much has changed since.
-              </p>
-            </div>
-          </article>
-        </div>
-
-        <div class="videos__cta" data-reveal>
-          <a class="btn btn--primary" href="https://www.youtube.com/@lumibaoBG" target="_blank" rel="noopener noreferrer">
-            Visit my channel
-            <svg class="btn__icon" aria-hidden="true"><use href="#i-youtube"></use></svg>
-          </a>
-          <a class="btn btn--ghost" href="https://github.com/lumibao" target="_blank" rel="noopener noreferrer">
-            My code on GitHub
-            <svg class="btn__icon" aria-hidden="true"><use href="#i-github"></use></svg>
-          </a>
-        </div>
-
-        <p class="videos__note">
-          More on the channel — a couple of playlists and a handful of shorts.
-        </p>
-      </div>
-    </section>
-
-    <!-- ===================================================================
-         THOUGHTS — "A Few Words From My Mind"
-         [EDIT: THOUGHTS] Short reflections — replace them with your own words.
-         =================================================================== -->
+    <!-- Thoughts -->
     <section class="section thoughts" id="thoughts" aria-labelledby="thoughts-title">
       <div class="container">
         <header class="section__head" data-reveal>
-          <p class="eyebrow">06 — Thoughts</p>
+          <p class="eyebrow">Thoughts</p>
           <h2 class="section__title" id="thoughts-title">A Few Words From My Mind</h2>
           <p class="section__lead">
             Short notes I jot down when the day gets quiet — the things worth
@@ -888,28 +685,22 @@
 
           <aside class="reminders glass" data-reveal aria-labelledby="reminders-title">
             <h3 class="reminders__title" id="reminders-title">Little reminders</h3>
-            <ul class="reminders__list">
-              <li><svg aria-hidden="true"><use href="#i-check"></use></svg>Drink water before debugging.</li>
-              <li><svg aria-hidden="true"><use href="#i-check"></use></svg>Ask the question — someone else has it too.</li>
-              <li><svg aria-hidden="true"><use href="#i-check"></use></svg>Sleep is part of the process.</li>
-              <li><svg aria-hidden="true"><use href="#i-check"></use></svg>Done and honest beats perfect and fake.</li>
-            </ul>
+            <p class="reminders__text">
+              Drink water before debugging, ask the question even when it feels
+              obvious, and remember that sleep is part of the process. Done and
+              honest beats perfect and fake.
+            </p>
           </aside>
         </div>
       </div>
     </section>
 
-    <!-- ===================================================================
-         CONTACT — "Let's Connect"
-         [EDIT: CONTACT] The email address, the GitHub, YouTube, Facebook and
-         Instagram links and their labels. There is deliberately NO contact form here — the
-         button opens the visitor's own email app.
-         =================================================================== -->
+    <!-- Contact -->
     <section class="section contact" id="contact" aria-labelledby="contact-title">
       <div class="container">
         <div class="contact__card glass" data-reveal>
           <div class="contact__intro">
-            <p class="eyebrow">07 — Contact</p>
+            <p class="eyebrow">Contact</p>
             <h2 class="section__title" id="contact-title">Let&rsquo;s Connect</h2>
             <p class="section__lead">
               A project idea, a question about something I built, or just a
@@ -991,9 +782,7 @@
     </section>
   </main>
 
-  <!-- =====================================================================
-       FOOTER — [EDIT: FOOTER] the sign-off line lives here.
-       ===================================================================== -->
+  <!-- Footer -->
   <footer class="footer">
     <div class="container footer__inner">
       <div class="footer__top-row">
@@ -1025,7 +814,7 @@
           <a href="#about">About</a>
           <a href="#skills">Skills</a>
           <a href="#gallery">Gallery</a>
-          <a href="#videos">Videos</a>
+          <a href="#thoughts">Thoughts</a>
           <a href="#contact">Contact</a>
         </nav>
       </div>
@@ -1034,11 +823,7 @@
     </div>
   </footer>
 
-  <!-- =====================================================================
-       LIGHTBOX — one panel per photo, opened with a plain #anchor link.
-       The panel whose id matches the address bar is the one that shows, so
-       this works with no JavaScript at all. Close, prev and next are links.
-       ===================================================================== -->
+  <!-- Lightbox — one panel per photo, opened with a plain #anchor link. -->
 
   <div class="lightbox" id="shot-1" role="dialog" aria-modal="true" aria-labelledby="shot-1-title">
     <a class="lightbox__backdrop" href="#gallery" aria-label="Close and return to the gallery"></a>
@@ -1055,12 +840,12 @@
 
         <figure class="lightbox__figure">
           <div class="lightbox__image-wrap">
-            <img src="assets/images/gallery-01.jpg" alt="Jhon Mark giving a thumbs-up in front of a wall of bird posters." width="1200" height="1200" loading="lazy" decoding="async">
+            <img src="assets/images/gallery-01.jpg" alt="Jhon Mark's senior high graduation graphic, with honors and an award citation for AQUALERT." width="1300" height="1300" loading="lazy" decoding="async">
           </div>
           <figcaption class="lightbox__caption">
             <span class="lightbox__cat">Me</span>
-            <h3 class="lightbox__title" id="shot-1-title">That's me</h3>
-            <p class="lightbox__text">Blue shirt, thumbs up, a wall of bird posters behind me. Probably the most &ldquo;me&rdquo; photo I have.</p>
+            <h3 class="lightbox__title" id="shot-1-title">Graduated with honors</h3>
+            <p class="lightbox__text">Senior high, STEM strand, with honors — and an award citation for AQUALERT on the same frame.</p>
             <p class="lightbox__count">1 / 9</p>
           </figcaption>
         </figure>
@@ -1087,12 +872,12 @@
 
         <figure class="lightbox__figure">
           <div class="lightbox__image-wrap">
-            <img src="assets/images/gallery-02.jpg" alt="An illustration of two open windows on a deep blue desk scene." width="1200" height="1200" loading="lazy" decoding="async">
+            <img src="assets/images/gallery-02.jpg" alt="Jhon Mark leaning over a chess board mid-game, clock running." width="1000" height="1000" loading="lazy" decoding="async">
           </div>
           <figcaption class="lightbox__caption">
             <span class="lightbox__cat">Me</span>
-            <h3 class="lightbox__title" id="shot-2-title">Two windows open</h3>
-            <p class="lightbox__text">Most evenings: one window for the code, one for whatever I&rsquo;m trying to understand.</p>
+            <h3 class="lightbox__title" id="shot-2-title">A long game</h3>
+            <p class="lightbox__text">A chess match at school, clock running. I played, I lost, and sat back down for the next one.</p>
             <p class="lightbox__count">2 / 9</p>
           </figcaption>
         </figure>
@@ -1119,12 +904,12 @@
 
         <figure class="lightbox__figure">
           <div class="lightbox__image-wrap">
-            <img src="assets/images/gallery-03.jpg" alt="An illustration of a walk home at dusk with a small heart." width="1200" height="1200" loading="lazy" decoding="async">
+            <img src="assets/images/gallery-03.jpg" alt="A group of classmates in suits and gowns posing for a prom photo." width="1000" height="1000" loading="lazy" decoding="async">
           </div>
           <figcaption class="lightbox__caption">
             <span class="lightbox__cat">Memories</span>
-            <h3 class="lightbox__title" id="shot-3-title">The long way home</h3>
-            <p class="lightbox__text">The walk back from school that always turns into thinking time.</p>
+            <h3 class="lightbox__title" id="shot-3-title">Senior prom</h3>
+            <p class="lightbox__text">The whole bark in suits and gowns, one thumbs-up each.</p>
             <p class="lightbox__count">3 / 9</p>
           </figcaption>
         </figure>
@@ -1151,12 +936,12 @@
 
         <figure class="lightbox__figure">
           <div class="lightbox__image-wrap">
-            <img src="assets/images/gallery-04.jpg" alt="An illustration of a book and a new beginning." width="1200" height="1200" loading="lazy" decoding="async">
+            <img src="assets/images/gallery-04.jpg" alt="Jhon Mark taking a selfie with his classmates at their Christmas party." width="1000" height="1000" loading="lazy" decoding="async">
           </div>
           <figcaption class="lightbox__caption">
             <span class="lightbox__cat">Memories</span>
-            <h3 class="lightbox__title" id="shot-4-title">New room, new start</h3>
-            <p class="lightbox__text">First week of college: new building, new faces, the same nervous smile. It got easier fast.</p>
+            <h3 class="lightbox__title" id="shot-4-title">Class Christmas party</h3>
+            <p class="lightbox__text">Last day before the holidays, certificates in hand and the projector still saying HAPPY HOLIDAYS behind us.</p>
             <p class="lightbox__count">4 / 9</p>
           </figcaption>
         </figure>
@@ -1183,12 +968,12 @@
 
         <figure class="lightbox__figure">
           <div class="lightbox__image-wrap">
-            <img src="assets/images/gallery-05.jpg" alt="An illustration of a sparkle that stands for a shared joke." width="1200" height="1200" loading="lazy" decoding="async">
+            <img src="assets/images/gallery-05.jpg" alt="Jhon Mark receiving a certificate on stage during the school's recognition rites." width="1000" height="1000" loading="lazy" decoding="async">
           </div>
           <figcaption class="lightbox__caption">
-            <span class="lightbox__cat">Memories</span>
-            <h3 class="lightbox__title" id="shot-5-title">Laughing at nothing</h3>
-            <p class="lightbox__text">One of those moments nobody can explain afterwards — which is exactly why it stuck.</p>
+            <span class="lightbox__cat">Me</span>
+            <h3 class="lightbox__title" id="shot-5-title">On stage</h3>
+            <p class="lightbox__text">Recognition day, certificate in hand.</p>
             <p class="lightbox__count">5 / 9</p>
           </figcaption>
         </figure>
@@ -1215,12 +1000,12 @@
 
         <figure class="lightbox__figure">
           <div class="lightbox__image-wrap">
-            <img src="assets/images/gallery-06.jpg" alt="An illustration of a clock and late golden light." width="1200" height="1200" loading="lazy" decoding="async">
+            <img src="assets/images/gallery-06.jpg" alt="The AQUALERT research poster, presented outside the school hall." width="1000" height="1000" loading="lazy" decoding="async">
           </div>
           <figcaption class="lightbox__caption">
             <span class="lightbox__cat">Projects</span>
-            <h3 class="lightbox__title" id="shot-6-title">Golden hour</h3>
-            <p class="lightbox__text">The late-afternoon light doing most of the work. I just happened to be there.</p>
+            <h3 class="lightbox__title" id="shot-6-title">AQUALERT poster</h3>
+            <p class="lightbox__text">Our research: an Arduino-based prototype that cuts the power and sends an SMS when floodwater rises. Three of us, one long school year.</p>
             <p class="lightbox__count">6 / 9</p>
           </figcaption>
         </figure>
@@ -1247,12 +1032,12 @@
 
         <figure class="lightbox__figure">
           <div class="lightbox__image-wrap">
-            <img src="assets/images/gallery-07.jpg" alt="An illustration of a gear from a half-built robot." width="1200" height="1200" loading="lazy" decoding="async">
+            <img src="assets/images/gallery-07.jpg" alt="The research group presenting AQUALERT to the panel, projected on screen." width="1000" height="1000" loading="lazy" decoding="async">
           </div>
           <figcaption class="lightbox__caption">
             <span class="lightbox__cat">Projects</span>
-            <h3 class="lightbox__title" id="shot-7-title">Robot, half-built</h3>
-            <p class="lightbox__text">Wires everywhere, half the screws missing — but it moved, and that was enough for one night.</p>
+            <h3 class="lightbox__title" id="shot-7-title">Final defense</h3>
+            <p class="lightbox__text">The panel defense, with the AQUALERT deck up on the projector.</p>
             <p class="lightbox__count">7 / 9</p>
           </figcaption>
         </figure>
@@ -1279,12 +1064,12 @@
 
         <figure class="lightbox__figure">
           <div class="lightbox__image-wrap">
-            <img src="assets/images/gallery-08.jpg" alt="An illustration of a coffee cup beside a glowing screen." width="1200" height="1200" loading="lazy" decoding="async">
+            <img src="assets/images/gallery-08.jpg" alt="The AQUALERT team at their exhibit table with the working prototype." width="1000" height="1000" loading="lazy" decoding="async">
           </div>
           <figcaption class="lightbox__caption">
             <span class="lightbox__cat">Projects</span>
-            <h3 class="lightbox__title" id="shot-8-title">Screen glow</h3>
-            <p class="lightbox__text">Debugging past midnight, one line at a time, until the error finally gives up.</p>
+            <h3 class="lightbox__title" id="shot-8-title">Exhibit day</h3>
+            <p class="lightbox__text">Exhibit day: the working unit on the table, poster behind it, laptops running the demo.</p>
             <p class="lightbox__count">8 / 9</p>
           </figcaption>
         </figure>
@@ -1311,12 +1096,12 @@
 
         <figure class="lightbox__figure">
           <div class="lightbox__image-wrap">
-            <img src="assets/images/gallery-09.jpg" alt="An illustration of a pen and a page of layout sketches." width="1200" height="1200" loading="lazy" decoding="async">
+            <img src="assets/images/gallery-09.jpg" alt="Jhon Mark wiring a robot's parts at a classroom table." width="1000" height="1000" loading="lazy" decoding="async">
           </div>
           <figcaption class="lightbox__caption">
             <span class="lightbox__cat">Projects</span>
-            <h3 class="lightbox__title" id="shot-9-title">Sketch before code</h3>
-            <p class="lightbox__text">Every page I build starts as a scribble on paper. The good ones keep the scribble.</p>
+            <h3 class="lightbox__title" id="shot-9-title">Building Flobot</h3>
+            <p class="lightbox__text">Flobot, partway through: sensors, jumper wires, scissors and a lot of careful cutting.</p>
             <p class="lightbox__count">9 / 9</p>
           </figcaption>
         </figure>
@@ -1328,10 +1113,7 @@
     </div>
   </div>
 
-  <!-- =====================================================================
-       ICON SPRITE — all icons used on the page, drawn as clean line icons.
-       Add a new icon by copying one <symbol> and changing the paths.
-       ===================================================================== -->
+  <!-- Icon sprite -->
   <svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
     <symbol id="i-sun" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4.1"/><path d="M12 2.8v2.1M12 19.1v2.1M2.8 12h2.1M19.1 12h2.1M5.4 5.4l1.5 1.5M17.1 17.1l1.5 1.5M18.6 5.4l-1.5 1.5M6.9 17.1l-1.5 1.5"/></g></symbol>
     <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.2 14.4A8.4 8.4 0 0 1 9.6 3.8 8.4 8.4 0 1 0 20.2 14.4Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
@@ -1345,13 +1127,9 @@
     <symbol id="i-cap" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.8 9.4 12 4.8l9.2 4.6L12 14Z"/><path d="M6.4 11.2v4.2c0 1.6 2.5 2.9 5.6 2.9s5.6-1.3 5.6-2.9v-4.2"/><path d="M21.2 9.4v5.2"/></g></symbol>
     <symbol id="i-book" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.2 5.3A2.3 2.3 0 0 1 6.5 3h13.3v15.2H6.5a2.3 2.3 0 0 0-2.3 2.3Z"/><path d="M4.2 18.5a2.3 2.3 0 0 1 2.3 2.3h13.3"/><path d="M8.3 7.4h7.6M8.3 10.9h4.8"/></g></symbol>
     <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c0 0 6.4-5.7 6.4-10.2a6.4 6.4 0 1 0-12.8 0C5.6 15.3 12 21 12 21Z"/><circle cx="12" cy="10.6" r="2.3"/></g></symbol>
-    <symbol id="i-user" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M4.8 20.2c.7-3.6 3.6-5.7 7.2-5.7s6.5 2.1 7.2 5.7"/></g></symbol>
     <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.8" y="5.2" width="18.4" height="13.6" rx="2.6"/><path d="m3.8 7.2 8.2 6 8.2-6"/></g></symbol>
-    <symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="8.4" y="8.4" width="12.2" height="12.2" rx="2.4"/><path d="M15.6 5.6A2.1 2.1 0 0 0 13.5 3.4h-8a2.1 2.1 0 0 0-2.1 2.1v8a2.1 2.1 0 0 0 2.1 2.1"/></g></symbol>
-    <symbol id="i-check" viewBox="0 0 24 24"><path d="m4.6 12.5 4.9 4.9 9.9-10.8" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="i-send" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3 10.5 13.5"/><path d="M21 3l-6.4 18-4.1-7.5L3 9.4Z"/></g></symbol>
     <symbol id="i-external" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13.6 4.6h5.8v5.8"/><path d="M19.4 4.6 10.8 13.2"/><path d="M18 14.2v3.9a1.9 1.9 0 0 1-1.9 1.9H5.4a1.9 1.9 0 0 1-1.9-1.9V7.4a1.9 1.9 0 0 1 1.9-1.9h3.9"/></g></symbol>
-    <symbol id="i-info" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.6"/><path d="M12 11v5.2M12 7.9h.01"/></g></symbol>
     <symbol id="i-code" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8.4 8.4 4.6 12l3.8 3.6M15.6 8.4 19.4 12l-3.8 3.6M13.4 5.4l-2.8 13.2"/></g></symbol>
     <symbol id="i-layout" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.4" width="18" height="15.2" rx="2.6"/><path d="M3 9.1h18"/><path d="m9.6 12.4-1.9 1.9 1.9 1.9M14.4 12.4l1.9 1.9-1.9 1.9"/></g></symbol>
     <symbol id="i-coffee" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.4 8.8h11.4v4.8a5.1 5.1 0 0 1-5.1 5.1h-1.2a5.1 5.1 0 0 1-5.1-5.1Z"/><path d="M15.8 10.2h1.7a2.6 2.6 0 0 1 0 5.2h-1.7"/><path d="M8 3.4v2.1M11.8 3.4v2.1"/></g></symbol>
@@ -1364,7 +1142,6 @@
     <symbol id="i-pen" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16.8 3.7a2.2 2.2 0 0 1 3.1 3.1L8.6 18.1 4 19.5l1.4-4.6Z"/><path d="m14.4 6.1 3.1 3.1"/></g></symbol>
     <symbol id="i-palette" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.4c4.7 0 8.5 3.4 8.5 7.6 0 2.6-2 4.1-3.9 4.1h-1.4c-1.2 0-2.1.9-2.1 2.1 0 .5.2.9.4 1.3.3.5.1 1.4-.9 1.4-4.6 0-9.1-3.4-9.1-8.4S7.3 3.4 12 3.4Z"/><circle cx="8.2" cy="10.1" r=".9"/><circle cx="11.4" cy="7.5" r=".9"/><circle cx="15.5" cy="8.9" r=".9"/></g></symbol>
     <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20.1S4.3 15.6 4.3 10.6A4.4 4.4 0 0 1 12 7.5a4.4 4.4 0 0 1 7.7 3.1c0 5-7.7 9.5-7.7 9.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="i-camera" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5h3l1.5-2.4h7L17 8.5h3a1.6 1.6 0 0 1 1.6 1.6v8a1.6 1.6 0 0 1-1.6 1.6H4a1.6 1.6 0 0 1-1.6-1.6v-8A1.6 1.6 0 0 1 4 8.5Z"/><circle cx="12" cy="13.7" r="3.3"/></g></symbol>
     <symbol id="i-quote" viewBox="0 0 24 24"><g fill="currentColor"><path d="M9.6 5.6c-3.2 1.3-5.2 4-5.2 7.4 0 2.6 1.5 4.4 3.8 4.4 1.9 0 3.3-1.4 3.3-3.3 0-1.8-1.3-3.1-3-3.1-.3 0-.6 0-.8.1.4-1.4 1.5-2.6 3.1-3.3l-1.2-2.2Zm9.6 0c-3.2 1.3-5.2 4-5.2 7.4 0 2.6 1.5 4.4 3.8 4.4 1.9 0 3.3-1.4 3.3-3.3 0-1.8-1.3-3.1-3-3.1-.3 0-.6 0-.8.1.4-1.4 1.5-2.6 3.1-3.3l-1.2-2.2Z"/></g></symbol>
     <symbol id="i-zoom" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.8" cy="10.8" r="6.4"/><path d="m15.6 15.6 4.2 4.2M10.8 8.2v5.2M8.2 10.8h5.2"/></g></symbol>
     <symbol id="i-github" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol>
