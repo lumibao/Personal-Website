@@ -19,14 +19,13 @@
    12. Hobbies
    13. Gallery + filters
    14. Lightbox
-   15. Videos + background reel
-   16. Thoughts
-   17. Contact
-   18. Footer + calm mode switch
-   19. Motion & scroll-driven reveals
-   20. Responsive tweaks
-   21. Reduced motion, print, forced colours
-   22. Calm mode
+   15. Thoughts
+   16. Contact
+   17. Footer + calm mode switch
+   18. Motion & scroll-driven reveals
+   19. Responsive tweaks
+   20. Reduced motion, print, forced colours
+   21. Calm mode
 
    EDITING TIP
    -----------
@@ -487,22 +486,6 @@ svg {
   margin-inline: auto;
 }
 
-.section__footnote {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  max-width: 720px;
-  margin: clamp(26px, 4vw, 38px) auto 0;
-  color: var(--muted);
-  font-size: 0.9rem;
-  line-height: 1.7;
-}
-
-.section__footnote svg {
-  margin-top: 3px;
-  color: var(--accent);
-}
-
 .eyebrow {
   display: inline-flex;
   align-items: center;
@@ -536,25 +519,6 @@ svg {
   pointer-events: none;
 }
 
-/* Small dashed marker for anything the owner still has to fill in */
-.is-placeholder {
-  border-bottom: 1px dashed var(--glass-border-strong);
-  cursor: help;
-}
-
-.micro-note {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 18px;
-  font-size: 0.8rem;
-  color: var(--faint);
-}
-
-.micro-note svg {
-  color: var(--accent);
-}
-
 /* ==========================================================================
    06. BACKGROUND SCENE
    --------------------------------------------------------------------------
@@ -571,77 +535,6 @@ svg {
     radial-gradient(1200px 700px at 78% -12%, var(--accent-soft), transparent 62%),
     linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
   transition: background-color var(--t-slow) var(--ease);
-}
-
-/* The background reel sits under the orbs, so the blue light still washes over
-   it. It has its own copy of the page gradient so nothing below it shows
-   through, then the video plays at low opacity on top. */
-.scene__reel {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  background:
-    radial-gradient(1200px 700px at 78% -12%, var(--accent-soft), transparent 62%),
-    linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
-}
-
-.scene__reel iframe {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100vw;
-  height: 56.25vw;
-  min-width: 177.78vh;
-  min-height: 100vh;
-  border: 0;
-  transform: translate(-50%, -50%) scale(1.01);
-  opacity: 0.38;
-  pointer-events: none;
-}
-
-/* A tint over the reel keeps every word on the page easy to read */
-.scene__reel::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(5, 11, 23, 0.46) 0%,
-    rgba(5, 11, 23, 0.62) 55%,
-    rgba(3, 7, 17, 0.78) 100%
-  );
-}
-
-/* No reel where it would cost more than it gives: small screens, light theme
-   and anyone who asked for less motion. */
-@media (max-width: 1023px) {
-  .scene__reel {
-    display: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .scene__reel {
-    display: none;
-  }
-}
-
-/* In the light theme the reel stays, faded right down behind a pale wash */
-html:has(#theme-light:checked) .scene__reel iframe {
-  opacity: 0.16;
-}
-
-html:has(#theme-light:checked) .scene__reel::after {
-  background: linear-gradient(
-    180deg,
-    rgba(238, 245, 255, 0.8) 0%,
-    rgba(238, 245, 255, 0.88) 55%,
-    rgba(219, 233, 251, 0.94) 100%
-  );
-}
-
-html:has(#calm-switch:checked) .scene__reel {
-  display: none;
 }
 
 .scene__orb {
@@ -868,8 +761,7 @@ html:has(#calm-switch:checked) .scene__reel {
 }
 
 /* ---------- Chips, tags, levels ---------- */
-.chip,
-.tag {
+.chip {
   display: inline-flex;
   align-items: center;
   gap: 7px;
@@ -889,11 +781,6 @@ html:has(#calm-switch:checked) .scene__reel {
 
 .chip svg {
   color: var(--accent);
-}
-
-.tag {
-  padding: 0.28rem 0.7rem;
-  font-size: 0.78rem;
 }
 
 .level {
@@ -1850,53 +1737,6 @@ html:has(#theme-light:checked) .theme-toggle__icon--moon {
   color: var(--text-soft);
 }
 
-.facts {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px 24px;
-  margin-top: 26px;
-  padding-top: 24px;
-  border-top: 1px solid var(--hairline);
-}
-
-.facts__item {
-  display: grid;
-  gap: 4px;
-  min-width: 0;
-}
-
-.facts__item--wide {
-  grid-column: 1 / -1;
-}
-
-.facts dt {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--faint);
-}
-
-.facts dt svg {
-  width: 14px;
-  height: 14px;
-  color: var(--accent);
-}
-
-.facts dd {
-  font-size: 0.94rem;
-  font-weight: 500;
-  color: var(--text);
-  overflow-wrap: anywhere;
-}
-
-.facts dd .tag {
-  margin: 2px 2px 0 0;
-}
-
 /* ==========================================================================
    11. SKILLS
    ========================================================================== */
@@ -1964,22 +1804,6 @@ html:has(#theme-light:checked) .theme-toggle__icon--moon {
   line-height: 1.35;
 }
 
-.skill-card__badge {
-  display: inline-block;
-  margin-left: 4px;
-  padding: 0.16rem 0.45rem;
-  border-radius: 999px;
-  border: 1px solid var(--glass-border);
-  background: var(--chip-bg);
-  font-family: var(--font-body);
-  font-size: 0.58rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--faint);
-  vertical-align: middle;
-}
-
 .skill-card__text {
   color: var(--muted);
   font-size: 0.92rem;
@@ -1995,19 +1819,6 @@ html:has(#theme-light:checked) .theme-toggle__icon--moon {
   padding-top: 6px;
 }
 
-.skill-card__list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.skill-card__list li {
-  padding: 0.2rem 0.55rem;
-  border-radius: 999px;
-  border: 1px dashed var(--glass-border-strong);
-  font-size: 0.74rem;
-  color: var(--muted);
-}
 
 /* The last card is a gentle note rather than a skill */
 .skill-card--note {
@@ -2171,7 +1982,6 @@ html:has(#theme-light:checked) .theme-toggle__icon--moon {
 .gallery__toolbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   flex-wrap: wrap;
   gap: 14px;
   margin-bottom: clamp(18px, 2.4vw, 28px);
@@ -2257,18 +2067,6 @@ html:has(#theme-light:checked) .theme-toggle__icon--moon {
   border-color: rgba(255, 255, 255, 0.24);
   background: rgba(255, 255, 255, 0.16);
   color: #ffffff;
-}
-
-.gallery__hint {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.78rem;
-  color: var(--faint);
-}
-
-.gallery__hint svg {
-  color: var(--accent);
 }
 
 .gallery__grid {
@@ -2655,94 +2453,8 @@ html:has(#filter-projects:checked) .gallery__item:not([data-category="projects"]
   transform: none;
 }
 
-
 /* ==========================================================================
-   15. VIDEOS + BACKGROUND REEL
-   ========================================================================== */
-.videos__grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(16px, 2.4vw, 26px);
-}
-
-.video-card {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  border-radius: var(--r-xl);
-  overflow: hidden;
-}
-
-.video-card:hover {
-  border-color: var(--glass-border-strong);
-  box-shadow: 0 26px 58px -32px var(--glow), var(--shadow-md);
-}
-
-/* 16:9 box; the iframe fills it exactly, so nothing jumps while loading */
-.video-frame {
-  position: relative;
-  aspect-ratio: 16 / 9;
-  border-radius: calc(var(--r-xl) - 9px);
-  overflow: hidden;
-  background: #05080f;
-  box-shadow: inset 0 0 0 1px var(--hairline);
-}
-
-.video-frame iframe {
-  position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-
-.video-card__meta {
-  display: grid;
-  gap: 7px;
-  padding: 16px 10px 10px;
-}
-
-.video-card__badge {
-  justify-self: start;
-  padding: 0.22rem 0.6rem;
-  border-radius: var(--r-pill);
-  border: 1px solid var(--glass-border);
-  background: var(--accent-soft);
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.03em;
-  color: var(--accent);
-}
-
-.video-card__title {
-  font-size: clamp(1rem, 0.95rem + 0.3vw, 1.15rem);
-  color: var(--text);
-}
-
-.video-card__text {
-  font-size: 0.88rem;
-  line-height: 1.68;
-  color: var(--muted);
-}
-
-.videos__cta {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  margin-top: clamp(24px, 3.4vw, 40px);
-}
-
-.videos__note {
-  margin-top: 16px;
-  text-align: center;
-  font-size: 0.8rem;
-  color: var(--faint);
-}
-
-/* ==========================================================================
-   16. THOUGHTS
+   15. THOUGHTS
    ========================================================================== */
 .thoughts__grid {
   display: grid;
@@ -2847,30 +2559,15 @@ html:has(#filter-projects:checked) .gallery__item:not([data-category="projects"]
   letter-spacing: -0.01em;
 }
 
-.reminders__list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px 26px;
-}
-
-.reminders__list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 9px;
-  font-size: 0.89rem;
-  line-height: 1.6;
+.reminders__text {
+  max-width: 68ch;
+  font-size: 0.93rem;
+  line-height: 1.75;
   color: var(--muted);
 }
 
-.reminders__list svg {
-  width: 15px;
-  height: 15px;
-  margin-top: 4px;
-  color: var(--accent);
-}
-
 /* ==========================================================================
-   17. CONTACT
+   16. CONTACT
    ========================================================================== */
 .contact__card {
   position: relative;
@@ -3060,7 +2757,7 @@ html:has(#filter-projects:checked) .gallery__item:not([data-category="projects"]
 }
 
 /* ==========================================================================
-   18. FOOTER
+   17. FOOTER
    ========================================================================== */
 .footer {
   position: relative;
@@ -3232,7 +2929,7 @@ html:has(#filter-projects:checked) .gallery__item:not([data-category="projects"]
 }
 
 /* ==========================================================================
-   19. MOTION & SCROLL-DRIVEN REVEALS
+   18. MOTION & SCROLL-DRIVEN REVEALS
    --------------------------------------------------------------------------
    All motion lives here so it is easy to slow down or switch off.
    Reveals run on the browser's own scroll timeline, so they work with no
@@ -3296,10 +2993,6 @@ html:has(#filter-projects:checked) .gallery__item:not([data-category="projects"]
   100% { transform: translate(-50%, 12px); opacity: 0; }
 }
 
-
-
-
-
 @keyframes tile-in {
   from { opacity: 0; transform: scale(0.96); }
   to   { opacity: 1; transform: scale(1); }
@@ -3331,7 +3024,7 @@ html:has(#filter-projects:checked) .gallery__item:not([data-category="projects"]
 }
 
 /* ==========================================================================
-   20. RESPONSIVE
+   19. RESPONSIVE
    --------------------------------------------------------------------------
    Mobile-first would be ideal, but the design is progressive: everything is
    fluid, and these breakpoints only simplify layouts as space shrinks.
@@ -3489,10 +3182,6 @@ html:has(#filter-projects:checked) .gallery__item:not([data-category="projects"]
 }
 
 @media (max-width: 760px) {
-  .videos__grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
   .about__media {
     grid-template-columns: minmax(0, 1fr);
     max-width: 460px;
@@ -3500,19 +3189,6 @@ html:has(#filter-projects:checked) .gallery__item:not([data-category="projects"]
 
   .contact__side {
     grid-template-columns: minmax(0, 1fr);
-  }
-
-  .reminders__list {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .facts {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 14px;
-  }
-
-  .facts__item--wide {
-    grid-column: auto;
   }
 
   .hobbies__banner img {
@@ -3541,8 +3217,6 @@ html:has(#filter-projects:checked) .gallery__item:not([data-category="projects"]
     height: 44px;
     border-radius: var(--r-sm);
   }
-
-
 
   .lightbox__dialog {
     max-height: calc(100svh - 48px);
@@ -3605,10 +3279,6 @@ html:has(#filter-projects:checked) .gallery__item:not([data-category="projects"]
   .filter {
     flex: none;
     min-height: 40px;
-  }
-
-  .gallery__hint {
-    font-size: 0.72rem;
   }
 
   .hero__actions .btn {
@@ -3705,7 +3375,7 @@ html:has(#filter-projects:checked) .gallery__item:not([data-category="projects"]
 }
 
 /* ==========================================================================
-   21. REDUCED MOTION, PRINT & FORCED COLOURS
+   20. REDUCED MOTION, PRINT & FORCED COLOURS
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -3750,14 +3420,12 @@ html:has(#filter-projects:checked) .gallery__item:not([data-category="projects"]
 @media print {
   .nav,
   .scene,
-  .scene__reel,
   .lightbox,
   .hero__scroll,
   .float-chip,
   .portrait__ring,
   .portrait__glow,
   .filters,
-  .gallery__hint,
   .theme-toggle {
     display: none !important;
   }
@@ -3809,7 +3477,7 @@ html:has(#filter-projects:checked) .gallery__item:not([data-category="projects"]
 }
 
 /* ==========================================================================
-   22. CALM MODE
+   21. CALM MODE
    --------------------------------------------------------------------------
    The footer switch sets data-calm="true" on <html>. It is a real, persisted
    preference: motion stops, the glass turns solid, and the grain disappears.
