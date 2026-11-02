@@ -173,21 +173,21 @@ grid.
 
 The nine photos currently in the build:
 
-| File | Original upload | Category |
-| --- | --- | --- |
-| `gallery-01.jpg` | `picture ko sa graduation.png` | Me |
-| `gallery-02.jpg` | `Chess.jpg` | Me |
-| `gallery-03.jpg` | `my friends took sa Senior prom.jpg` | Memories |
-| `gallery-04.jpg` | `Stem Club.jpeg` | Memories |
-| `gallery-05.jpg` | `awarding achievement.jpeg` | Me |
-| `gallery-06.jpg` | `Poster ng Research namin sa AQUALERT.jpg` | Projects |
-| `gallery-07.jpg` | `final defense.jpeg` | Projects |
-| `gallery-08.jpg` | `laban sa muntilupa.jpeg` | Projects |
-| `gallery-09.jpg` | `gumawa sa Flobot.jpeg` | Projects |
+| File | Original upload | Title on the page | Category |
+| --- | --- | --- | --- |
+| `gallery-01.jpg` | `picture ko sa graduation.png` | picture ko sa graduation | Me |
+| `gallery-02.jpg` | `Chess.jpg` | Chess | Me |
+| `gallery-03.jpg` | `my friends took sa Senior prom.jpg` | my friends took sa Senior prom | Memories |
+| `gallery-04.jpg` | `Stem Club.jpeg` | Stem Club | Memories |
+| `gallery-05.jpg` | `awarding achievement.jpeg` | awarding achievement | Me |
+| `gallery-06.jpg` | `Poster ng Research namin sa AQUALERT.jpg` | Poster ng research namin sa AQUALERT | Projects |
+| `gallery-07.jpg` | `final defense.jpeg` | final defense | Projects |
+| `gallery-08.jpg` | `laban sa muntilupa.jpeg` | laban sa muntilupa | Projects |
+| `gallery-09.jpg` | `gumawa sa Flobot.jpeg` | gumawa sa Flobot | Projects |
 
-Titles in the page come straight from those file names — keep that relationship
-if you swap a photo, so the caption never describes something the picture
-doesn't show.
+Titles are the upload names exactly as typed, minus the file extension — no
+rewording, no added capitals. If you swap a photo, title it after whatever you
+call the file, so a caption never describes something the picture doesn't show.
 
 ### Thoughts
 
