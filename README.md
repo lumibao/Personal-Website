@@ -173,17 +173,21 @@ grid.
 
 The nine photos currently in the build:
 
-| File | Photo | Category |
+| File | Original upload | Category |
 | --- | --- | --- |
-| `gallery-01.jpg` | Senior high graduation portrait, with honors | Me |
-| `gallery-02.jpg` | Chess match at school | Me |
-| `gallery-03.jpg` | Senior prom group photo | Memories |
-| `gallery-04.jpg` | Class Christmas party selfie | Memories |
-| `gallery-05.jpg` | Recognition day on stage | Me |
-| `gallery-06.jpg` | AQUALERT research poster | Projects |
-| `gallery-07.jpg` | AQUALERT final defense | Projects |
-| `gallery-08.jpg` | Exhibit day with the prototype | Projects |
-| `gallery-09.jpg` | Building Flobot | Projects |
+| `gallery-01.jpg` | `picture ko sa graduation.png` | Me |
+| `gallery-02.jpg` | `Chess.jpg` | Me |
+| `gallery-03.jpg` | `my friends took sa Senior prom.jpg` | Memories |
+| `gallery-04.jpg` | `Stem Club.jpeg` | Memories |
+| `gallery-05.jpg` | `awarding achievement.jpeg` | Me |
+| `gallery-06.jpg` | `Poster ng Research namin sa AQUALERT.jpg` | Projects |
+| `gallery-07.jpg` | `final defense.jpeg` | Projects |
+| `gallery-08.jpg` | `laban sa muntilupa.jpeg` | Projects |
+| `gallery-09.jpg` | `gumawa sa Flobot.jpeg` | Projects |
+
+Titles in the page come straight from those file names — keep that relationship
+if you swap a photo, so the caption never describes something the picture
+doesn't show.
 
 ### Thoughts
 
