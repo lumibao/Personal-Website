@@ -2180,6 +2180,8 @@ html:has(#theme-light:checked) .theme-toggle__icon--moon {
   font-size: 0.92rem;
   font-weight: 500;
   line-height: 1.35;
+  /* titles are the original file names, which can be long — let them wrap */
+  overflow-wrap: anywhere;
   text-shadow: 0 1px 16px rgba(0, 0, 0, 0.45);
 }
 
