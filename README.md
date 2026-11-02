@@ -177,13 +177,17 @@ The nine photos currently in the build:
 | --- | --- | --- | --- |
 | `gallery-01.jpg` | `picture ko sa graduation.png` | picture ko sa graduation | Me |
 | `gallery-02.jpg` | `Chess.jpg` | Chess | Me |
-| `gallery-03.jpg` | `my friends took sa Senior prom.jpg` | my friends took sa Senior prom | Memories |
-| `gallery-04.jpg` | `Stem Club.jpeg` | Stem Club | Memories |
-| `gallery-05.jpg` | `awarding achievement.jpeg` | awarding achievement | Me |
-| `gallery-06.jpg` | `Poster ng Research namin sa AQUALERT.jpg` | Poster ng research namin sa AQUALERT | Projects |
-| `gallery-07.jpg` | `final defense.jpeg` | final defense | Projects |
-| `gallery-08.jpg` | `laban sa muntilupa.jpeg` | laban sa muntilupa | Projects |
-| `gallery-09.jpg` | `gumawa sa Flobot.jpeg` | gumawa sa Flobot | Projects |
+| `gallery-03.jpg` | `pfp.jpg` | pfp | Me |
+| `gallery-04.jpg` | `my friends took sa Senior prom.jpg` | my friends took sa Senior prom | Memories |
+| `gallery-05.jpg` | `Stem Club.jpeg` | Stem Club | Memories |
+| `gallery-06.jpg` | `awarding achievement.jpeg` | awarding achievement | Me |
+| `gallery-07.jpg` | `Poster ng Research namin sa AQUALERT.jpg` | Poster ng research namin sa AQUALERT | Projects |
+| `gallery-08.jpg` | `final defense.jpeg` | final defense | Projects |
+| `gallery-09.jpg` | `laban sa muntilupa.jpeg` | laban sa muntilupa | Projects |
+
+`gumawa sa Flobot.jpeg` is used as the wide banner in Hobbies, not in the
+gallery. Every tile carries the original file name in its `title` attribute, so
+you can hover (or view source) to confirm which photo you are looking at.
 
 Titles are the upload names exactly as typed, minus the file extension — no
 rewording, no added capitals. If you swap a photo, title it after whatever you
