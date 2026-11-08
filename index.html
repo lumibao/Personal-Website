@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<!--
-  index.html — Jhon Mark L. Lumibao · Personal Space
-  Single page, plain HTML and CSS. No JavaScript anywhere in this file.
--->
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -14,7 +10,6 @@
   <meta name="theme-color" content="#050b17">
   <meta name="color-scheme" content="dark light">
 
-  <!-- Social sharing preview -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://lumibao.github.io/Personal-Website/">
   <meta property="og:title" content="Jhon Mark L. Lumibao — My Little Digital Space">
@@ -24,24 +19,19 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://lumibao.github.io/Personal-Website/assets/images/og-cover.jpg">
 
-  <!-- Icons -->
   <link rel="icon" href="assets/icons/JM.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
 
-  <!-- Fonts (self-hosted, subset to the Latin characters this page uses) -->
   <link rel="preload" href="assets/fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
 
-  <!-- Styles -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- Background scene — soft orbs, a faint grid and film grain. Decorative
-       only: aria-hidden and untouchable by the pointer. -->
   <div class="scene" aria-hidden="true">
     <span class="scene__orb scene__orb--one"></span>
     <span class="scene__orb scene__orb--two"></span>
@@ -50,8 +40,6 @@
     <span class="scene__noise"></span>
   </div>
 
-  <!-- Navigation — a floating glass bar. On phones it grows a second row of
-       links that scrolls sideways. -->
   <header class="nav" id="site-nav">
     <div class="nav__bar glass">
       <a class="brand" href="#home" aria-label="Jhon Mark — back to the top">
@@ -75,7 +63,6 @@
       </nav>
 
       <div class="nav__actions">
-        <!-- Light / dark switch — two radio buttons, no script. -->
         <div class="theme-toggle" role="group" aria-label="Colour theme">
           <input class="theme-toggle__input" type="radio" name="jml-theme" id="theme-light">
           <input class="theme-toggle__input" type="radio" name="jml-theme" id="theme-dark" checked>
@@ -99,7 +86,6 @@
 
   <main id="main">
 
-    <!-- Hero -->
     <section class="hero" id="home" aria-labelledby="hero-title">
       <div class="container hero__inner">
 
@@ -114,7 +100,6 @@
             <span class="hero__title-line"><span>I&rsquo;m <em>Jhon Mark.</em></span></span>
           </h1>
 
-          <!-- The rotating role is decorative; the full sentence is read below. -->
           <p class="hero__role">
             <span class="hero__role-label">Currently:</span>
             <span class="hero__roles" aria-hidden="true">
@@ -155,7 +140,6 @@
           </ul>
         </div>
 
-        <!-- Portrait card -->
         <div class="hero__visual">
           <span class="hero__watermark" aria-hidden="true">JM</span>
           <div class="portrait">
@@ -195,8 +179,6 @@
       </a>
     </section>
 
-    <!-- Ticker — decorative strip. Both groups must stay identical so the
-         loop remains seamless. -->
     <div class="ticker" aria-hidden="true">
       <div class="ticker__track">
         <div class="ticker__group">
@@ -222,7 +204,6 @@
       </div>
     </div>
 
-    <!-- About -->
     <section class="section about" id="about" aria-labelledby="about-title">
       <div class="container">
         <header class="section__head" data-reveal>
@@ -292,7 +273,6 @@
       </div>
     </section>
 
-    <!-- Skills -->
     <section class="section skills" id="skills" aria-labelledby="skills-title">
       <div class="container">
         <header class="section__head section__head--center" data-reveal>
@@ -408,7 +388,6 @@
       </div>
     </section>
 
-    <!-- Hobbies -->
     <section class="section hobbies" id="hobbies" aria-labelledby="hobbies-title">
       <div class="container">
         <header class="section__head" data-reveal>
@@ -501,7 +480,6 @@
       </div>
     </section>
 
-    <!-- Gallery -->
     <section class="section gallery" id="gallery" aria-labelledby="gallery-title">
       <div class="container">
         <header class="section__head section__head--center" data-reveal>
@@ -512,8 +490,6 @@
           </p>
         </header>
 
-        <!-- Filters — each choice is a radio button; the stylesheet hides the
-             tiles that do not match. -->
         <div class="gallery__toolbar" data-reveal>
           <div class="filters" role="group" aria-label="Filter the gallery">
             <label class="filter">
@@ -639,8 +615,6 @@
       </div>
     </section>
 
-
-    <!-- Thoughts -->
     <section class="section thoughts" id="thoughts" aria-labelledby="thoughts-title">
       <div class="container">
         <header class="section__head" data-reveal>
@@ -696,7 +670,6 @@
       </div>
     </section>
 
-    <!-- Contact -->
     <section class="section contact" id="contact" aria-labelledby="contact-title">
       <div class="container">
         <div class="contact__card glass" data-reveal>
@@ -783,7 +756,6 @@
     </section>
   </main>
 
-  <!-- Footer -->
   <footer class="footer">
     <div class="container footer__inner">
       <div class="footer__top-row">
@@ -825,8 +797,6 @@
       <p class="footer__wordmark" aria-hidden="true">Jhon&nbsp;Mark</p>
     </div>
   </footer>
-
-  <!-- Lightbox — one panel per photo, opened with a plain #anchor link. -->
 
   <div class="lightbox" id="shot-1" role="dialog" aria-modal="true" aria-labelledby="shot-1-title">
     <a class="lightbox__backdrop" href="#gallery" aria-label="Close and return to the gallery"></a>
@@ -1116,7 +1086,6 @@
     </div>
   </div>
 
-  <!-- Icon sprite -->
   <svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
     <symbol id="i-sun" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4.1"/><path d="M12 2.8v2.1M12 19.1v2.1M2.8 12h2.1M19.1 12h2.1M5.4 5.4l1.5 1.5M17.1 17.1l1.5 1.5M18.6 5.4l-1.5 1.5M6.9 17.1l-1.5 1.5"/></g></symbol>
     <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.2 14.4A8.4 8.4 0 0 1 9.6 3.8 8.4 8.4 0 1 0 20.2 14.4Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
