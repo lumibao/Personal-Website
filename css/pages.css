@@ -466,23 +466,14 @@ body.has-page-banner::before {
    7. Calendar specifics
    -------------------------------------------------------------------------- */
 .cal-head {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 18px;
-  align-items: baseline;
-  justify-content: space-between;
   margin-bottom: 14px;
 }
 
-.cal-head h1 {
+/* Note the h2: the month is a section heading, not the page title — the page
+   title is the h1 sitting on the banner above it. */
+.cal-head h2 {
   margin: 0;
   font-size: clamp(1.35rem, 1.1rem + 1.8vw, 1.8rem);
-}
-
-.cal-head p {
-  margin: 0;
-  font-size: 0.82rem;
-  color: var(--ink-muted);
 }
 
 .cal-wrap {
