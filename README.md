@@ -37,7 +37,7 @@ Personal-Website/
 ├── resume.html             resume (opens in a new tab)
 ├── calendar.html           March 2008 calendar (opens in a new tab)
 ├── css/
-│   ├── style.css           styling for the main page (21 numbered sections)
+│   ├── style.css           styling for the main page
 │   └── pages.css           styling for resume.html and calendar.html
 ├── assets/
 │   ├── images/             portrait, about photo, 9 gallery photos, banner, social cover
@@ -53,7 +53,7 @@ Personal-Website/
 | File | Purpose |
 | --- | --- |
 | `index.html` | Every section in order: hero, ticker, about, skills, hobbies, gallery, thoughts, contact, footer, then the lightbox panels and the icon sprite. |
-| `css/style.css` | Design tokens first, then one numbered block per section, then responsive and reduced-motion rules. |
+| `css/style.css` | The colour and font variables first, then the rules in page order, then the responsive and reduced-motion rules at the end. |
 | `resume.html` | The resume, laid out as a printable document with a photo. |
 | `calendar.html` | A March 2008 calendar built with an HTML `<table>`, with a photo in the 13th. |
 | `css/pages.css` | Shared styling for those two pages — same fonts and colours, plainer frame. |
@@ -84,9 +84,9 @@ Nothing here needs a script, so nothing breaks when scripting is off.
 
 ### Colour
 
-Every colour, radius, shadow and timing is a CSS variable in **section 02** of
-`css/style.css` (search for `DESIGN TOKENS`). Change a token once and the whole
-site follows, including the light theme.
+Every colour, radius, shadow and timing is a CSS variable in the `:root` block
+near the top of `css/style.css`. Change a token once and the whole site follows,
+including the light theme.
 
 - **Dark (default):** near-black navy `#050b17`, glass surfaces, a soft blue
   accent, three slow background orbs and a faint grid.
@@ -115,9 +115,9 @@ beside them), so the site works offline.
 
 ## 5. Editing the content
 
-Everything lives in `index.html`, in page order. Each section is wrapped in a
-short comment naming it, so `Ctrl-F` for `<!-- Gallery` or `<!-- About` gets you
-there.
+Everything lives in `index.html`, in page order. Each section carries an `id`,
+so `Ctrl-F` for `id="gallery"` or `id="about"` gets you there. There are no
+comments in the source — the markup speaks for itself.
 
 ### The hero
 
@@ -239,7 +239,7 @@ of the portrait), `banner.jpg` (the calendar header strip) and `background.jpg`
 ## 7. Light and dark mode
 
 The switch in the navigation is two radio buttons. `html:has(#theme-light:checked)`
-re-points the colour tokens in section 02 of the stylesheet; everything else
+re-points the colour variables at the top of the stylesheet; everything else
 inherits. The page opens in **dark**, and no preference is stored between visits
 because there is no script to store it.
 
