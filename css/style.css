@@ -978,6 +978,34 @@ svg {
   transition: width var(--t-med) var(--ease);
 }
 
+/* The two extra pages are links out of the page, so they get a small arrow and
+   a faint divider to separate them from the in-page anchors. */
+.nav__link--page {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 4px;
+  color: var(--text-soft);
+}
+
+.nav__link--page-first {
+  margin-left: 10px;
+  padding-left: 14px;
+  border-left: 1px solid var(--hairline);
+}
+
+@media (max-width: 1140px) {
+  .nav__link-icon {
+    display: none;
+  }
+}
+
+.nav__link-icon {
+  width: 11px;
+  height: 11px;
+  opacity: 0.55;
+}
+
 /* The nav has no "current section" state without a script, so hovering is the
    only highlight — a soft tinted pill plus the underline. */
 .nav__link:hover {

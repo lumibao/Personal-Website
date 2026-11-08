@@ -33,9 +33,12 @@ There is **no build step**. Edit a file, save it, refresh.
 
 ```
 Personal-Website/
-├── index.html              all page structure and text
+├── index.html              the main page
+├── resume.html             resume (opens in a new tab)
+├── calendar.html           March 2008 calendar (opens in a new tab)
 ├── css/
-│   └── style.css           all styling (21 numbered sections)
+│   ├── style.css           styling for the main page (21 numbered sections)
+│   └── pages.css           styling for resume.html and calendar.html
 ├── assets/
 │   ├── images/             portrait, about photo, 9 gallery photos, banner, social cover
 │   ├── icons/              favicon + Apple touch icon + 192/512/maskable app icons
@@ -51,6 +54,9 @@ Personal-Website/
 | --- | --- |
 | `index.html` | Every section in order: hero, ticker, about, skills, hobbies, gallery, thoughts, contact, footer, then the lightbox panels and the icon sprite. |
 | `css/style.css` | Design tokens first, then one numbered block per section, then responsive and reduced-motion rules. |
+| `resume.html` | The resume, laid out as a printable document with a photo. |
+| `calendar.html` | A March 2008 calendar built with an HTML `<table>`, with a photo in the 13th. |
+| `css/pages.css` | Shared styling for those two pages — same fonts and colours, plainer frame. |
 | `site.webmanifest` | App name, theme colour and the three app icons. |
 | `assets/icons/JM.png` | The `JM` browser-tab icon (40 × 40). |
 
@@ -205,7 +211,32 @@ it is a dead end, so the primary button opens the visitor's own mail app.
 
 ---
 
-## 6. Light and dark mode
+## 6. Resume and calendar
+
+Two extra pages sit beside the main one and open in a **new tab** from the
+navigation and the footer:
+
+- **`resume.html`** — the resume as a document: name, contact details, a photo,
+  professional summary, education, technical skills, project experience, core
+  competencies and personal attributes. `Ctrl + P` prints it cleanly (the site
+  chrome is hidden in the print stylesheet).
+- **`calendar.html`** — a March 2008 calendar written as a plain HTML
+  `<table>`, with a photo in the 13th. The faded numbers at the top are the last
+  days of February (2008 was a leap year) and the hatched cells at the bottom
+  keep the grid square.
+
+Both use `css/pages.css` rather than `style.css`. They share the same fonts and
+accent colour, but the layout is deliberately plainer — paper, rules and
+margins instead of glass — so they read like documents. Neither page loads a
+script.
+
+Their shared images live in `assets/images/pages/`: `avatar.jpg` (a square crop
+of the portrait), `banner.jpg` (the calendar header strip) and `background.jpg`
+(a 7%-opacity backdrop).
+
+---
+
+## 7. Light and dark mode
 
 The switch in the navigation is two radio buttons. `html:has(#theme-light:checked)`
 re-points the colour tokens in section 02 of the stylesheet; everything else
@@ -217,7 +248,7 @@ If you ever add a script, the one improvement worth making is reading
 
 ---
 
-## 7. Icons and artwork
+## 8. Icons and artwork
 
 - All 33 icons are hand-drawn inline SVG `<symbol>`s in the sprite at the bottom
   of `index.html` (`#i-sun`, `#i-chevron-left`, `#i-github`, `#i-youtube`, and so
@@ -236,7 +267,7 @@ If you ever add a script, the one improvement worth making is reading
 
 ---
 
-## 8. Accessibility
+## 9. Accessibility
 
 - **Contrast:** body text and every button meet WCAG AA against their own
   background, in both themes.
@@ -260,7 +291,7 @@ Those three need JavaScript. There is none — that is a deliberate trade.
 
 ---
 
-## 9. Browser support
+## 10. Browser support
 
 Modern Chrome, Edge, Firefox and Safari, desktop and mobile. The page degrades
 politely:
@@ -272,7 +303,7 @@ politely:
 
 ---
 
-## 10. Publishing
+## 11. Publishing
 
 The site is published from the repository root with **GitHub Pages**.
 
@@ -286,7 +317,7 @@ plain Apache/Nginx host with no changes.
 
 ---
 
-## 11. Contact details in this build
+## 12. Contact details in this build
 
 | Where | Value |
 | --- | --- |
@@ -300,7 +331,7 @@ There is no LinkedIn, because there is no account to link to.
 
 ---
 
-## 12. If something looks wrong
+## 13. If something looks wrong
 
 | Symptom | Likely cause |
 | --- | --- |
@@ -313,7 +344,7 @@ There is no LinkedIn, because there is no account to link to.
 
 ---
 
-## 13. Credits
+## 14. Credits
 
 - **Design, code and copy:** Jhon Mark L. Lumibao.
 - **Photos:** Jhon Mark L. Lumibao.

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calendar — March 2008</title>
+  <meta name="description" content="A March 2008 calendar built with an HTML table, with a photo in one of the days.">
+  <link rel="icon" href="assets/icons/JM.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body class="has-page-banner">
+
+  <main class="sheet">
+
+    <nav class="page-tools" aria-label="Page">
+      <a class="back" href="index.html">&larr; Back to my site</a>
+      <span class="logo-mark" aria-hidden="true">JM</span>
+    </nav>
+
+    <header class="page-banner">
+      <img src="assets/images/pages/banner.jpg" alt="Jhon Mark leaning against a sunlit stone wall." width="2400" height="1200">
+      <div class="page-banner__text">
+        <p class="eyebrow">Activity</p>
+        <h1>Calendar</h1>
+      </div>
+    </header>
+
+    <div class="cal-head">
+      <h2 id="cal-title">March 2008</h2>
+      <p>Built with a plain HTML table — no library.</p>
+    </div>
+
+    <div class="cal-wrap">
+      <table class="calendar" aria-labelledby="cal-title">
+        <caption>March 2008 &middot; Sunday to Saturday</caption>
+        <thead>
+          <tr>
+            <th scope="col">Sunday</th>
+            <th scope="col">Monday</th>
+            <th scope="col">Tuesday</th>
+            <th scope="col">Wednesday</th>
+            <th scope="col">Thursday</th>
+            <th scope="col">Friday</th>
+            <th scope="col">Saturday</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="is-out">24</td>
+            <td class="is-out">25</td>
+            <td class="is-out">26</td>
+            <td class="is-out">27</td>
+            <td class="is-out">28</td>
+            <td class="is-out">29</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>10</td>
+            <td>11</td>
+            <td>12</td>
+            <td class="is-marked">
+              <a class="day-mark" href="assets/images/pages/avatar.jpg">
+                <span class="day-mark__num">13</span>
+                <img class="day-mark__photo" src="assets/images/pages/avatar.jpg" alt="Jhon Mark L. Lumibao." width="420" height="420">
+                <span class="day-mark__label">My picture</span>
+              </a>
+            </td>
+            <td>14</td>
+            <td>15</td>
+          </tr>
+          <tr>
+            <td>16</td>
+            <td>17</td>
+            <td>18</td>
+            <td>19</td>
+            <td>20</td>
+            <td>21</td>
+            <td>22</td>
+          </tr>
+          <tr>
+            <td>23</td>
+            <td>24</td>
+            <td>25</td>
+            <td>26</td>
+            <td>27</td>
+            <td>28</td>
+            <td>29</td>
+          </tr>
+          <tr>
+            <td>30</td>
+            <td>31</td>
+            <td class="is-blank"></td>
+            <td class="is-blank"></td>
+            <td class="is-blank"></td>
+            <td class="is-blank"></td>
+            <td class="is-blank"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cal-notes">
+      <p>
+        <span class="legend"><span class="legend__swatch" aria-hidden="true"></span>March 13 &mdash; the day with my picture in it.</span>
+      </p>
+      <p>
+        The faded days at the top are the last days of February; 2008 was a leap
+        year, so February had 29. The hatched cells at the bottom are padding to
+        keep the grid square.
+      </p>
+    </div>
+
+  </main>
+
+  <p class="colophon">
+    <a href="index.html">lumibao.github.io/Personal-Website</a> &middot;
+    <a href="resume.html">Resume</a>
+  </p>
+
+</body>
+</html>
