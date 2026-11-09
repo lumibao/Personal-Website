@@ -52,7 +52,7 @@ Personal-Website/
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | Every section in order: hero, ticker, about, skills, hobbies, gallery, thoughts, contact, footer, then the lightbox panels and the icon sprite. |
+| `index.html` | Every section in order: banner, hero, ticker, about, skills, hobbies, gallery, thoughts, contact, footer, then the lightbox panels and the icon sprite. |
 | `css/style.css` | The colour and font variables first, then the rules in page order, then the responsive and reduced-motion rules at the end. |
 | `resume.html` | The resume, laid out as a printable document with a photo. |
 | `calendar.html` | A March 2008 calendar built with an HTML `<table>`, with a photo in the 13th. |
