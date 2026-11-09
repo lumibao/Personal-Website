@@ -263,7 +263,8 @@ If you ever add a script, the one improvement worth making is reading
   with ImageMagick. The originals stay in the repository history if a wider crop
   is ever needed.
 - `profile.jpg` (hero) and `about-photo.jpg` are 4:5; the gallery tiles are
-  square; `og-cover.jpg` is 1200 × 630 for link previews.
+  square; `og-banner.jpg` is 1200 × 630 and is the picture that shows up when
+  the link is shared, cropped from the same photo as the page banners.
 
 ---
 
